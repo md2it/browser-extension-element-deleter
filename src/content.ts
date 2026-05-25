@@ -2,10 +2,15 @@ import { ext } from "./api";
 import {
   isEditableKeyboardTarget,
   isEscHotkeyEvent,
+  isStartHotkeyEvent,
   isUndoHotkeyEvent,
 } from "./hotkeys";
 import type { BgToContent, ContentActivationResponse, ContentToBg } from "./messages";
-import { getEscHotkeyEnabled, getUndoHotkeyEnabled } from "./storage";
+import {
+  getEscHotkeyEnabled,
+  getStartHotkeyEnabled,
+  getUndoHotkeyEnabled,
+} from "./storage";
 import {
   resolveUndoEntryParent,
   type UndoStackAccess,
@@ -28,6 +33,7 @@ declare global {
       sender: chrome.runtime.MessageSender,
     ) => void;
     __domDeleterEscHotkeyHandler?: (e: KeyboardEvent) => void;
+    __domDeleterStartHotkeyHandler?: (e: KeyboardEvent) => void;
     __domDeleterUndoHotkeyHandler?: (e: KeyboardEvent) => void;
     __domDeleterContextMenuHandler?: (e: MouseEvent) => void;
     __domDeleterState?: ContentState;
@@ -110,6 +116,13 @@ function notifyBackgroundActive(isActive: boolean): void {
 
 function requestOpenPanel(tab: "settings" | "info"): void {
   const msg: ContentToBg = { type: "OPEN_PANEL", tab };
+  void ext.runtime.sendMessage(msg).catch(() => {
+    /* extension reloaded */
+  });
+}
+
+function requestToggle(): void {
+  const msg: ContentToBg = { type: "TOGGLE_REQUEST" };
   void ext.runtime.sendMessage(msg).catch(() => {
     /* extension reloaded */
   });
@@ -225,6 +238,27 @@ function attachMessageHandler(state: ContentState): void {
   attachUndoHotkeyListener(state, ensureUi);
 }
 
+function attachStartHotkeyListener(): void {
+  const prev = window.__domDeleterStartHotkeyHandler;
+  if (prev) {
+    window.removeEventListener("keydown", prev, true);
+  }
+
+  const handler = (e: KeyboardEvent): void => {
+    if (!isStartHotkeyEvent(e)) return;
+    if (isEditableKeyboardTarget(e.target)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    void (async () => {
+      if (!(await getStartHotkeyEnabled())) return;
+      requestToggle();
+    })();
+  };
+
+  window.__domDeleterStartHotkeyHandler = handler;
+  window.addEventListener("keydown", handler, true);
+}
+
 function attachUndoHotkeyListener(
   state: ContentState,
   ensureUi: () => Promise<DeleterUI>,
@@ -290,6 +324,7 @@ if (
 window.__domDeleterRuntimeId = runtimeId;
 attachContextMenuTargetListener();
 attachMessageHandler(state);
+attachStartHotkeyListener();
 
 // Action popup page: settings / about panel under the extension icon.
 const PANEL_POPUP_SESSION_KEY = "panelPopupTab";
