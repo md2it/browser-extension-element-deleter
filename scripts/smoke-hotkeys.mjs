@@ -92,10 +92,35 @@ assert.match(sharedIndexSrc, /registerPrefixManifestHotkeys/);
 assert.match(sharedIndexSrc, /registerPrefixStartHotkey/);
 assert.match(sharedIndexSrc, /formatPrefixHotkeyLabel/);
 assert.match(sharedIndexSrc, /PREFIX_ACTION_TIMEOUT_MS/);
+assert.match(sharedIndexSrc, /showPrefixBadge/);
+assert.match(sharedIndexSrc, /PREFIX_HINT_SHOW/);
+
+const prefixHintSrc = readFileSync(join(sharedHotkeys, "prefix-hint.ts"), "utf8");
+assert.doesNotMatch(prefixHintSrc, /document\./);
+assert.doesNotMatch(prefixHintSrc, /data-shared-prefix-hint/);
+
+const prefixHintBadgeSrc = readFileSync(
+  join(sharedHotkeys, "prefix-hint-badge.ts"),
+  "utf8",
+);
+assert.match(prefixHintBadgeSrc, /setBadgeText/);
+assert.match(prefixHintBadgeSrc, /registerPrefixHintBadgeListeners/);
 
 const deleterKeysSrc = readFileSync(join(root, "src/hotkeys/keys.ts"), "utf8");
-assert.match(deleterKeysSrc, /formatPrefixHotkeyLabel/);
+assert.match(deleterKeysSrc, /formatPrefixChordLabel/);
+assert.match(deleterKeysSrc, /getStartHotkeyChordLabel/);
+assert.match(deleterKeysSrc, /getStartHotkeyActionLabel/);
 assert.match(deleterKeysSrc, /PREFIX_ACTION_KEY/);
+
+const prefixBackgroundSrc = readFileSync(
+  join(sharedHotkeys, "prefix-background.ts"),
+  "utf8",
+);
+assert.match(prefixBackgroundSrc, /EXECUTE_ACTION_COMMAND/);
+assert.match(
+  prefixBackgroundSrc,
+  /command === EXECUTE_ACTION_COMMAND[\s\S]*stampToggleCommand/,
+);
 
 const deleterRegistrySrc = readFileSync(join(root, "src/hotkeys/registry.ts"), "utf8");
 assert.match(deleterRegistrySrc, /registerSharedContentHotkey/);
@@ -104,6 +129,8 @@ assert.match(deleterRegistrySrc, /elementDeleter/);
 const deleterBackgroundSrc = readFileSync(join(root, "src/hotkeys/background.ts"), "utf8");
 assert.match(deleterBackgroundSrc, /registerPrefixManifestHotkeys/);
 assert.match(deleterBackgroundSrc, /COMMAND_EXECUTE_ACTION/);
+assert.match(deleterBackgroundSrc, /DELETER_ACTIVE_COLOR/);
+assert.match(deleterBackgroundSrc, /badgeBackgroundColor/);
 assert.match(deleterBackgroundSrc, /PREFIX_ARM_TOGGLE/);
 assert.match(deleterBackgroundSrc, /TOGGLE_REQUEST/);
 assert.doesNotMatch(deleterBackgroundSrc, /registerManifestCommandHotkeys/);
