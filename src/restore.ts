@@ -1,6 +1,6 @@
-import { ensurePageHighlightStyles } from "./highlight-visual";
+import { runElementTransition } from "./highlight/delete-restore-visual";
 
-const ELEMENT_ANIM_MS = 200;
+export { runElementTransition };
 
 export type UndoEntry = {
   id: number;
@@ -105,50 +105,6 @@ function findElementByChildIndexPath(
   return node;
 }
 
-export function runElementTransition(el: Element, out: boolean): Promise<void> {
-  const node = el as HTMLElement;
-  const animClass = out ? "dd-delete-anim" : "dd-restore-anim";
-  if (out && node === document.activeElement) {
-    node.blur();
-  }
-  node.classList.add(animClass);
-  if (out) {
-    void node.offsetWidth;
-    node.classList.add("is-out");
-  } else {
-    void node.offsetWidth;
-    node.classList.remove("is-out");
-  }
-
-  return new Promise((resolve) => {
-    let settled = false;
-    const finish = (): void => {
-      if (settled) return;
-      settled = true;
-      node.removeEventListener("transitionend", onTransitionEnd);
-      window.clearTimeout(timeoutId);
-      if (!out) {
-        node.classList.remove("dd-restore-anim", "is-out");
-      }
-      resolve();
-    };
-
-    const onTransitionEnd = (event: TransitionEvent): void => {
-      if (event.target !== node) return;
-      if (
-        event.propertyName !== "opacity" &&
-        event.propertyName !== "transform"
-      ) {
-        return;
-      }
-      finish();
-    };
-
-    node.addEventListener("transitionend", onTransitionEnd);
-    const timeoutId = window.setTimeout(finish, ELEMENT_ANIM_MS + 75);
-  });
-}
-
 function parseElementForInsertion(outerHTML: string, parent: Element): Element | null {
   const svgNS = "http://www.w3.org/2000/svg";
   if (parent.namespaceURI === svgNS) {
@@ -250,8 +206,6 @@ export class RestoreSystem {
 
   private async restoreEntry(entry: UndoEntry): Promise<boolean> {
     if (!resolveUndoEntryParent(entry)) return false;
-
-    ensurePageHighlightStyles();
 
     const restored = parseElementForInsertion(entry.outerHTML, entry.parent);
     if (!restored) return false;

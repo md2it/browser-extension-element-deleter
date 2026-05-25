@@ -20,6 +20,13 @@ export function shouldSuppressContentToggleAfterExecuteAction(
   return lastAt > 0 && now - lastAt < windowMs;
 }
 
+/** Paired `action.onClicked` after manifest `_execute_action` (incl. when hotkey is off). */
+export function shouldSuppressToolbarClickAfterHotkeyCommand(
+  now = Date.now(),
+): boolean {
+  return shouldSuppressContentToggleAfterExecuteAction(lastExecuteActionAt, now);
+}
+
 export type BackgroundHotkeysHost = {
   getActiveCommandTab: () => Promise<chrome.tabs.Tab | undefined>;
   deactivateTab: (tabId: number) => Promise<void>;
@@ -35,8 +42,9 @@ export function registerBackgroundHotkeys(host: BackgroundHotkeysHost): void {
       if (tab?.id === undefined) return;
 
       if (command === COMMAND_EXECUTE_ACTION) {
-        if (!(await getStartHotkeyEnabled())) return;
+        // Always stamp: Chrome still fires `action.onClicked` for this command.
         lastExecuteActionAt = Date.now();
+        if (!(await getStartHotkeyEnabled())) return;
         await host.toggleTab(tab.id, tab.windowId);
         return;
       }

@@ -1,12 +1,12 @@
 export {
   clearMessageCache,
   getMessage,
-} from "./get-message";
+} from "../../../SHARED/src/i18n/get-message";
 export {
   detectLocale,
   getAcceptLanguageTags,
 } from "./detect";
-export { isRtlLocale } from "./rtl";
+export { isRtlLocale } from "../../../SHARED/src/i18n/rtl";
 export { t } from "./strings";
 export {
   isLocale,
@@ -14,4 +14,4 @@ export {
   LOCALES,
   type Locale,
   type Strings,
-} from "./types";
+} from "../../../SHARED/src/i18n/types";

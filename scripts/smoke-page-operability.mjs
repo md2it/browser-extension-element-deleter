@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-/** Mirrors src/page-operability/probe.ts */
+/** Mirrors SHARED/src/page-operability/probe.ts */
 function probeDocumentOperability(document) {
   try {
     const root = document.documentElement ?? document.body;

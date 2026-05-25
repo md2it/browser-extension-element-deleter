@@ -3,8 +3,8 @@ export {
   RESTRICTED_NOTICE_POPUP,
   RESTRICTED_NOTICE_SESSION_KEY,
 } from "./constants";
-export { canOperateOnTab } from "./can-operate";
-export { probeDocumentOperability } from "./probe";
+export { canOperateOnTab } from "../../../SHARED/src/page-operability/can-operate";
+export { probeDocumentOperability } from "../../../SHARED/src/page-operability/probe";
 export {
   refreshRestrictedNoticeCache,
   showRestrictedNotice,

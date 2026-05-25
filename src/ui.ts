@@ -1,9 +1,9 @@
 import {
   findIframeAtPoint,
   isPointInElement,
-} from "./element-under-cursor";
+} from "../../SHARED/src/element-under-cursor";
 import { formatElementLabel } from "./element-label";
-import { ensurePageHighlightStyles, HighlightSystem } from "./highlight-selector";
+import { HighlightSystem } from "./highlight-selector";
 import { isRtlLocale, t, type Locale } from "./i18n";
 import {
   RestoreSystem,
@@ -221,7 +221,6 @@ export class DeleterUI {
 
     this.elementActionInFlight = true;
     this.highlight.clearIfTarget(toRemove);
-    ensurePageHighlightStyles();
 
     try {
       await runElementTransition(toRemove, true);

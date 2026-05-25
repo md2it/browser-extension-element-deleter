@@ -39,7 +39,7 @@ assert.equal(isEscHotkeyEvent(ev({ key: "Escape" })), true);
 assert.equal(isMacPlatform("Mozilla/5.0 (Macintosh)", "MacIntel"), true);
 assert.equal(isMacPlatform("Mozilla/5.0 (Windows NT 10.0)", "Win32"), false);
 
-// Keep in sync with src/hotkeys/background.ts (start hotkey enable race).
+// Keep in sync with src/hotkeys/background.ts (_execute_action paired toggles).
 const EXECUTE_ACTION_TOGGLE_SUPPRESS_MS = 300;
 
 function shouldSuppressContentToggleAfterExecuteAction(

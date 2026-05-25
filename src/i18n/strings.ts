@@ -1,4 +1,4 @@
-import type { Locale, Strings } from "./types";
+import type { Locale, Strings } from "../../../SHARED/src/i18n/types";
 
 const MESSAGES: Record<Locale, Strings> = {
   en: {

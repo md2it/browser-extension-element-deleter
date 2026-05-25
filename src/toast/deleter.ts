@@ -1,7 +1,7 @@
 import { extensionMarkSvg, COG, INFO, UNDO_2 } from "../icons";
 import { type Strings } from "../i18n";
-import { ToastStack } from "./stack";
-import type { ToastStackHost } from "./types";
+import { TOAST_STACK_CONFIG } from "../ui-config";
+import { ToastStack, type ToastStackHost } from "../../../SHARED/src/toast";
 
 export type ToastHost = ToastStackHost & {
   getStrings: () => Strings;
@@ -14,11 +14,14 @@ export class ToastSystem {
   private readonly stack: ToastStack;
 
   constructor(private readonly host: ToastHost) {
-    this.stack = new ToastStack({
-      shadow: host.shadow,
-      getNotificationSeconds: () => host.getNotificationSeconds(),
-      isRtl: () => host.isRtl(),
-    });
+    this.stack = new ToastStack(
+      {
+        shadow: host.shadow,
+        getNotificationSeconds: () => host.getNotificationSeconds(),
+        isRtl: () => host.isRtl(),
+      },
+      TOAST_STACK_CONFIG,
+    );
   }
 
   showDeletedToast(elementLabel: string, undoId: number): void {

@@ -195,18 +195,11 @@ E = Extension
    - N это редактируемое число
    - Редактирование должно быть возможно при клике на "Уведомления N сек"
    - Тултип "Установите 0 для выключения уведомлений"
-- Toggler: "Вкл/выкл HOTKEY"
-   - Переменная HOTKEY = "Ctrl + Shift + X" или "⌘ + Shift + X" в зависимости от ОС. Monospace
-   - По умолчанию включено
-- Toggler: "Выкл Esc"
-   - "Esc" monospace
-   - По умолчанию включено
-- Toggler: "Отменить удаление HOTKEY"
-   - Переменная HOTKEY = "Ctrl + Z" или "⌘ + Z" в зависимости от ОС. Monospace
-   - По умолчанию включено
-- Toggler: "tag#id / tag.class"
-   - Подстроки "tag#id" и "tag.class" monospace
-   - По умолчанию включено
+- Toggler: "Вкл/выкл HOTKEY" (HOTKEY = "Ctrl + Shift + X" или "⌘ + Shift + X" в зависимости от ОС. Monospace)
+- Toggler: "Выкл Esc" ("Esc" monospace)
+- Toggler: "Отменить удаление HOTKEY" (HOTKEY = "Ctrl + Z" или "⌘ + Z" в зависимости от ОС. Monospace)
+- Toggler: "tag#id / tag.class" (подстроки "tag#id" и "tag.class" monospace)
+- По умолчанию все тогглеры включены
 
 **ABOUT**
 - Boolean список:

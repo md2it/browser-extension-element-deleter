@@ -6,7 +6,8 @@ import {
   CHEVRONS_LEFT,
   CHEVRONS_RIGHT,
 } from "../icons";
-import { createPanelFooter } from "../panel-footer";
+import { createPanelFooter } from "../../../SHARED/src/panel-footer";
+import { PANEL_FOOTER_CONFIG } from "../ui-config";
 import { createPanelDivider, createPanelHeader } from "./header";
 import {
   isRtlLocale,
@@ -106,7 +107,7 @@ export class PanelWindowSystem {
 
     body.append(settingsPanel, infoPanel);
 
-    const footer = createPanelFooter();
+    const footer = createPanelFooter(PANEL_FOOTER_CONFIG);
 
     let activeTab: "settings" | "info" = tab;
 
