@@ -7,7 +7,7 @@ import {
 } from "./commands";
 import { getStartHotkeyEnabled } from "./settings";
 
-/** Ignore page `TOGGLE_REQUEST` shortly after manifest `_execute_action` (enable→off race). */
+/** Ignore paired hotkeys shortly after manifest `_execute_action` (same key as `deactivate`). */
 export const EXECUTE_ACTION_TOGGLE_SUPPRESS_MS = 300;
 
 let lastExecuteActionAt = 0;
@@ -43,6 +43,14 @@ export function registerBackgroundHotkeys(host: BackgroundHotkeysHost): void {
 
       if (command === COMMAND_DEACTIVATE) {
         if (!(await getStartHotkeyEnabled())) return;
+        if (
+          shouldSuppressContentToggleAfterExecuteAction(
+            lastExecuteActionAt,
+            Date.now(),
+          )
+        ) {
+          return;
+        }
         await host.deactivateTab(tab.id);
         return;
       }
