@@ -3,7 +3,7 @@
     "message": "删除和恢复网页上的元素。不用网络。不收集数据。"
   },
   "commandToggleDelete": {
-    "message": "开/关"
+    "message": "开/关: Ctrl+Shift+X\u00A0/\u00A0⇧⌘X\u00A0→\u00A0D"
   },
   "commandUndoDelete": {
     "message": "撤销删除"

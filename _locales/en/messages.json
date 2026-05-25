@@ -3,7 +3,7 @@
     "message": "Remove and restore elements on web pages. No network. No data collection."
   },
   "commandToggleDelete": {
-    "message": "On/Off"
+    "message": "On/Off: Ctrl+Shift+X\u00A0/\u00A0⇧⌘X\u00A0→\u00A0D"
   },
   "commandUndoDelete": {
     "message": "Undo delete"
