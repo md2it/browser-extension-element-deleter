@@ -1,0 +1,11 @@
+{
+  "extDescription": {
+    "message": "Supprime et restaure des éléments sur des pages web. Pas de réseau. Ne collecte pas de données."
+  },
+  "commandDeactivate": {
+    "message": "Arrêt"
+  },
+  "commandUndoDelete": {
+    "message": "Annuler la suppression"
+  }
+}

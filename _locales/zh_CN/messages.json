@@ -1,0 +1,11 @@
+{
+  "extDescription": {
+    "message": "删除和恢复网页上的元素。不用网络。不收集数据。"
+  },
+  "commandDeactivate": {
+    "message": "关闭"
+  },
+  "commandUndoDelete": {
+    "message": "撤销删除"
+  }
+}

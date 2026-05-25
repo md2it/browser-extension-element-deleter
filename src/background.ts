@@ -285,6 +285,18 @@ async function setTabActive(tabId: number, active: boolean): Promise<void> {
   }
 }
 
+async function deactivateTab(tabId: number): Promise<void> {
+  if (!tabActive.get(tabId)) return;
+  tabActive.set(tabId, false);
+  await syncTabToolbarIcon(tabId);
+  await setTabActive(tabId, false);
+}
+
+async function undoOnTab(tabId: number): Promise<void> {
+  if (!(await getUndoHotkeyEnabled())) return;
+  await sendWithInject(tabId, { type: "UNDO_LAST" });
+}
+
 async function toggleTab(tabId: number): Promise<void> {
   const next = !tabActive.get(tabId);
   if (!next) {
@@ -309,7 +321,8 @@ async function toggleTab(tabId: number): Promise<void> {
 const CONTEXT_MENU_SETTINGS = "dom-deleter-settings";
 const CONTEXT_MENU_ABOUT = "dom-deleter-about";
 const CONTEXT_MENU_DELETE = "dom-deleter-delete-element";
-const TOGGLE_COMMAND = "toggle-active";
+const COMMAND_DEACTIVATE = "deactivate";
+const COMMAND_UNDO = "undo-delete";
 
 /** Chrome `all` includes `action`; page delete must not appear on the toolbar icon menu. */
 const PAGE_CONTEXT_MENU_CONTEXTS = [
@@ -513,12 +526,18 @@ ext.action.onClicked.addListener(async (tab) => {
 });
 
 ext.commands.onCommand.addListener(async (command) => {
-  if (command !== TOGGLE_COMMAND) return;
-  if (!(await getStartHotkeyEnabled())) return;
-
   const [tab] = await ext.tabs.query({ active: true, currentWindow: true });
   if (tab?.id === undefined) return;
-  await toggleTab(tab.id);
+  const tabId = tab.id;
+
+  if (command === COMMAND_DEACTIVATE) {
+    if (!(await getStartHotkeyEnabled())) return;
+    await deactivateTab(tabId);
+    return;
+  }
+  if (command === COMMAND_UNDO) {
+    await undoOnTab(tabId);
+  }
 });
 
 ext.contextMenus.onClicked.addListener((info, tab) => {

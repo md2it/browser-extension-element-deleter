@@ -8,7 +8,8 @@ export type BgToContent =
       locale: Locale;
       elementLabelEnabled: boolean;
     }
-  | { type: "DELETE_CONTEXT_ELEMENT" };
+  | { type: "DELETE_CONTEXT_ELEMENT" }
+  | { type: "UNDO_LAST" };
 
 export type ContentToBg =
   | { type: "ACTIVE_CHANGED"; active: boolean }
