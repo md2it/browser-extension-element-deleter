@@ -5,7 +5,6 @@ import undo2Svg from "../icons/undo-2.svg";
 
 export {
   ARROW_UP,
-  BUY_ME_COFFEE,
   COG,
   HEART,
   INFO,
@@ -13,7 +12,6 @@ export {
   MD2IT,
   PIN,
   PUZZLE,
-  REVOLUT,
 } from "../../SHARED/src/icons";
 
 function stripComment(svg: string): string {
