@@ -1,23 +1,24 @@
 import {
   ESCAPE_KEY_LABEL,
   formatModifierKeyLabel,
-  formatModifierShiftKeyLabel,
+  formatPrefixHotkeyLabel,
   isEditableKeyboardTarget,
   isEscapeKeyEvent,
+  isPrefixChordKeyEvent,
   isModifierKeyEvent,
-  isModifierShiftKeyEvent,
 } from "../../../SHARED/src/hotkeys";
+import { PREFIX_ACTION_KEY } from "./commands";
 
 export const ESC_HOTKEY_LABEL = ESCAPE_KEY_LABEL;
 
-/** Display label for the start shortcut (README: Mac vs Win/Linux/unknown). */
+/** Display label for prefix toggle (README / settings). */
 export function getStartHotkeyLabel(): string {
-  return formatModifierShiftKeyLabel("X");
+  return formatPrefixHotkeyLabel(PREFIX_ACTION_KEY);
 }
 
-/** Ctrl/Cmd+Shift+X — fallback when the browser does not route the manifest command. */
+/** Ctrl/Cmd+Shift+X — prefix chord (page fallback). */
 export function isStartHotkeyEvent(e: KeyboardEvent): boolean {
-  return isModifierShiftKeyEvent(e, "x");
+  return isPrefixChordKeyEvent(e);
 }
 
 /** Escape — exit delete mode (README: second completion hotkey). */

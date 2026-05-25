@@ -291,6 +291,7 @@ registerBackgroundHotkeys({
   getActiveCommandTab,
   undoOnTab,
   toggleTab,
+  sendToTab: (tabId, message) => sendWithInject(tabId, message),
 });
 
 ext.contextMenus.onClicked.addListener((info, tab) => {

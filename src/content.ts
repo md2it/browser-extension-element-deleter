@@ -1,5 +1,9 @@
 import { ext } from "./api";
-import { registerDeleterContentHotkeys, registerDeleterStartHotkey } from "./hotkeys";
+import {
+  armDeleterPrefixToggle,
+  registerDeleterContentHotkeys,
+  registerDeleterStartHotkey,
+} from "./hotkeys";
 import type { BgToContent, ContentActivationResponse, ContentToBg } from "./messages";
 import { getUndoHotkeyEnabled } from "./storage";
 import {
@@ -219,6 +223,10 @@ function attachMessageHandler(state: ContentState): void {
         if (!ui.canUndo()) return;
         await ui.undoLast();
       })();
+      return;
+    }
+    if (message.type === "PREFIX_ARM_TOGGLE") {
+      armDeleterPrefixToggle(message.hint);
     }
   };
 

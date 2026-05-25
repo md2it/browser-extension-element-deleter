@@ -1,14 +1,20 @@
 import {
   createToggleCommandSuppressTracker,
-  registerManifestCommandHotkeys,
-  type ManifestCommandHotkeysHost,
+  registerPrefixManifestHotkeys,
+  type PrefixManifestHotkeysHost,
 } from "../../../SHARED/src/hotkeys";
-import { COMMAND_TOGGLE_DELETE, COMMAND_UNDO } from "./commands";
+import type { BgToContent } from "../messages";
+import {
+  COMMAND_EXECUTE_ACTION,
+  COMMAND_TOGGLE_DELETE,
+  COMMAND_UNDO,
+  PREFIX_ACTION_KEY,
+} from "./commands";
 import { getStartHotkeyEnabled } from "./settings";
 
 const toggleCommandSuppress = createToggleCommandSuppressTracker();
 
-/** Paired `action.onClicked` after manifest `_execute_action` (same key as toggle). */
+/** Paired `action.onClicked` after manifest `_execute_action` (same key as prefix). */
 export function shouldSuppressToolbarClickAfterHotkeyCommand(
   now = Date.now(),
 ): boolean {
@@ -19,23 +25,29 @@ export type BackgroundHotkeysHost = {
   getActiveCommandTab: () => Promise<chrome.tabs.Tab | undefined>;
   undoOnTab: (tabId: number) => Promise<void>;
   toggleTab: (tabId: number, windowId?: number) => Promise<void>;
+  sendToTab: (tabId: number, message: BgToContent) => Promise<boolean>;
 };
 
-/** Manifest commands + content-script toggle fallback (`TOGGLE_REQUEST`). */
+/** Manifest prefix chord + action letter + content fallback (`TOGGLE_REQUEST`). */
 export function registerBackgroundHotkeys(host: BackgroundHotkeysHost): void {
-  const manifestHost: ManifestCommandHotkeysHost = {
+  const manifestHost: PrefixManifestHotkeysHost = {
     getActiveCommandTab: host.getActiveCommandTab,
-    onToggleCommand: async (tab) => {
-      await host.toggleTab(tab.id!, tab.windowId);
+    armPrefixOnTab: async (tab, hintLetter) => {
+      await host.sendToTab(tab.id!, {
+        type: "PREFIX_ARM_TOGGLE",
+        hint: hintLetter,
+      });
     },
     onUndoCommand: async (tab) => {
       await host.undoOnTab(tab.id!);
     },
   };
 
-  registerManifestCommandHotkeys({
-    toggleCommand: COMMAND_TOGGLE_DELETE,
+  registerPrefixManifestHotkeys({
+    prefixCommands: [COMMAND_TOGGLE_DELETE, COMMAND_EXECUTE_ACTION],
+    hintLetter: PREFIX_ACTION_KEY,
     undoCommand: COMMAND_UNDO,
+    isPrefixEnabled: getStartHotkeyEnabled,
     isToggleEnabled: getStartHotkeyEnabled,
     toggleRequestMessageType: "TOGGLE_REQUEST",
     onToggleRequest: (tabId, windowId) => host.toggleTab(tabId, windowId),

@@ -1,6 +1,12 @@
-export { COMMAND_TOGGLE_DELETE, COMMAND_UNDO } from "./commands";
+export {
+  COMMAND_EXECUTE_ACTION,
+  COMMAND_TOGGLE_DELETE,
+  COMMAND_UNDO,
+  PREFIX_ACTION_KEY,
+} from "./commands";
 export { registerBackgroundHotkeys, type BackgroundHotkeysHost } from "./background";
 export {
+  armDeleterPrefixToggle,
   registerDeleterContentHotkeys,
   registerDeleterStartHotkey,
   type DeleterContentHotkeysHost,

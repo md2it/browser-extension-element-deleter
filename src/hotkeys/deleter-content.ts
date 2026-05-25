@@ -1,9 +1,13 @@
 import {
+  registerPrefixStartHotkey,
+  type PrefixModeController,
+} from "../../../SHARED/src/hotkeys";
+import {
   isEditableKeyboardTarget,
   isEscHotkeyEvent,
-  isStartHotkeyEvent,
   isUndoHotkeyEvent,
 } from "./keys";
+import { PREFIX_ACTION_KEY } from "./commands";
 import { registerContentHotkey, type ContentHotkeySlot } from "./registry";
 import {
   getEscHotkeyEnabled,
@@ -24,58 +28,57 @@ export type DeleterContentHotkeysHost = {
   ensureUi: () => Promise<DeleterUndoUi>;
 };
 
-/** Ctrl/Cmd+Shift+X page fallback → background toggle (top frame only). */
-export function registerDeleterStartHotkey(requestToggle: () => void): void {
-  if (window.top !== window) return;
+const HOTKEY_NAMESPACE = "elementDeleter";
 
-  registerContentHotkey("start", (e) => {
-    if (!isStartHotkeyEvent(e)) return;
-    if (isEditableKeyboardTarget(e.target)) return;
-    e.preventDefault();
-    e.stopPropagation();
-    void (async () => {
-      if (!(await getStartHotkeyEnabled())) return;
-      requestToggle();
-    })();
+let prefixController: PrefixModeController | undefined;
+
+/** Ctrl/Cmd+Shift+X → D page fallback (top frame only). */
+export function registerDeleterStartHotkey(requestToggle: () => void): void {
+  prefixController = registerPrefixStartHotkey({
+    namespace: HOTKEY_NAMESPACE,
+    hintLetter: PREFIX_ACTION_KEY,
+    isEnabled: getStartHotkeyEnabled,
+    onAction: requestToggle,
   });
 }
 
-/** Page `keydown` handlers: toggle mode, Esc off, undo restore. */
+/** Arm prefix mode from background (manifest chord). */
+export function armDeleterPrefixToggle(hint = PREFIX_ACTION_KEY): void {
+  prefixController?.arm(hint);
+}
+
+/** Page `keydown` handlers: Esc off, undo restore. */
 export function registerDeleterContentHotkeys(
   host: DeleterContentHotkeysHost,
-  slots: readonly ContentHotkeySlot[] = ["start", "esc", "undo"],
+  slots: readonly ContentHotkeySlot[] = ["esc", "undo"],
 ): void {
-  if (slots.includes("start")) {
-    registerDeleterStartHotkey(host.requestToggle);
-  }
-
   if (slots.includes("undo")) {
-  registerContentHotkey("undo", (e) => {
-    if (!isUndoHotkeyEvent(e)) return;
-    if (isEditableKeyboardTarget(e.target)) return;
-    if (host.hasRestorableUndo()) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    void (async () => {
-      if (!(await getUndoHotkeyEnabled())) return;
-      const ui = await host.ensureUi();
-      if (!ui.canUndo()) return;
-      await ui.undoLast();
-    })();
-  });
+    registerContentHotkey("undo", (e) => {
+      if (!isUndoHotkeyEvent(e)) return;
+      if (isEditableKeyboardTarget(e.target)) return;
+      if (host.hasRestorableUndo()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      void (async () => {
+        if (!(await getUndoHotkeyEnabled())) return;
+        const ui = await host.ensureUi();
+        if (!ui.canUndo()) return;
+        await ui.undoLast();
+      })();
+    });
   }
 
   if (slots.includes("esc")) {
-  registerContentHotkey("esc", (e) => {
-    if (!isEscHotkeyEvent(e)) return;
-    void (async () => {
-      if (!(await getEscHotkeyEnabled())) return;
-      if (!host.isActive()) return;
-      e.preventDefault();
-      e.stopPropagation();
-      host.deactivate();
-    })();
-  });
+    registerContentHotkey("esc", (e) => {
+      if (!isEscHotkeyEvent(e)) return;
+      void (async () => {
+        if (!(await getEscHotkeyEnabled())) return;
+        if (!host.isActive()) return;
+        e.preventDefault();
+        e.stopPropagation();
+        host.deactivate();
+      })();
+    });
   }
 }

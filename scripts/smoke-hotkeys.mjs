@@ -24,6 +24,15 @@ function isModifierShiftKeyEvent(e, key, mac) {
   return modifier && e.shiftKey && e.key.toLowerCase() === key.toLowerCase();
 }
 
+function isPrefixChordKeyEvent(e, mac) {
+  return isModifierShiftKeyEvent(e, "x", mac);
+}
+
+function isPrefixActionKeyEvent(e, key) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return false;
+  return e.key.toLowerCase() === key.toLowerCase();
+}
+
 function isModifierKeyEvent(e, key, options = {}, mac) {
   const modifier = mac ? e.metaKey : e.ctrlKey;
   const shift = options.shift ?? false;
@@ -53,9 +62,12 @@ function shouldSuppressContentToggleAfterToggleCommand(
 
 const ev = (partial) => ({ ...partial, key: partial.key ?? "" });
 
-assert.equal(isModifierShiftKeyEvent(ev({ ctrlKey: true, shiftKey: true, key: "X" }), "x", false), true);
-assert.equal(isModifierShiftKeyEvent(ev({ metaKey: true, shiftKey: true, key: "x" }), "x", true), true);
-assert.equal(isModifierShiftKeyEvent(ev({ ctrlKey: true, shiftKey: false, key: "X" }), "x", false), false);
+assert.equal(isPrefixChordKeyEvent(ev({ ctrlKey: true, shiftKey: true, key: "X" }), false), true);
+assert.equal(isPrefixChordKeyEvent(ev({ metaKey: true, shiftKey: true, key: "x" }), true), true);
+assert.equal(isPrefixChordKeyEvent(ev({ ctrlKey: true, shiftKey: false, key: "X" }), false), false);
+
+assert.equal(isPrefixActionKeyEvent(ev({ key: "d" }), "D"), true);
+assert.equal(isPrefixActionKeyEvent(ev({ ctrlKey: true, key: "d" }), "D"), false);
 
 assert.equal(isModifierKeyEvent(ev({ ctrlKey: true, key: "z" }), "z", {}, false), true);
 assert.equal(isModifierKeyEvent(ev({ ctrlKey: true, shiftKey: true, key: "z" }), "z", {}, false), false);
@@ -76,26 +88,34 @@ assert.equal(
 assert.equal(shouldSuppressContentToggleAfterToggleCommand(0, 100), false);
 
 const sharedIndexSrc = readFileSync(join(sharedHotkeys, "index.ts"), "utf8");
-assert.match(sharedIndexSrc, /registerManifestCommandHotkeys/);
-assert.match(sharedIndexSrc, /registerContentHotkey/);
-assert.match(sharedIndexSrc, /isModifierShiftKeyEvent/);
+assert.match(sharedIndexSrc, /registerPrefixManifestHotkeys/);
+assert.match(sharedIndexSrc, /registerPrefixStartHotkey/);
+assert.match(sharedIndexSrc, /formatPrefixHotkeyLabel/);
+assert.match(sharedIndexSrc, /PREFIX_ACTION_TIMEOUT_MS/);
 
 const deleterKeysSrc = readFileSync(join(root, "src/hotkeys/keys.ts"), "utf8");
-assert.match(deleterKeysSrc, /SHARED\/src\/hotkeys/);
-assert.match(deleterKeysSrc, /formatModifierShiftKeyLabel\("X"\)/);
+assert.match(deleterKeysSrc, /formatPrefixHotkeyLabel/);
+assert.match(deleterKeysSrc, /PREFIX_ACTION_KEY/);
 
 const deleterRegistrySrc = readFileSync(join(root, "src/hotkeys/registry.ts"), "utf8");
 assert.match(deleterRegistrySrc, /registerSharedContentHotkey/);
 assert.match(deleterRegistrySrc, /elementDeleter/);
 
 const deleterBackgroundSrc = readFileSync(join(root, "src/hotkeys/background.ts"), "utf8");
-assert.match(deleterBackgroundSrc, /registerManifestCommandHotkeys/);
-assert.match(deleterBackgroundSrc, /COMMAND_TOGGLE_DELETE/);
+assert.match(deleterBackgroundSrc, /registerPrefixManifestHotkeys/);
+assert.match(deleterBackgroundSrc, /COMMAND_EXECUTE_ACTION/);
+assert.match(deleterBackgroundSrc, /PREFIX_ARM_TOGGLE/);
 assert.match(deleterBackgroundSrc, /TOGGLE_REQUEST/);
-assert.doesNotMatch(deleterBackgroundSrc, /ext\.commands\.onCommand/);
+assert.doesNotMatch(deleterBackgroundSrc, /registerManifestCommandHotkeys/);
 
 const commandsSrc = readFileSync(join(root, "src/hotkeys/commands.ts"), "utf8");
 assert.match(commandsSrc, /toggle-delete-mode/);
+assert.match(commandsSrc, /_execute_action/);
 assert.match(commandsSrc, /undo-delete/);
+
+const manifestSrc = readFileSync(join(root, "manifest.json"), "utf8");
+assert.match(manifestSrc, /"_execute_action"/);
+assert.match(manifestSrc, /"toggle-delete-mode"/);
+assert.match(manifestSrc, /Ctrl\+Shift\+X/);
 
 console.log("smoke-hotkeys: ok");

@@ -9,7 +9,8 @@ export type BgToContent =
       elementLabelEnabled: boolean;
     }
   | { type: "DELETE_CONTEXT_ELEMENT" }
-  | { type: "UNDO_LAST" };
+  | { type: "UNDO_LAST" }
+  | { type: "PREFIX_ARM_TOGGLE"; hint: string };
 
 export type ContentToBg =
   | { type: "ACTIVE_CHANGED"; active: boolean }
