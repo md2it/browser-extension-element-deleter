@@ -39,7 +39,7 @@ assert.equal(isEscHotkeyEvent(ev({ key: "Escape" })), true);
 assert.equal(isMacPlatform("Mozilla/5.0 (Macintosh)", "MacIntel"), true);
 assert.equal(isMacPlatform("Mozilla/5.0 (Windows NT 10.0)", "Win32"), false);
 
-// Keep in sync with src/hotkeys/background.ts (manifest toggle + content fallback).
+// Keep in sync with src/hotkeys/background.ts (_execute_action + toggle-delete-mode).
 const TOGGLE_COMMAND_SUPPRESS_MS = 300;
 
 function shouldSuppressContentToggleAfterToggleCommand(
@@ -48,6 +48,10 @@ function shouldSuppressContentToggleAfterToggleCommand(
   windowMs = TOGGLE_COMMAND_SUPPRESS_MS,
 ) {
   return lastAt > 0 && now - lastAt < windowMs;
+}
+
+function shouldSuppressToolbarClickAfterHotkeyCommand(lastAt, now) {
+  return shouldSuppressContentToggleAfterToggleCommand(lastAt, now);
 }
 
 function shouldHandleToggleDeleteCommand(startHotkeyEnabled) {
@@ -66,5 +70,8 @@ assert.equal(shouldSuppressContentToggleAfterToggleCommand(0, 100), false);
 
 assert.equal(shouldHandleToggleDeleteCommand(true), true);
 assert.equal(shouldHandleToggleDeleteCommand(false), false);
+
+assert.equal(shouldSuppressToolbarClickAfterHotkeyCommand(1000, 1200), true);
+assert.equal(shouldSuppressToolbarClickAfterHotkeyCommand(1000, 1400), false);
 
 console.log("smoke-hotkeys: ok");

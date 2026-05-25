@@ -10,7 +10,10 @@ import {
 } from "./extension-icon-state";
 import { isRtlLocale, t, type Locale } from "./i18n";
 import type { BgToContent, ContentActivationResponse, ContentToBg } from "./messages";
-import { registerBackgroundHotkeys } from "./hotkeys/background";
+import {
+  registerBackgroundHotkeys,
+  shouldSuppressToolbarClickAfterHotkeyCommand,
+} from "./hotkeys/background";
 import {
   ensureLocaleInStorage,
   getElementLabelEnabled,
@@ -280,6 +283,7 @@ async function pushSettingsToActiveTabs(): Promise<void> {
 
 ext.action.onClicked.addListener(async (tab) => {
   if (tab.id === undefined) return;
+  if (shouldSuppressToolbarClickAfterHotkeyCommand()) return;
   await toggleTab(tab.id, tab.windowId);
 });
 
