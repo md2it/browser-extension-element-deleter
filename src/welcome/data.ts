@@ -7,7 +7,6 @@ import {
   HEART,
   PIN,
   PUZZLE,
-  extensionMarkSvg,
   toolbarWelcomeIconSvg,
 } from "../icons";
 import {
@@ -52,7 +51,7 @@ export function buildWelcomeData(
     extensionName,
     locale,
     dir: current.dir,
-    headerLogoSvg: extensionMarkSvg({ variant: "panel" }),
+    headerLogoSvg: toolbarWelcomeIconSvg(),
     headerTitle: PANEL_TITLE,
     headerSubtitle: current.headerSubtitle,
     iconSvg: toolbarWelcomeIconSvg(),

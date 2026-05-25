@@ -12,20 +12,23 @@
 
 .dd-panel-title-row {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: stretch;
-  gap: 0.5rem;
-  min-height: 2.25rem;
+  grid-template-columns: 1fr;
+  grid-template-areas: "stack";
+  align-items: center;
+}
+
+.dd-panel-logo,
+.dd-panel-heading {
+  grid-area: stack;
 }
 
 .dd-panel-logo {
-  flex: 0 0 auto;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   align-self: stretch;
   justify-self: start;
   line-height: 0;
-  color: #999;
+  z-index: 1;
 }
 
 .dd-panel-logo svg {
@@ -33,18 +36,19 @@
   height: 100%;
   width: auto;
   aspect-ratio: 1;
+  flex-shrink: 0;
 }
 
 .dd-panel-heading {
+  justify-self: center;
+  align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-self: center;
-  grid-column: 2;
   gap: 0.12rem;
   min-width: 0;
-  color: #1f2937;
+  max-width: 100%;
   font-size: 0.82rem;
 }
 
@@ -54,7 +58,8 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-align: center;
-  color: inherit;
+  text-transform: uppercase;
+  color: #012292;
 }
 
 .dd-panel-subtitle {
@@ -65,5 +70,5 @@
   line-height: 1.2;
   white-space: nowrap;
   text-align: center;
-  color: #374151;
+  color: #666666;
 }
