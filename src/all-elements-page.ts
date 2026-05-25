@@ -10,7 +10,7 @@ import {
 export const ALL_ELEMENTS_OUTLINE_STYLE_ID = "element-deleter-all-elements-outline";
 export const ALL_ELEMENTS_FILL_STYLE_ID = "element-deleter-all-elements-fill";
 
-/** Brand red #b91c1c — slightly softer alpha for dotted outline */
+/** Brand red #b91c1c — slightly softer alpha for dashed outline */
 const OUTLINE_RGBA = "rgba(185, 28, 28, 0.48)";
 
 export function removeAllElementsPageStyles(): void {
@@ -25,7 +25,7 @@ export function applyAllElementsPageStyles(options: {
     enableAllElementsOutline({
       styleId: ALL_ELEMENTS_OUTLINE_STYLE_ID,
       rgba: OUTLINE_RGBA,
-      outlineStyle: "dotted",
+      outlineStyle: "dashed",
     });
   } else {
     disableAllElementsOutline(ALL_ELEMENTS_OUTLINE_STYLE_ID);

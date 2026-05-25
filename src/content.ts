@@ -12,6 +12,7 @@ import type { BgToContent, ContentActivationResponse, ContentToBg } from "./mess
 import {
   getAllElementsFillEnabled,
   getAllElementsOutlineEnabled,
+  getElementLabelEnabled,
   getUndoHotkeyEnabled,
 } from "./storage";
 import {
@@ -291,10 +292,23 @@ async function syncAllElementsPageStylesFromStorage(
   applyAllElementsPageStyles({ outline, fill });
 }
 
+async function syncElementLabelFromStorage(state: ContentState): Promise<void> {
+  if (!state.ui) return;
+  state.ui.setElementLabelEnabled(await getElementLabelEnabled());
+}
+
 ext.storage.onChanged.addListener((changes, area) => {
   if (area !== "local") return;
-  if (!changes.allElementsOutlineEnabled && !changes.allElementsFillEnabled) {
+  const outlineOrFillChanged =
+    changes.allElementsOutlineEnabled || changes.allElementsFillEnabled;
+  const elementLabelChanged = changes.elementLabelEnabled;
+  if (!outlineOrFillChanged && !elementLabelChanged) {
     return;
   }
-  void syncAllElementsPageStylesFromStorage(state);
+  if (outlineOrFillChanged) {
+    void syncAllElementsPageStylesFromStorage(state);
+  }
+  if (elementLabelChanged) {
+    void syncElementLabelFromStorage(state);
+  }
 });
