@@ -3,7 +3,7 @@
     "message": "Elimina y restaura elementos en páginas web. Sin red. No recopila datos."
   },
   "commandToggleDelete": {
-    "message": "Activar/desactivar: Ctrl+Shift+X\u00A0/\u00A0⇧⌘X\u00A0→\u00A0D"
+    "message": "Activar\u00A0/\u00A0desactivar: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0luego\u00A0pulsa\u00A0D"
   },
   "commandUndoDelete": {
     "message": "Deshacer eliminación"

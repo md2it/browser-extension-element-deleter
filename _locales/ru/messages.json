@@ -3,7 +3,7 @@
     "message": "Удаление и восстановление элементов веб страницы. Без сети. Данные не собираются."
   },
   "commandToggleDelete": {
-    "message": "Вкл/выкл: Ctrl+Shift+X\u00A0/\u00A0⇧⌘X\u00A0→\u00A0D"
+    "message": "Вкл\u00A0/\u00A0выкл: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0затем\u00A0нажмите\u00A0D"
   },
   "commandUndoDelete": {
     "message": "Отменить удаление"

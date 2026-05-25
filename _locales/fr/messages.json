@@ -3,7 +3,7 @@
     "message": "Supprime et restaure des éléments sur des pages web. Pas de réseau. Ne collecte pas de données."
   },
   "commandToggleDelete": {
-    "message": "Activer/désactiver: Ctrl+Shift+X\u00A0/\u00A0⇧⌘X\u00A0→\u00A0D"
+    "message": "Activer\u00A0/\u00A0désactiver: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0puis\u00A0appuyez\u00A0sur\u00A0D"
   },
   "commandUndoDelete": {
     "message": "Annuler la suppression"
