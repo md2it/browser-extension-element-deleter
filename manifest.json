@@ -14,10 +14,10 @@
   "action": {
     "default_title": "Element Deleter",
     "default_icon": {
-      "16": "icons/toolbar-inactive.svg",
-      "32": "icons/toolbar-inactive.svg",
-      "48": "icons/toolbar-inactive.svg",
-      "128": "icons/toolbar-inactive.svg"
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
     }
   },
   "background": {

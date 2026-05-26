@@ -40,16 +40,24 @@ try {
     nodePaths: [join(shared, "node_modules")],
   });
 
-  const { getInactiveManifestRasters } = await import(pathToFileURL(outfile).href);
+  const { getInactiveManifestRasters, getActiveManifestRasters } =
+    await import(pathToFileURL(outfile).href);
   const outDir = join(root, "icons");
   mkdirSync(outDir, { recursive: true });
 
-  for (const { size, data } of getInactiveManifestRasters()) {
+  const writeRaster = (prefix, { size, data }) => {
     const png = new PNG({ width: size, height: size });
     png.data = data;
-    const dest = join(outDir, `icon-${size}.png`);
+    const dest = join(outDir, `${prefix}-${size}.png`);
     writeFileSync(dest, PNG.sync.write(png));
     console.log("wrote", dest);
+  };
+
+  for (const raster of getInactiveManifestRasters()) {
+    writeRaster("icon", raster);
+  }
+  for (const raster of getActiveManifestRasters()) {
+    writeRaster("toolbar-active", raster);
   }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
