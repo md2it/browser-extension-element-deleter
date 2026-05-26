@@ -1,11 +1,11 @@
 import {
   disableAllElementsFill,
   enableAllElementsFill,
-} from "@shared/all-elements-fill";
+} from "@lib/all-elements-fill";
 import {
   disableAllElementsOutline,
   enableAllElementsOutline,
-} from "@shared/all-elements-outline";
+} from "@lib/all-elements-outline";
 
 export const ALL_ELEMENTS_OUTLINE_STYLE_ID = "element-deleter-all-elements-outline";
 export const ALL_ELEMENTS_FILL_STYLE_ID = "element-deleter-all-elements-fill";

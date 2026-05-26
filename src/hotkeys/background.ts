@@ -2,7 +2,7 @@ import {
   createToggleCommandSuppressTracker,
   registerPrefixManifestHotkeys,
   type PrefixManifestHotkeysHost,
-} from "../../../SHARED/src/hotkeys";
+} from "../../../lib/src/hotkeys";
 import type { BgToContent } from "../messages";
 import {
   COMMAND_TOGGLE_DELETE,

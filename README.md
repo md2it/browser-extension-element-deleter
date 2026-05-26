@@ -31,7 +31,7 @@ Browser extension (Chrome, Firefox) to remove page elements locally and restore 
 
 ### Build from source
 
-This repository contains **Element Deleter** sources only. Shared library code (`SHARED/`) is a private multi-project toolkit and is **not published**. You cannot rebuild from this repo alone.
+This repository contains **Element Deleter** sources only. Shared library code (`lib/`) is a private multi-project toolkit and is **not published**. You cannot rebuild from this repo alone.
 
 TypeScript in `src/` is for reference; runtime code is in the bundled `.js` files inside `dist/`.
 

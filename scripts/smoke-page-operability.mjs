@@ -1,15 +1,15 @@
 /**
- * Smoke: SHARED page operability + element-deleter wiring (no browser APIs).
+ * Smoke: lib page operability + element-deleter wiring (no browser APIs).
  * Run: node scripts/smoke-page-operability.mjs
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { runSmokePageOperabilityCore } from "../../SHARED/scripts/smoke-page-operability-core.mjs";
+import { runSmokePageOperabilityCore } from "../../lib/scripts/smoke-page-operability-core.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const sharedOperability = join(root, "../SHARED/src/page-operability");
+const sharedOperability = join(root, "../lib/src/page-operability");
 
 runSmokePageOperabilityCore();
 

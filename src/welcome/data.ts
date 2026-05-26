@@ -1,4 +1,4 @@
-import { welcomeStepIcon, type WelcomeData } from "../../../SHARED/src/welcome";
+import { welcomeStepIcon, type WelcomeData } from "../../../lib/src/welcome";
 import { buildAboutListItems } from "../about";
 import { PANEL_TITLE } from "../brand";
 import {
@@ -9,7 +9,7 @@ import {
   PUZZLE,
   toolbarWelcomeIconSvg,
 } from "../icons";
-import { isRtlLocale } from "../../../SHARED/src/i18n/rtl";
+import { isRtlLocale } from "../../../lib/src/i18n/rtl";
 import { t } from "../i18n/strings";
 import { LOCALE_BUTTON_LABELS, LOCALES, type Locale } from "../i18n/types";
 

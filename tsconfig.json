@@ -1,4 +1,4 @@
 {
-  "extends": "../SHARED/tsconfig.base.json",
-  "include": ["src/**/*.ts", "src/env.d.ts", "../SHARED/src/**/*.ts"]
+  "extends": "../lib/tsconfig.base.json",
+  "include": ["src/**/*.ts", "src/env.d.ts", "../lib/src/**/*.ts"]
 }

@@ -1,1 +1,1 @@
-export { isPanelTabMode } from "../../../SHARED/src/panel-tab";
+export { isPanelTabMode } from "../../../lib/src/panel-tab";

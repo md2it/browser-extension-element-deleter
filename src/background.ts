@@ -1,5 +1,5 @@
 import { ext } from "./api";
-import { registerPrefixHintBadgeListeners } from "../../SHARED/src/hotkeys";
+import { registerPrefixHintBadgeListeners } from "../../lib/src/hotkeys";
 import {
   bootstrapToolbarIcons,
   forEachActiveTabId,
@@ -45,7 +45,7 @@ const BADGE_BLOCKED_TEXT = "✕";
 
 /**
  * Badge state priority (catalog):
- * 1) prefix letter (handled by SHARED prefix badge; we only suppress/restore)
+ * 1) prefix letter (handled by lib prefix badge; we only suppress/restore)
  * 2) cannot operate on page => X
  * 3) running => ON
  * 4) off => no badge

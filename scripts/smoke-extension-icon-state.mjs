@@ -1,12 +1,12 @@
 /**
- * Smoke: SHARED extension icon state + element-deleter wiring.
+ * Smoke: lib extension icon state + element-deleter wiring.
  * Run: node scripts/smoke-extension-icon-state.mjs
  */
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { runSmokeExtensionIconStateCore } from "../../SHARED/scripts/smoke-extension-icon-state-core.mjs";
+import { runSmokeExtensionIconStateCore } from "../../lib/scripts/smoke-extension-icon-state-core.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 

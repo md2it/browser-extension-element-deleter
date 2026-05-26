@@ -1,8 +1,8 @@
-import { detectLocale as detectLocaleBase } from "../../../SHARED/src/i18n/detect";
-import { mapChineseUiLocale } from "../../../SHARED/src/i18n/locale-code";
+import { detectLocale as detectLocaleBase } from "../../../lib/src/i18n/detect";
+import { mapChineseUiLocale } from "../../../lib/src/i18n/locale-code";
 import type { Locale } from "./types";
 
-export { getAcceptLanguageTags } from "../../../SHARED/src/i18n/detect";
+export { getAcceptLanguageTags } from "../../../lib/src/i18n/detect";
 
 function mapLanguageTag(tag: string): Locale | null {
   const chinese = mapChineseUiLocale(tag);

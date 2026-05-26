@@ -1,13 +1,13 @@
 # План публикации
 
 Для публикации в https://chrome.google.com/webstore/ нужно подготовить Single purpose, Permission justification, скриншоты, описания.
-Документ связан с [SHARED/PUBLICATION.md](../../SHARED/PUBLICATION.md)
+Документ связан с [lib/PUBLICATION.md](../../lib/PUBLICATION.md)
 
 ---
 
 ## СКРИПТЫ
 
-Общие скрипты — в [SHARED/scripts/](../../SHARED/scripts/). Запуск из корня проекта (`element-deleter/`).
+Общие скрипты — в [lib/scripts/](../../lib/scripts/). Запуск из корня проекта (`element-deleter/`).
 
 - Скриншот страниц
    - `npm run screenshots:pages -- ru` → `capture-pages.mjs`
@@ -19,8 +19,8 @@
 В `package.json` проекта:
 
 ```json
-"screenshots:pages": "node ../SHARED/scripts/capture-pages.mjs",
-"screenshots:live": "node ../SHARED/scripts/crop-live-screenshots.mjs"
+"screenshots:pages": "node ../lib/scripts/capture-pages.mjs",
+"screenshots:live": "node ../lib/scripts/crop-live-screenshots.mjs"
 ```
 
 Коды языков в CLI (и в именах файлов в **uncut-live-screenshots/**): `ru`, `en`, `es`, `fr`, `de`, `zn`, `ar`. Каталоги в PUBLICATION — `RU`, `EN`, `ES`, `FR`, `DE`, `ZN`, `AR` (`zn` → локаль `zh_CN`).

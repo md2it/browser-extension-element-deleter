@@ -7,8 +7,8 @@ import {
   CHEVRONS_RIGHT,
   toolbarWelcomeIconSvg,
 } from "../icons";
-import { createPanelFooter } from "../../../SHARED/src/panel-footer";
-import { localeToHtmlLang } from "../../../SHARED/src/i18n/locale-code";
+import { createPanelFooter } from "../../../lib/src/panel-footer";
+import { localeToHtmlLang } from "../../../lib/src/i18n/locale-code";
 import { PANEL_FOOTER_CONFIG } from "../ui-config";
 import { createPanelDivider, createPanelHeader } from "./header";
 import {

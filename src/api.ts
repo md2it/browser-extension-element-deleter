@@ -1,1 +1,1 @@
-export { ext } from "../../SHARED/src/api";
+export { ext } from "../../lib/src/api";

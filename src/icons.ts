@@ -12,7 +12,7 @@ export {
   MD2IT,
   PIN,
   PUZZLE,
-} from "../../SHARED/src/icons";
+} from "../../lib/src/icons";
 
 function stripComment(svg: string): string {
   return svg.replace(/<!--[\s\S]*?-->\s*/g, "").trim();

@@ -1,5 +1,5 @@
 import type { Locale } from "./i18n";
-import type { PrefixHintContentToBg } from "../../SHARED/src/hotkeys/prefix-hint-messages";
+import type { PrefixHintContentToBg } from "../../lib/src/hotkeys/prefix-hint-messages";
 
 export type BgToContent =
   | { type: "SET_ACTIVE"; active: boolean }

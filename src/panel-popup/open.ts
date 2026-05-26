@@ -2,7 +2,7 @@ import {
   openPanelInActionPopup as openSharedPanelInActionPopup,
   panelPagePath,
   type PanelPageOpenTarget,
-} from "../../../SHARED/src/panel-popup";
+} from "../../../lib/src/panel-popup";
 import { openPanelInTab } from "../panel-tab";
 import { PANEL_PAGE_CONFIG, type PanelPopupTab } from "./constants";
 

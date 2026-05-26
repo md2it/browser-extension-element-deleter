@@ -3,16 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "icons:manifest": "node ../SHARED/scripts/generate-manifest-icons.mjs",
+    "icons:manifest": "node ../lib/scripts/generate-manifest-icons.mjs",
     "build": "node scripts/build.mjs",
     "watch": "node scripts/build.mjs --watch",
-    "typecheck": "node ../SHARED/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json",
+    "typecheck": "node ../lib/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json",
     "smoke:hotkeys": "node scripts/smoke-hotkeys.mjs",
     "smoke:operability": "node scripts/smoke-page-operability.mjs",
     "smoke:icon-state": "node scripts/smoke-extension-icon-state.mjs",
     "smoke": "npm run smoke:hotkeys && npm run smoke:operability && npm run smoke:icon-state",
-    "screenshots:pages": "node ../SHARED/scripts/capture-pages.mjs",
-    "screenshots:live": "node ../SHARED/scripts/crop-live-screenshots.mjs"
+    "screenshots:pages": "node ../lib/scripts/capture-pages.mjs",
+    "screenshots:live": "node ../lib/scripts/crop-live-screenshots.mjs"
   },
   "devDependencies": {
     "playwright": "^1.60.0"

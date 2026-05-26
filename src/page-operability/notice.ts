@@ -3,7 +3,7 @@ import { getLocale, getNotificationSeconds } from "../storage";
 import {
   showBlockedNotice,
   type BlockedNoticePayload,
-} from "../../../SHARED/src/page-operability";
+} from "../../../lib/src/page-operability";
 import {
   RESTRICTED_NOTICE_CONFIG,
   RESTRICTED_NOTICE_MIN_MS,

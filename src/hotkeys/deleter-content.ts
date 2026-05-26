@@ -1,7 +1,7 @@
 import {
   registerPrefixStartHotkey,
   type PrefixModeController,
-} from "../../../SHARED/src/hotkeys";
+} from "../../../lib/src/hotkeys";
 import {
   isEditableKeyboardTarget,
   isEscHotkeyEvent,

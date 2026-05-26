@@ -1,4 +1,4 @@
-import { mountPanelShadowHost } from "../../../SHARED/src/panel-shell";
+import { mountPanelShadowHost } from "../../../lib/src/panel-shell";
 import { isRtlLocale, t, type Locale } from "../i18n";
 import {
   getAllElementsFillEnabled,

@@ -5,11 +5,11 @@ import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 const esbuild = require(
-  join(dirname(fileURLToPath(import.meta.url)), "../../SHARED/node_modules/esbuild"),
+  join(dirname(fileURLToPath(import.meta.url)), "../../lib/node_modules/esbuild"),
 );
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const sharedSrc = join(root, "../SHARED/src");
+const sharedSrc = join(root, "../lib/src");
 const watch = process.argv.includes("--watch");
 
 const stylesDir = join(root, "styles");
@@ -38,7 +38,7 @@ const common = {
     ".svg": "text",
   },
   alias: {
-    "@shared": sharedSrc,
+    "@lib": sharedSrc,
   },
 };
 

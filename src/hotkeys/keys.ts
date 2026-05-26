@@ -6,7 +6,7 @@ import {
   isEscapeKeyEvent,
   isPrefixChordKeyEvent,
   isModifierKeyEvent,
-} from "../../../SHARED/src/hotkeys";
+} from "../../../lib/src/hotkeys";
 import { PREFIX_ACTION_KEY } from "./commands";
 
 export const ESC_HOTKEY_LABEL = ESCAPE_KEY_LABEL;

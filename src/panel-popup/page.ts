@@ -2,7 +2,7 @@ import {
   getPanelPageUrl,
   isPanelPage,
   resolvePanelPageInitialTab as resolveSharedPanelPageInitialTab,
-} from "../../../SHARED/src/panel-popup";
+} from "../../../lib/src/panel-popup";
 import { isPanelTabMode } from "../panel-tab";
 import {
   PANEL_PAGE_CONFIG,

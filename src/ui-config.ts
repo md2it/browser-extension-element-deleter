@@ -1,4 +1,4 @@
-import { createToastUiClasses } from "../../SHARED/src/toast";
+import { createToastUiClasses } from "../../lib/src/toast";
 
 export const UI_HOST_ATTR = "data-element-deleter-ui";
 export const UI_CLASS_PREFIX = "dd";

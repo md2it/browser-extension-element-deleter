@@ -1,5 +1,5 @@
-import { welcomeStepIcon } from "../../../SHARED/src/welcome/step-icon";
-import type { WelcomeData } from "../../../SHARED/src/welcome/types";
+import { welcomeStepIcon } from "../../../lib/src/welcome/step-icon";
+import type { WelcomeData } from "../../../lib/src/welcome/types";
 import { buildAboutListItems } from "../../src/about";
 import { PANEL_TITLE } from "../../src/brand";
 import {
@@ -10,7 +10,7 @@ import {
   PUZZLE,
   toolbarWelcomeIconSvg,
 } from "../../src/icons";
-import { isRtlLocale } from "../../../SHARED/src/i18n/rtl";
+import { isRtlLocale } from "../../../lib/src/i18n/rtl";
 import { t } from "../../src/i18n/strings";
 import { LOCALE_BUTTON_LABELS, LOCALES, type Locale } from "../../src/i18n/types";
 

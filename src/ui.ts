@@ -1,7 +1,7 @@
 import {
   findIframeAtPoint,
   isPointInElement,
-} from "../../SHARED/src/element-under-cursor";
+} from "../../lib/src/element-under-cursor";
 import { formatElementLabel } from "./element-label";
 import {
   HighlightSystem,

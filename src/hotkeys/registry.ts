@@ -1,4 +1,4 @@
-import { registerContentHotkey as registerSharedContentHotkey } from "../../../SHARED/src/hotkeys";
+import { registerContentHotkey as registerSharedContentHotkey } from "../../../lib/src/hotkeys";
 
 const HOTKEY_NAMESPACE = "elementDeleter";
 
