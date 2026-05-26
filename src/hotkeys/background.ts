@@ -5,7 +5,7 @@ import {
 } from "../../../lib/src/hotkeys";
 import type { BgToContent } from "../messages";
 import {
-  COMMAND_TOGGLE_DELETE,
+  COMMAND_ACTIVATE_DEACTIVATE,
   DELETER_ACTIVE_COLOR,
   PREFIX_ACTION_KEY,
 } from "./commands";
@@ -39,7 +39,7 @@ export function registerBackgroundHotkeys(host: BackgroundHotkeysHost): void {
   };
 
   registerPrefixManifestHotkeys({
-    prefixCommands: [COMMAND_TOGGLE_DELETE],
+    prefixCommands: [COMMAND_ACTIVATE_DEACTIVATE],
     hintLetter: PREFIX_ACTION_KEY,
     badgeBackgroundColor: DELETER_ACTIVE_COLOR,
     isPrefixEnabled: getStartHotkeyEnabled,

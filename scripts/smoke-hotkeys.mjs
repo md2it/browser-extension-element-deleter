@@ -31,7 +31,7 @@ assert.match(libRegistrySrc, /unregisterContentHotkey/);
 
 const deleterBackgroundSrc = readFileSync(join(root, "src/hotkeys/background.ts"), "utf8");
 assert.match(deleterBackgroundSrc, /registerPrefixManifestHotkeys/);
-assert.match(deleterBackgroundSrc, /prefixCommands:\s*\[COMMAND_TOGGLE_DELETE\]/);
+assert.match(deleterBackgroundSrc, /prefixCommands:\s*\[COMMAND_ACTIVATE_DEACTIVATE\]/);
 assert.match(deleterBackgroundSrc, /DELETER_ACTIVE_COLOR/);
 assert.match(deleterBackgroundSrc, /badgeBackgroundColor/);
 assert.match(deleterBackgroundSrc, /PREFIX_ARM_TOGGLE/);
@@ -57,13 +57,13 @@ assert.match(contentSrc, /mountDeleterContentHotkeys/);
 assert.match(contentSrc, /unmountDeleterContentHotkeys/);
 
 const commandsSrc = readFileSync(join(root, "src/hotkeys/commands.ts"), "utf8");
-assert.match(commandsSrc, /toggle-delete-mode/);
+assert.match(commandsSrc, /activate-deactivate/);
 assert.match(commandsSrc, /_execute_action/);
 assert.doesNotMatch(commandsSrc, /undo-delete/);
 
 const manifestSrc = readFileSync(join(root, "manifest.json"), "utf8");
 assert.match(manifestSrc, /"_execute_action"/);
-assert.match(manifestSrc, /"toggle-delete-mode"/);
+assert.match(manifestSrc, /"activate-deactivate"/);
 assert.match(manifestSrc, /Ctrl\+Shift\+X/);
 assert.match(manifestSrc, /"undo-delete"/);
 assert.match(manifestSrc, /__MSG_commandUndoDelete__/);

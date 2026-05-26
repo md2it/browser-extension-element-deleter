@@ -1,6 +1,6 @@
 export {
   COMMAND_EXECUTE_ACTION,
-  COMMAND_TOGGLE_DELETE,
+  COMMAND_ACTIVATE_DEACTIVATE,
   PREFIX_ACTION_KEY,
 } from "./commands";
 export { registerBackgroundHotkeys, type BackgroundHotkeysHost } from "./background";

@@ -34,7 +34,7 @@
   ],
   "commands": {
     "_execute_action": {},
-    "toggle-delete-mode": {
+    "activate-deactivate": {
       "description": "__MSG_commandToggleDelete__",
       "suggested_key": {
         "default": "Ctrl+Shift+X",
