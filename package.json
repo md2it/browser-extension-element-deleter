@@ -11,8 +11,8 @@
     "smoke:operability": "node scripts/smoke-page-operability.mjs",
     "smoke:icon-state": "node scripts/smoke-extension-icon-state.mjs",
     "smoke": "npm run smoke:hotkeys && npm run smoke:operability && npm run smoke:icon-state",
-    "screenshots:pages": "node PUBLICATION/scripts/capture-pages.mjs",
-    "screenshots:live": "node PUBLICATION/scripts/crop-live-screenshots.mjs"
+    "screenshots:pages": "node ../SHARED/scripts/capture-pages.mjs",
+    "screenshots:live": "node ../SHARED/scripts/crop-live-screenshots.mjs"
   },
   "devDependencies": {
     "playwright": "^1.60.0"
