@@ -9,19 +9,21 @@
 
 Общие скрипты — в [SHARED/scripts/](../../SHARED/scripts/). Запуск из корня проекта (`element-deleter/`).
 
-| Задача | npm (в `package.json` проекта) | Скрипт |
-|--------|--------------------------------|--------|
-| Скрин «страницы» (welcome + settings + about) | `npm run screenshots:pages -- ru` | `capture-pages.mjs` |
-| Обрезка живых скринов | `npm run screenshots:live` | `crop-live-screenshots.mjs` |
+- Скриншот страниц
+   - `npm run screenshots:pages -- ru` → `capture-pages.mjs`
+   - welcome + settings + about
+- Обрезка изображений
+   - `npm run screenshots:live` → `crop-live-screenshots.mjs`
+   - В проекте нужен свой `PUBLICATION/scripts/welcome-seed-entry.ts` (данные welcome под расширение).
 
-Для `capture-pages` в проекте нужен свой `PUBLICATION/scripts/welcome-seed-entry.ts` (данные welcome под расширение).
-
-Пример в `package.json`:
+В `package.json` проекта:
 
 ```json
 "screenshots:pages": "node ../SHARED/scripts/capture-pages.mjs",
 "screenshots:live": "node ../SHARED/scripts/crop-live-screenshots.mjs"
 ```
+
+Коды языков в CLI (и в именах файлов в **uncut-live-screenshots/**): `ru`, `en`, `es`, `fr`, `de`, `zn`, `ar`. Каталоги в PUBLICATION — `RU`, `EN`, `ES`, `FR`, `DE`, `ZN`, `AR` (`zn` → локаль `zh_CN`).
 
 ---
 
@@ -32,12 +34,16 @@
 
 Содержит:
 - **uncut-live-screenshots/** -- необработанные скриншоты (обрезка: `npm run screenshots:live`)
+   - Имена: `{lang}1.png`, `{lang}2.png` (например `ru1.png`, `ru2.png`)
 - **[lang]/** -- каталоги под каждый язык
-   - Набор языков для element-deleter: RU, EN, ES, FR, DE, ZN, AR
+   - Набор может отличаться для разных проектов
+   - EN/ есть в любом случае, даже если проект не поддерживает разные языки
+   - Для element-deleter: `RU`, `EN`, `ES`, `FR`, `DE`, `ZN`, `AR`
    - Для каждого языка создаётся отдельный каталог
    - В каждом:
       - description.txt -- файл без разметки, чтобы копировать текст целиком
       - массив скриншотов
+- **scripts/welcome-seed-entry.ts** -- данные welcome для `capture-pages`
 - **complience.md** ответы на вопросы:
    1. Single purpose
    2-n. "Permission justification" Про каждое разрешение
@@ -49,7 +55,7 @@
 
 Это базовый план подготовки скриншотов. *Для конкретного проекта план может быть изменён*.
 
-По 2 скрина на каждый поддерживаемый язык:
+По 3 скрина на каждый поддерживаемый язык:
 1. Страницы
 2. Живой скриншот 1
 3. Живой скриншот 2
@@ -67,20 +73,25 @@
 - Состояние дефолтное для всех страницами
 - Для "Приветственной" только основной блок, без стрелочки
 - Язык интерфейса показывать соответсвенно языку итогового изображения
-- Итоговый результат назвать {lang}-pages.png
+- Итоговый результат назвать `{lang}-pages.png` (например `ru-pages.png` в каталоге `RU/`)
 
 ### Живой скриншот
 - Взять скриншоты из **uncut-live-screenshots/**
 - Обрезать до 1280×800 (24-bit PNG (no alpha))
-- Обрезка для element-deleter:
-   - Обрезать слева и сверху
-   - Снизу не обрезать
+- ВАЖНО УТОЧНИТЬ, КАК ОБРЕЗАТЬ!
+   - По умолчанию:
+      - Обрезать слева и сверху
+      - Снизу и справа не обрезать
+      - Так делаем, чтобы показать уведомления
+   - Для element-deleter (подтверждено):
+      - Обрезать слева и сверху
+      - Снизу не обрезать
 - Назвать
    - live-1.png
    - live-2.png
    - ...
 - Положить в каталог соответствующего языка
-- Если не ясно, к какому языку относятся скриншоты, то нужно уточнить
+- Если в проекте есть разные языки, но не ясно, к какому языку относятся скриншоты, то нужно уточнить
 
 ---
 
@@ -91,24 +102,39 @@
 - 🔲 Каталог PUBLICATION/ создан и заполнен шаблонами и каталогами
 - 🔲 public-key.pem
 - 🔲 complience.md
-- 🔲 RU
-   - 🔲 description.txt
-   - 🔲 скриншоты
+- 🔲 scripts/welcome-seed-entry.ts
 - 🔲 EN
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 en-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
+- 🔲 RU
+   - 🔲 description.txt
+   - 🔲 ru-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
 - 🔲 ES
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 es-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
 - 🔲 FR
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 fr-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
 - 🔲 DE
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 de-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
 - 🔲 ZN
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 zn-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
 - 🔲 AR
    - 🔲 description.txt
-   - 🔲 скриншоты
+   - 🔲 ar-pages.png
+   - 🔲 live-1.png
+   - 🔲 live-2.png
