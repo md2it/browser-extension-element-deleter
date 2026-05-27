@@ -34,6 +34,9 @@
 ### 1.0.2
 - Reducing the impact of hotkeys between applications
 
+### 1.0.3
+- Clarifying UI texts
+
 ---
 
 ## NOT RELEASED LIST

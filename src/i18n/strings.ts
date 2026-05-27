@@ -19,7 +19,8 @@ const MESSAGES: Record<Locale, Strings> = {
     titleSettings: "Settings",
     titleAbout: "About",
     contextMenuDeleteElement: "Delete this element",
-    restrictedPageNotice: "Browser extensions don't work on this page or site.",
+    restrictedPageNotice:
+      "Browser extensions don't work on system pages and protected sites. Try another site.",
     welcomePin: "To keep the extension handy:",
     welcomePinStep1: "The top bar has an extensions list",
     welcomePinStep2: "In the list, find:",
@@ -52,7 +53,7 @@ const MESSAGES: Record<Locale, Strings> = {
     titleAbout: "Acerca de",
     contextMenuDeleteElement: "Eliminar este elemento",
     restrictedPageNotice:
-      "Las extensiones del navegador no funcionan en esta página o sitio.",
+      "Las extensiones del navegador no funcionan en páginas del sistema y sitios protegidos. Prueba en otro sitio.",
     welcomePin: "Para tener la extensión siempre a mano:",
     welcomePinStep1: "En la barra superior hay una lista de extensiones",
     welcomePinStep2: "En la lista, busca:",
@@ -85,7 +86,7 @@ const MESSAGES: Record<Locale, Strings> = {
     titleAbout: "À propos",
     contextMenuDeleteElement: "Supprimer cet élément",
     restrictedPageNotice:
-      "Les extensions du navigateur ne fonctionnent pas sur cette page ou ce site.",
+      "Les extensions du navigateur ne fonctionnent pas sur les pages système et les sites protégés. Essayez un autre site.",
     welcomePin: "Pour garder l'extension à portée de main :",
     welcomePinStep1: "La barre supérieure contient une liste d'extensions",
     welcomePinStep2: "Dans la liste, trouvez :",
@@ -118,7 +119,7 @@ const MESSAGES: Record<Locale, Strings> = {
     titleAbout: "Info",
     contextMenuDeleteElement: "Dieses Element löschen",
     restrictedPageNotice:
-      "Browser-Erweiterungen funktionieren auf dieser Seite oder Website nicht.",
+      "Browser-Erweiterungen funktionieren auf Systemseiten und geschützten Websites nicht. Versuche es auf einer anderen Website.",
     welcomePin: "Damit die Erweiterung immer griffbereit ist:",
     welcomePinStep1: "In der oberen Leiste gibt es eine Erweiterungsliste",
     welcomePinStep2: "In der Liste finde:",
@@ -151,7 +152,7 @@ const MESSAGES: Record<Locale, Strings> = {
     titleAbout: "О расширении",
     contextMenuDeleteElement: "Удалить этот элемент",
     restrictedPageNotice:
-      "На этой странице или сайте браузерные расширения не работают",
+      "На системных страницах и защищённых сайтах браузерные расширения не работают. Попробуй на другом сайте",
     welcomePin: "Чтобы расширение было всегда под рукой:",
     welcomePinStep1: "В верхней панели есть список расширений",
     welcomePinStep2: "В списке найди:",
@@ -183,7 +184,8 @@ const MESSAGES: Record<Locale, Strings> = {
     titleSettings: "设置",
     titleAbout: "关于",
     contextMenuDeleteElement: "删除此元素",
-    restrictedPageNotice: "浏览器扩展无法在此页面或网站上运行。",
+    restrictedPageNotice:
+      "浏览器扩展无法在系统页面和受保护网站上运行。请尝试其他网站。",
     welcomePin: "让扩展随时触手可及：",
     welcomePinStep1: "顶部栏有扩展程序列表",
     welcomePinStep2: "在列表中找到：",
@@ -215,7 +217,8 @@ const MESSAGES: Record<Locale, Strings> = {
     titleSettings: "الإعدادات",
     titleAbout: "حول",
     contextMenuDeleteElement: "حذف هذا العنصر",
-    restrictedPageNotice: "لا تعمل إضافات المتصفح على هذه الصفحة أو الموقع.",
+    restrictedPageNotice:
+      "لا تعمل إضافات المتصفح على صفحات النظام والمواقع المحمية. جرّب موقعًا آخر.",
     welcomePin: "لتبقى الإضافة دائمًا في متناول اليد:",
     welcomePinStep1: "في الشريط العلوي قائمة الإضافات",
     welcomePinStep2: "في القائمة، ابحث عن:",
