@@ -3,7 +3,7 @@
     "message": "حذف عناصر الصفحة واستعادتها. بدون شبكة. لا يجمع بيانات."
   },
   "commandToggleDelete": {
-    "message": "تشغيل\u00A0/\u00A0إيقاف: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0ثم\u00A0اضغط\u00A0D"
+    "message": "تشغيل\u00A0/\u00A0إيقاف: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0أطلق\u00A0المفاتيح 3.\u00A0ثم\u00A0اضغط\u00A0D"
   },
   "commandUndoDelete": {
     "message": "تراجع\u00A0عن\u00A0الحذف: Ctrl+Z\u00A0/\u00A0⌘Z"

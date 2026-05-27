@@ -3,7 +3,7 @@
     "message": "Elemente auf Webseiten entfernen und wiederherstellen. Kein Netzwerk. Keine Datenerfassung."
   },
   "commandToggleDelete": {
-    "message": "Ein\u00A0/\u00A0Aus: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0dann\u00A0D\u00A0drücken"
+    "message": "Ein\u00A0/\u00A0Aus: 1.\u00A0Ctrl+Shift+X\u00A0/\u00A0⇧⌘X 2.\u00A0Tasten\u00A0loslassen 3.\u00A0dann\u00A0D\u00A0drücken"
   },
   "commandUndoDelete": {
     "message": "Löschen\u00A0rückgängig: Ctrl+Z\u00A0/\u00A0⌘Z"
