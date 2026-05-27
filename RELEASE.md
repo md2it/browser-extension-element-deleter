@@ -37,6 +37,9 @@
 ### 1.0.3
 - Clarifying UI texts
 
+### 1.0.4
+- Hotkeys work better from input fields
+
 ---
 
 ## NOT RELEASED LIST
