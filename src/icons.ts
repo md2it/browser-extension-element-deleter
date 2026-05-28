@@ -1,3 +1,7 @@
+import chevronLeftSvg from "../../lib/icons/lucide/chevron-left.svg";
+import chevronRightSvg from "../../lib/icons/lucide/chevron-right.svg";
+import chevronsLeftSvg from "../../lib/icons/lucide/chevrons-left.svg";
+import chevronsRightSvg from "../../lib/icons/lucide/chevrons-right.svg";
 import circlePowerSvg from "../icons/circle-power.svg";
 import shieldCheckSvg from "../icons/shield-check.svg";
 import trash2Svg from "../icons/trash-2.svg";
@@ -42,10 +46,10 @@ function lucideUiIcon(raw: string): string {
 
 export const UNDO_2 = lucideUiIcon(undo2Svg);
 
-export const CHEVRON_LEFT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>`;
-export const CHEVRON_RIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>`;
-export const CHEVRONS_LEFT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>`;
-export const CHEVRONS_RIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>`;
+export const CHEVRON_LEFT = lucideUiIcon(chevronLeftSvg);
+export const CHEVRON_RIGHT = lucideUiIcon(chevronRightSvg);
+export const CHEVRONS_LEFT = lucideUiIcon(chevronsLeftSvg);
+export const CHEVRONS_RIGHT = lucideUiIcon(chevronsRightSvg);
 
 const INACTIVE_BG = "#012292";
 // Spec: toolbar icon uses single active style; badge carries state.
