@@ -40,6 +40,9 @@
 ### 1.0.4
 - Hotkeys work better from input fields
 
+### 1.0.5
+- More badge variants, including animated
+
 ---
 
 ## NOT RELEASED LIST

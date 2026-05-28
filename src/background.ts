@@ -19,6 +19,7 @@ import {
   shouldSuppressToolbarClickAfterHotkeyCommand,
 } from "./hotkeys/background";
 import { DELETER_ACTIVE_COLOR } from "./hotkeys/commands";
+import { createBadgeTextColorAnimation } from "../../lib/src/badge/text-color-animation";
 import {
   ensureLocaleInStorage,
   getAllElementsFillEnabled,
@@ -44,10 +45,6 @@ let lastToggleAt = 0;
 const BADGE_TEXT_COLOR = "#ffffff";
 const BADGE_RUNNING_TEXT = "◉";
 const BADGE_RUNNING_BG_COLOR = "#dc2626";
-const BADGE_RUNNING_STEP_MIN = 1;
-const BADGE_RUNNING_STEP_MID = 20;
-const BADGE_RUNNING_STEP_MAX = 40;
-const BADGE_RUNNING_CYCLE_FRAMES = 80;
 const BADGE_RUNNING_TEXT_COLOR_WHITE: readonly [number, number, number] = [255, 255, 255];
 const BADGE_RUNNING_TEXT_COLOR_YELLOW: readonly [number, number, number] = [250, 204, 21];
 const BADGE_RUNNING_TEXT_COLOR_RED: readonly [number, number, number] = [185, 28, 28];
@@ -60,7 +57,17 @@ const BADGE_BLOCKED_BG_COLOR = "#e5e7eb";
 const BADGE_BLOCKED_TEXT_COLOR = "#374151";
 const BADGE_RESTORED_BG_COLOR = "#1d4ed8";
 const BADGE_FLASH_MS = 1000;
+const BADGE_RUNNING_ANIMATION_STEPS = 40;
 const BADGE_RUNNING_ANIMATION_STEP_MS = 25;
+
+const runningBadgeTextAnimation = createBadgeTextColorAnimation({
+  startColor: BADGE_RUNNING_TEXT_COLOR_WHITE,
+  midColor: BADGE_RUNNING_TEXT_COLOR_YELLOW,
+  endColor: BADGE_RUNNING_TEXT_COLOR_RED,
+  steps: BADGE_RUNNING_ANIMATION_STEPS,
+  stepIntervalMs: BADGE_RUNNING_ANIMATION_STEP_MS,
+  mode: "ping-pong",
+});
 
 /**
  * Badge state priority (catalog):
@@ -76,40 +83,6 @@ const blockedBadgeClearTimers = new Map<number, ReturnType<typeof setTimeout>>()
 const flashBadgeClearTimers = new Map<number, ReturnType<typeof setTimeout>>();
 const runningBadgeAnimationIntervals = new Map<number, ReturnType<typeof setInterval>>();
 const runningBadgeAnimationFrame = new Map<number, number>();
-
-function toHex(value: number): string {
-  return value.toString(16).padStart(2, "0");
-}
-
-function mixColor(
-  from: readonly [number, number, number],
-  to: readonly [number, number, number],
-  ratio: number,
-): string {
-  const r = Math.round(from[0] + (to[0] - from[0]) * ratio);
-  const g = Math.round(from[1] + (to[1] - from[1]) * ratio);
-  const b = Math.round(from[2] + (to[2] - from[2]) * ratio);
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
-
-function getRunningBadgeStep(frame: number): number {
-  const normalizedFrame =
-    ((frame % BADGE_RUNNING_CYCLE_FRAMES) + BADGE_RUNNING_CYCLE_FRAMES) %
-    BADGE_RUNNING_CYCLE_FRAMES;
-  if (normalizedFrame < BADGE_RUNNING_STEP_MAX) {
-    return normalizedFrame + BADGE_RUNNING_STEP_MIN;
-  }
-  return BADGE_RUNNING_CYCLE_FRAMES - normalizedFrame;
-}
-
-function getRunningBadgeTextColor(step: number): string {
-  if (step <= BADGE_RUNNING_STEP_MID) {
-    const ratio = (step - BADGE_RUNNING_STEP_MIN) / (BADGE_RUNNING_STEP_MID - BADGE_RUNNING_STEP_MIN);
-    return mixColor(BADGE_RUNNING_TEXT_COLOR_WHITE, BADGE_RUNNING_TEXT_COLOR_YELLOW, ratio);
-  }
-  const ratio = (step - BADGE_RUNNING_STEP_MID) / (BADGE_RUNNING_STEP_MAX - BADGE_RUNNING_STEP_MID);
-  return mixColor(BADGE_RUNNING_TEXT_COLOR_YELLOW, BADGE_RUNNING_TEXT_COLOR_RED, ratio);
-}
 
 function clearBlockedBadgeTimer(tabId: number): void {
   const timer = blockedBadgeClearTimers.get(tabId);
@@ -157,10 +130,10 @@ function ensureRunningBadgeAnimation(tabId: number): void {
       const currentFrame = runningBadgeAnimationFrame.get(tabId) ?? 0;
       runningBadgeAnimationFrame.set(
         tabId,
-        (currentFrame + 1) % BADGE_RUNNING_CYCLE_FRAMES,
+        runningBadgeTextAnimation.nextFrame(currentFrame),
       );
       void syncToolbarBadge(tabId);
-    }, BADGE_RUNNING_ANIMATION_STEP_MS),
+    }, runningBadgeTextAnimation.stepIntervalMs),
   );
 }
 
@@ -271,11 +244,10 @@ async function syncToolbarBadge(tabId: number): Promise<void> {
   if (getTabActiveState(tabId)) {
     ensureRunningBadgeAnimation(tabId);
     const frame = runningBadgeAnimationFrame.get(tabId) ?? 0;
-    const step = getRunningBadgeStep(frame);
     await setToolbarBadge(tabId, {
       text: BADGE_RUNNING_TEXT,
       backgroundColor: BADGE_RUNNING_BG_COLOR,
-      textColor: getRunningBadgeTextColor(step),
+      textColor: runningBadgeTextAnimation.getColor(frame),
     });
     return;
   }
