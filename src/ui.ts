@@ -30,6 +30,8 @@ type DeactivateFn = () => void;
 type DeleterUIOptions = {
   openPanel: (tab: "settings" | "info") => void;
   undo: UndoStackAccess;
+  onElementDeleted?: () => void;
+  onElementRestored?: () => void;
 };
 
 export class DeleterUI {
@@ -44,11 +46,15 @@ export class DeleterUI {
   private readonly toast: ToastSystem;
   private readonly highlight: HighlightSystem;
   private readonly restore: RestoreSystem;
+  private readonly onElementDeleted?: () => void;
+  private readonly onElementRestored?: () => void;
 
   private readonly boundClick: (e: MouseEvent) => void;
 
   constructor(onDeactivate: DeactivateFn, options: DeleterUIOptions) {
     this.onDeactivate = onDeactivate;
+    this.onElementDeleted = options.onElementDeleted;
+    this.onElementRestored = options.onElementRestored;
 
     this.boundClick = (e) => this.handleClick(e);
 
@@ -88,7 +94,10 @@ export class DeleterUI {
 
     this.restore = new RestoreSystem(
       {
-        onRestored: (elementLabel) => this.toast.showRestoredToast(elementLabel),
+        onRestored: (elementLabel) => {
+          this.toast.showRestoredToast(elementLabel);
+          this.onElementRestored?.();
+        },
       },
       options.undo,
     );
@@ -248,6 +257,7 @@ export class DeleterUI {
         elementLabel,
       });
       this.toast.showDeletedToast(elementLabel, undoId);
+      this.onElementDeleted?.();
       return true;
     } finally {
       this.elementActionInFlight = false;

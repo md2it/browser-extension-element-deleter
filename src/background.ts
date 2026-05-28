@@ -42,8 +42,25 @@ let lastToggleTabId: number | undefined;
 let lastToggleAt = 0;
 
 const BADGE_TEXT_COLOR = "#ffffff";
-const BADGE_RUNNING_TEXT = "✓";
+const BADGE_RUNNING_TEXT = "◉";
+const BADGE_RUNNING_BG_COLOR = "#dc2626";
+const BADGE_RUNNING_STEP_MIN = 1;
+const BADGE_RUNNING_STEP_MID = 20;
+const BADGE_RUNNING_STEP_MAX = 40;
+const BADGE_RUNNING_CYCLE_FRAMES = 80;
+const BADGE_RUNNING_TEXT_COLOR_WHITE: readonly [number, number, number] = [255, 255, 255];
+const BADGE_RUNNING_TEXT_COLOR_YELLOW: readonly [number, number, number] = [250, 204, 21];
+const BADGE_RUNNING_TEXT_COLOR_RED: readonly [number, number, number] = [185, 28, 28];
 const BADGE_BLOCKED_TEXT = "✕";
+const BADGE_DELETED_TEXT = "✓";
+const BADGE_RESTORED_TEXT = "✓";
+const BADGE_PREFIX_TEXT_COLOR = "#012292";
+const BADGE_PREFIX_BG_COLOR = "#ffffff";
+const BADGE_BLOCKED_BG_COLOR = "#e5e7eb";
+const BADGE_BLOCKED_TEXT_COLOR = "#374151";
+const BADGE_RESTORED_BG_COLOR = "#1d4ed8";
+const BADGE_FLASH_MS = 1000;
+const BADGE_RUNNING_ANIMATION_STEP_MS = 25;
 
 /**
  * Badge state priority (catalog):
@@ -54,7 +71,45 @@ const BADGE_BLOCKED_TEXT = "✕";
  */
 const tabBlockedBadge = new Map<number, boolean>();
 const tabPrefixBadgeShown = new Map<number, boolean>();
+const tabFlashBadge = new Map<number, "deleted" | "restored">();
 const blockedBadgeClearTimers = new Map<number, ReturnType<typeof setTimeout>>();
+const flashBadgeClearTimers = new Map<number, ReturnType<typeof setTimeout>>();
+const runningBadgeAnimationIntervals = new Map<number, ReturnType<typeof setInterval>>();
+const runningBadgeAnimationFrame = new Map<number, number>();
+
+function toHex(value: number): string {
+  return value.toString(16).padStart(2, "0");
+}
+
+function mixColor(
+  from: readonly [number, number, number],
+  to: readonly [number, number, number],
+  ratio: number,
+): string {
+  const r = Math.round(from[0] + (to[0] - from[0]) * ratio);
+  const g = Math.round(from[1] + (to[1] - from[1]) * ratio);
+  const b = Math.round(from[2] + (to[2] - from[2]) * ratio);
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+function getRunningBadgeStep(frame: number): number {
+  const normalizedFrame =
+    ((frame % BADGE_RUNNING_CYCLE_FRAMES) + BADGE_RUNNING_CYCLE_FRAMES) %
+    BADGE_RUNNING_CYCLE_FRAMES;
+  if (normalizedFrame < BADGE_RUNNING_STEP_MAX) {
+    return normalizedFrame + BADGE_RUNNING_STEP_MIN;
+  }
+  return BADGE_RUNNING_CYCLE_FRAMES - normalizedFrame;
+}
+
+function getRunningBadgeTextColor(step: number): string {
+  if (step <= BADGE_RUNNING_STEP_MID) {
+    const ratio = (step - BADGE_RUNNING_STEP_MIN) / (BADGE_RUNNING_STEP_MID - BADGE_RUNNING_STEP_MIN);
+    return mixColor(BADGE_RUNNING_TEXT_COLOR_WHITE, BADGE_RUNNING_TEXT_COLOR_YELLOW, ratio);
+  }
+  const ratio = (step - BADGE_RUNNING_STEP_MID) / (BADGE_RUNNING_STEP_MAX - BADGE_RUNNING_STEP_MID);
+  return mixColor(BADGE_RUNNING_TEXT_COLOR_YELLOW, BADGE_RUNNING_TEXT_COLOR_RED, ratio);
+}
 
 function clearBlockedBadgeTimer(tabId: number): void {
   const timer = blockedBadgeClearTimers.get(tabId);
@@ -66,6 +121,60 @@ function clearBlockedBadgeTimer(tabId: number): void {
 function clearBlockedBadgeState(tabId: number): void {
   clearBlockedBadgeTimer(tabId);
   tabBlockedBadge.set(tabId, false);
+}
+
+function clearFlashBadgeTimer(tabId: number): void {
+  const timer = flashBadgeClearTimers.get(tabId);
+  if (timer === undefined) return;
+  clearTimeout(timer);
+  flashBadgeClearTimers.delete(tabId);
+}
+
+function clearFlashBadgeState(tabId: number): void {
+  clearFlashBadgeTimer(tabId);
+  tabFlashBadge.delete(tabId);
+}
+
+function clearRunningBadgeAnimation(tabId: number): void {
+  const interval = runningBadgeAnimationIntervals.get(tabId);
+  if (interval !== undefined) {
+    clearInterval(interval);
+    runningBadgeAnimationIntervals.delete(tabId);
+  }
+  runningBadgeAnimationFrame.delete(tabId);
+}
+
+function ensureRunningBadgeAnimation(tabId: number): void {
+  if (runningBadgeAnimationIntervals.has(tabId)) return;
+  runningBadgeAnimationFrame.set(tabId, 0);
+  runningBadgeAnimationIntervals.set(
+    tabId,
+    setInterval(() => {
+      if (!getTabActiveState(tabId)) {
+        clearRunningBadgeAnimation(tabId);
+        return;
+      }
+      const currentFrame = runningBadgeAnimationFrame.get(tabId) ?? 0;
+      runningBadgeAnimationFrame.set(
+        tabId,
+        (currentFrame + 1) % BADGE_RUNNING_CYCLE_FRAMES,
+      );
+      void syncToolbarBadge(tabId);
+    }, BADGE_RUNNING_ANIMATION_STEP_MS),
+  );
+}
+
+function scheduleClearFlashBadge(tabId: number): void {
+  clearFlashBadgeTimer(tabId);
+  flashBadgeClearTimers.set(
+    tabId,
+    setTimeout(() => {
+      flashBadgeClearTimers.delete(tabId);
+      if (!tabFlashBadge.has(tabId)) return;
+      clearFlashBadgeState(tabId);
+      void syncToolbarBadge(tabId);
+    }, BADGE_FLASH_MS),
+  );
 }
 
 function onBlockedNoticeDismissed(tabId: number): void {
@@ -98,21 +207,30 @@ async function showBlockedPageFeedback(
   scheduleClearBlockedBadge(tabId, dismissMs);
 }
 
+type BadgeVisuals = {
+  text: string;
+  backgroundColor?: string;
+  textColor?: string;
+};
+
 async function setToolbarBadge(
   tabId: number,
-  text: string,
+  visuals: BadgeVisuals,
 ): Promise<void> {
   try {
-    if (text) {
-      await ext.action.setBadgeBackgroundColor({ tabId, color: DELETER_ACTIVE_COLOR });
+    if (visuals.text) {
+      await ext.action.setBadgeBackgroundColor({
+        tabId,
+        color: visuals.backgroundColor ?? DELETER_ACTIVE_COLOR,
+      });
       const setBadgeTextColor = (
         ext.action as typeof ext.action & {
           setBadgeTextColor?: (details: { tabId: number; color: string }) => Promise<void>;
         }
       ).setBadgeTextColor;
-      await setBadgeTextColor?.({ tabId, color: BADGE_TEXT_COLOR });
+      await setBadgeTextColor?.({ tabId, color: visuals.textColor ?? BADGE_TEXT_COLOR });
     }
-    await ext.action.setBadgeText({ tabId, text });
+    await ext.action.setBadgeText({ tabId, text: visuals.text });
   } catch (err) {
     console.warn("[Element Deleter] setBadgeText failed:", err);
   }
@@ -120,19 +238,50 @@ async function setToolbarBadge(
 
 async function syncToolbarBadge(tabId: number): Promise<void> {
   // Prefix letter overrides everything while armed.
-  if (tabPrefixBadgeShown.get(tabId)) return;
+  if (tabPrefixBadgeShown.get(tabId)) {
+    clearRunningBadgeAnimation(tabId);
+    return;
+  }
+
+  const flash = tabFlashBadge.get(tabId);
+  if (flash === "deleted") {
+    clearRunningBadgeAnimation(tabId);
+    await setToolbarBadge(tabId, { text: BADGE_DELETED_TEXT });
+    return;
+  }
+  if (flash === "restored") {
+    clearRunningBadgeAnimation(tabId);
+    await setToolbarBadge(tabId, {
+      text: BADGE_RESTORED_TEXT,
+      backgroundColor: BADGE_RESTORED_BG_COLOR,
+    });
+    return;
+  }
 
   if (tabBlockedBadge.get(tabId)) {
-    await setToolbarBadge(tabId, BADGE_BLOCKED_TEXT);
+    clearRunningBadgeAnimation(tabId);
+    await setToolbarBadge(tabId, {
+      text: BADGE_BLOCKED_TEXT,
+      backgroundColor: BADGE_BLOCKED_BG_COLOR,
+      textColor: BADGE_BLOCKED_TEXT_COLOR,
+    });
     return;
   }
 
   if (getTabActiveState(tabId)) {
-    await setToolbarBadge(tabId, BADGE_RUNNING_TEXT);
+    ensureRunningBadgeAnimation(tabId);
+    const frame = runningBadgeAnimationFrame.get(tabId) ?? 0;
+    const step = getRunningBadgeStep(frame);
+    await setToolbarBadge(tabId, {
+      text: BADGE_RUNNING_TEXT,
+      backgroundColor: BADGE_RUNNING_BG_COLOR,
+      textColor: getRunningBadgeTextColor(step),
+    });
     return;
   }
 
-  await setToolbarBadge(tabId, "");
+  clearRunningBadgeAnimation(tabId);
+  await setToolbarBadge(tabId, { text: "" });
 }
 
 async function injectContent(tabId: number, frameId?: number): Promise<boolean> {
@@ -255,6 +404,8 @@ async function setTabActive(
 
   if (!active) {
     clearBlockedBadgeState(tabId);
+    clearFlashBadgeState(tabId);
+    clearRunningBadgeAnimation(tabId);
   }
 
   await syncToolbarBadge(tabId);
@@ -275,6 +426,8 @@ async function toggleTab(tabId: number, windowId?: number): Promise<void> {
   if (!next) {
     setTabActiveState(tabId, false);
     clearBlockedBadgeState(tabId);
+    clearFlashBadgeState(tabId);
+    clearRunningBadgeAnimation(tabId);
     await syncIconForTab(tabId);
     await syncToolbarBadge(tabId);
     await setTabActive(tabId, false, windowId);
@@ -455,7 +608,15 @@ ext.runtime.onMessage.addListener(
       onContentActiveChanged(tabId, contentMessage.active);
       if (!contentMessage.active) {
         clearBlockedBadgeState(tabId);
+        clearFlashBadgeState(tabId);
+        clearRunningBadgeAnimation(tabId);
       }
+      void syncToolbarBadge(tabId);
+    }
+    if (contentMessage.type === "BADGE_FLASH" && sender.tab?.id !== undefined) {
+      const tabId = sender.tab.id;
+      tabFlashBadge.set(tabId, contentMessage.variant);
+      scheduleClearFlashBadge(tabId);
       void syncToolbarBadge(tabId);
     }
     if (contentMessage.type === "OPEN_PANEL") {
@@ -470,12 +631,16 @@ ext.runtime.onMessage.addListener(
 ext.tabs.onRemoved.addListener((tabId) => {
   stopWelcomePinWatcher(tabId);
   clearBlockedBadgeTimer(tabId);
+  clearFlashBadgeTimer(tabId);
+  clearRunningBadgeAnimation(tabId);
   tabBlockedBadge.delete(tabId);
+  tabFlashBadge.delete(tabId);
   tabPrefixBadgeShown.delete(tabId);
 });
 
 registerPrefixHintBadgeListeners({
-  badgeBackgroundColor: DELETER_ACTIVE_COLOR,
+  badgeBackgroundColor: BADGE_PREFIX_BG_COLOR,
+  badgeTextColor: BADGE_PREFIX_TEXT_COLOR,
   canShowPrefixBadgeOnTab: canOperateOnTab,
   onShow: (tabId) => {
     if (tabId === undefined) return;

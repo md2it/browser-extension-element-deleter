@@ -133,6 +133,13 @@ function requestToggle(): void {
   });
 }
 
+function requestBadgeFlash(variant: "deleted" | "restored"): void {
+  const msg: ContentToBg = { type: "BADGE_FLASH", variant };
+  void ext.runtime.sendMessage(msg).catch(() => {
+    /* extension reloaded */
+  });
+}
+
 function attachMessageHandler(state: ContentState): void {
   const prev = window.__elementDeleterMessageHandler;
   if (prev) {
@@ -165,6 +172,8 @@ function attachMessageHandler(state: ContentState): void {
         const ui = new DeleterUI(deactivate, {
           openPanel,
           undo: createUndoAccess(state),
+          onElementDeleted: () => requestBadgeFlash("deleted"),
+          onElementRestored: () => requestBadgeFlash("restored"),
         });
         await ui.loadSettings();
         state.ui = ui;
