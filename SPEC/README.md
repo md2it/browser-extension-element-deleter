@@ -26,7 +26,7 @@
   - [ui-vertical-menu.md](./ui-vertical-menu.md) — вертикальное меню
   - [ui-pages.md](./ui-pages.md) — приветственное окно, SETTINGS / SHORTCUTS / ABOUT
   - [ui-animations.md](./ui-animations.md) — анимации
-- [BUILD.md](../BUILD.md) — разработка и сборка
+- [README.md](../README.md) — агент: сборка и правила
 
 Общие ресурсы каталога:
 

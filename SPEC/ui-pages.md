@@ -52,13 +52,13 @@ Cтандартное
    - <небольшой отступ>
    - "The 3-step shortcut is not obvious." // серый
    - "But it is safer and avoids conflicts with other apps." // серый
-- <разделительная черта>
+- [разделительная черта]
 - Undo delete: // bold line
   Win / Linux: `Ctrl+Z`  
   On Mac:      `⌘Z`
-- <разделительная черта>
+- [разделительная черта]
 - To stop: `Esc` // bold line
-- <разделительная черта>
+- [разделительная черта]
 
 ### ABOUT
 - Boolean список:
@@ -69,7 +69,7 @@ Cтандартное
    - <shield-check> Не использует сеть,
    - <shield-check> Не собирает данные.
    - Минифутер внизу:
-      - <разделительная черта>
+      - [разделительная черта]
       - "Element-Deleter"
       - "© Alex T" // "Alex T" = ссылка на https://www.linkedin.com/in/alex-terekhov/ , underline
       - Текст, включая ссылку серый, центрирован
