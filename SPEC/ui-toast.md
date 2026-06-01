@@ -6,8 +6,8 @@
    - Иконку расширения
    - Текст "DELETED: <дескриптор>"
    - Дескриптор:
-      - "No title" --> дескриптор пустой
-      - "click to delete" --> дескриптор пустой
+      - "No title" --> дескриптор "can be restored"
+      - "click to delete" --> дескриптор "can be restored"
       - "tag id class" --> дескриптор tag id class
       - "selector" --> дескриптор selector
       - "full XPath" --> дескриптор full XPath
@@ -18,6 +18,15 @@
 
 **О восстановлении**
 - Синее
-- Наполнение:
-   - Аналогично "DELETED"
-   - Но "DELETED" -> "RESTORED", нет кнопки восстановления
+- Содержит в ряд:
+   - Иконку расширения
+   - Текст "RESTORED: <дескриптор>"
+   - Дескриптор:
+      - "No title" --> дескриптор "👍"
+      - "click to delete" --> дескриптор "👍"
+      - "tag id class" --> дескриптор tag id class
+      - "selector" --> дескриптор selector
+      - "full XPath" --> дескриптор full XPath
+      - Если дескриптор слишком длинный, обрезается
+   - Кнопка настроек (иконка cog)
+   - Кнопка инфо (иконка info)

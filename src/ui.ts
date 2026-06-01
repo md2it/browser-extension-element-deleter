@@ -3,6 +3,7 @@ import {
   isPointInElement,
 } from "../../lib/src/element-under-cursor";
 import {
+  formatToastDescriptor,
   resolveElementDescriptor,
   shouldShowSelectionCaption,
 } from "./selection-caption";
@@ -100,8 +101,10 @@ export class DeleterUI {
 
     this.restore = new RestoreSystem(
       {
-        onRestored: (elementLabel) => {
-          this.toast.showRestoredToast(elementLabel);
+        onRestored: (restoredElement) => {
+          this.toast.showRestoredToast(
+            this.formatRestoredToastDescriptorText(restoredElement),
+          );
           this.onElementRestored?.();
         },
       },
@@ -164,6 +167,26 @@ export class DeleterUI {
       elementLabelEnabled: this.elementLabelEnabled,
       selectionCaptionStyle: this.selectionCaptionStyle,
       clickToDeleteLabel: this.strings().selectionCaptionClickToDelete,
+    });
+  }
+
+  private formatDeletedToastDescriptor(target: Element): string {
+    const s = this.strings();
+    return formatToastDescriptor(target, {
+      variant: "deleted",
+      elementLabelEnabled: this.elementLabelEnabled,
+      selectionCaptionStyle: this.selectionCaptionStyle,
+      deletedCanBeRestored: s.toastDeletedCanBeRestored,
+    });
+  }
+
+  private formatRestoredToastDescriptorText(target: Element): string {
+    const s = this.strings();
+    return formatToastDescriptor(target, {
+      variant: "restored",
+      elementLabelEnabled: this.elementLabelEnabled,
+      selectionCaptionStyle: this.selectionCaptionStyle,
+      deletedCanBeRestored: s.toastDeletedCanBeRestored,
     });
   }
 
@@ -263,7 +286,7 @@ export class DeleterUI {
     const nextSibling = toRemove.nextSibling;
     const childIndex = Array.prototype.indexOf.call(parent.children, toRemove);
     const outerHTML = toRemove.outerHTML;
-    const elementLabel = this.formatSelectionCaptionText(toRemove);
+    const toastDescriptor = this.formatDeletedToastDescriptor(toRemove);
 
     this.elementActionInFlight = true;
     this.highlight.clearIfTarget(toRemove);
@@ -281,9 +304,9 @@ export class DeleterUI {
         childIndex,
         removedElement: toRemove,
         outerHTML,
-        elementLabel,
+        elementLabel: toastDescriptor,
       });
-      this.toast.showDeletedToast(elementLabel, undoId);
+      this.toast.showDeletedToast(toastDescriptor, undoId);
       this.onElementDeleted?.();
       return true;
     } finally {

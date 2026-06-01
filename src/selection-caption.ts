@@ -60,3 +60,35 @@ export function resolveElementDescriptor(
     options.clickToDeleteLabel,
   );
 }
+
+export type ToastDescriptorVariant = "deleted" | "restored";
+
+export const TOAST_RESTORED_DESCRIPTOR = "👍";
+
+/** Descriptor line in delete/restore toasts (see SPEC/ui-toast.md). */
+export function formatToastDescriptor(
+  el: Element,
+  options: {
+    variant: ToastDescriptorVariant;
+    elementLabelEnabled: boolean;
+    selectionCaptionStyle: SelectionCaptionStyle;
+    deletedCanBeRestored: string;
+  },
+): string {
+  if (options.elementLabelEnabled) {
+    return formatElementLabel(el);
+  }
+  switch (options.selectionCaptionStyle) {
+    case "none":
+    case "click-to-delete":
+      return options.variant === "deleted"
+        ? options.deletedCanBeRestored
+        : TOAST_RESTORED_DESCRIPTOR;
+    case "tag-id-class":
+      return formatTagIdClassCaption(el);
+    case "selector":
+      return getCssSelector(el);
+    case "full-xpath":
+      return getFullXPath(el);
+  }
+}

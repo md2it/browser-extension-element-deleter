@@ -54,6 +54,7 @@ export type Strings = {
   selectionCaptionFullXPath: string;
   toastDeleted: string;
   toastRestored: string;
+  toastDeletedCanBeRestored: string;
   btnRestore: string;
   panelSubtitle: string;
   titleSettings: string;

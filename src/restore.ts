@@ -28,7 +28,7 @@ export type DeletionSnapshot = {
 };
 
 export type RestoreHost = {
-  onRestored: (elementLabel: string) => void;
+  onRestored: (restoredElement: Element) => void;
 };
 
 export type UndoStackAccess = {
@@ -216,7 +216,7 @@ export class RestoreSystem {
       this.remapSubtreeUndoParents(entry.removedElement, restored);
       await runElementTransition(restored, false);
       restored.classList.remove("dd-restore-anim", "is-out");
-      this.host.onRestored(entry.elementLabel);
+      this.host.onRestored(restored);
       return true;
     } catch {
       restored.classList.remove("dd-restore-anim", "is-out");
