@@ -2,7 +2,11 @@ import {
   findIframeAtPoint,
   isPointInElement,
 } from "../../lib/src/element-under-cursor";
-import { formatElementLabel } from "./element-label";
+import {
+  resolveElementDescriptor,
+  shouldShowSelectionCaption,
+} from "./selection-caption";
+import type { SelectionCaptionStyle } from "./settings/selection-caption-style";
 import {
   HighlightSystem,
   HIGHLIGHT_UI,
@@ -19,6 +23,7 @@ import {
   getElementLabelEnabled,
   getLocale,
   getNotificationSeconds,
+  getSelectionCaptionStyle,
 } from "./storage";
 import { ToastSystem } from "./toast";
 
@@ -40,6 +45,7 @@ export class DeleterUI {
   private notificationSeconds = 4;
   private locale: Locale = "en";
   private elementLabelEnabled = false;
+  private selectionCaptionStyle: SelectionCaptionStyle = "click-to-delete";
   private elementActionInFlight = false;
 
   private readonly onDeactivate: DeactivateFn;
@@ -106,8 +112,12 @@ export class DeleterUI {
       host: {
         shadow: this.shadow,
         isOurNode: (node) => this.isOurNode(node),
-        getElementLabelEnabled: () => this.elementLabelEnabled,
-        formatElementLabel,
+        getElementLabelEnabled: () =>
+          shouldShowSelectionCaption(
+            this.elementLabelEnabled,
+            this.selectionCaptionStyle,
+          ),
+        formatElementLabel: (target) => this.formatSelectionCaptionText(target),
         hostAttr: HOST_ATTR,
         classes: HIGHLIGHT_UI,
       },
@@ -126,19 +136,35 @@ export class DeleterUI {
   }
 
   async loadSettings(): Promise<void> {
-    const [seconds, locale, elementLabelEnabled] = await Promise.all([
-      getNotificationSeconds(),
-      getLocale(),
-      getElementLabelEnabled(),
-    ]);
+    const [seconds, locale, elementLabelEnabled, selectionCaptionStyle] =
+      await Promise.all([
+        getNotificationSeconds(),
+        getLocale(),
+        getElementLabelEnabled(),
+        getSelectionCaptionStyle(),
+      ]);
     this.notificationSeconds = seconds;
     this.locale = locale;
     this.elementLabelEnabled = elementLabelEnabled;
+    this.selectionCaptionStyle = selectionCaptionStyle;
   }
 
   setElementLabelEnabled(enabled: boolean): void {
     this.elementLabelEnabled = enabled;
     this.highlight.syncElementLabel();
+  }
+
+  setSelectionCaptionStyle(style: SelectionCaptionStyle): void {
+    this.selectionCaptionStyle = style;
+    this.highlight.syncElementLabel();
+  }
+
+  private formatSelectionCaptionText(target: Element): string {
+    return resolveElementDescriptor(target, {
+      elementLabelEnabled: this.elementLabelEnabled,
+      selectionCaptionStyle: this.selectionCaptionStyle,
+      clickToDeleteLabel: this.strings().selectionCaptionClickToDelete,
+    });
   }
 
   setNotificationSeconds(seconds: number): void {
@@ -147,6 +173,7 @@ export class DeleterUI {
 
   setLocale(locale: Locale): void {
     this.locale = locale;
+    this.highlight.syncElementLabel();
   }
 
   private strings() {
@@ -236,7 +263,7 @@ export class DeleterUI {
     const nextSibling = toRemove.nextSibling;
     const childIndex = Array.prototype.indexOf.call(parent.children, toRemove);
     const outerHTML = toRemove.outerHTML;
-    const elementLabel = formatElementLabel(toRemove);
+    const elementLabel = this.formatSelectionCaptionText(toRemove);
 
     this.elementActionInFlight = true;
     this.highlight.clearIfTarget(toRemove);

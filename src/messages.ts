@@ -1,4 +1,5 @@
 import type { Locale } from "./i18n";
+import type { SelectionCaptionStyle } from "./settings/selection-caption-style";
 import type { PrefixHintContentToBg } from "../../lib/src/hotkeys/prefix-hint-messages";
 
 export type BgToContent =
@@ -8,6 +9,7 @@ export type BgToContent =
       notificationSeconds: number;
       locale: Locale;
       elementLabelEnabled: boolean;
+      selectionCaptionStyle: SelectionCaptionStyle;
       allElementsOutlineEnabled: boolean;
       allElementsFillEnabled: boolean;
     }
@@ -37,6 +39,7 @@ export const START_HOTKEY_ENABLED_KEY = "startHotkeyEnabled";
 export const ESC_HOTKEY_ENABLED_KEY = "escHotkeyEnabled";
 export const UNDO_HOTKEY_ENABLED_KEY = "undoHotkeyEnabled";
 export const ELEMENT_LABEL_ENABLED_KEY = "elementLabelEnabled";
+export const SELECTION_CAPTION_STYLE_KEY = "selectionCaptionStyle";
 export const ALL_ELEMENTS_OUTLINE_ENABLED_KEY = "allElementsOutlineEnabled";
 export const ALL_ELEMENTS_FILL_ENABLED_KEY = "allElementsFillEnabled";
 export const DEFAULT_NOTIFICATION_SECONDS = 4;

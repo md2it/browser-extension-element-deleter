@@ -27,6 +27,7 @@ import {
   getElementLabelEnabled,
   getLocale,
   getNotificationSeconds,
+  getSelectionCaptionStyle,
 } from "./storage";
 import { openPanelFromSender } from "./panel-popup";
 import {
@@ -36,6 +37,7 @@ import {
   refreshRestrictedNoticeCache,
   showRestrictedNotice,
 } from "./page-operability";
+import type { SelectionCaptionStyle } from "./settings/selection-caption-style";
 import { showWelcome, stopWelcomePinWatcher, watchWelcomePinStatus } from "./welcome";
 
 const TOGGLE_DEBOUNCE_MS = 80;
@@ -304,6 +306,7 @@ type ContentSettings = {
   notificationSeconds: number;
   locale: Locale;
   elementLabelEnabled: boolean;
+  selectionCaptionStyle: SelectionCaptionStyle;
   allElementsOutlineEnabled: boolean;
   allElementsFillEnabled: boolean;
 };
@@ -313,12 +316,14 @@ async function loadAllSettings(): Promise<ContentSettings> {
     notificationSeconds,
     locale,
     elementLabelEnabled,
+    selectionCaptionStyle,
     allElementsOutlineEnabled,
     allElementsFillEnabled,
   ] = await Promise.all([
     getNotificationSeconds(),
     getLocale(),
     getElementLabelEnabled(),
+    getSelectionCaptionStyle(),
     getAllElementsOutlineEnabled(),
     getAllElementsFillEnabled(),
   ]);
@@ -326,6 +331,7 @@ async function loadAllSettings(): Promise<ContentSettings> {
     notificationSeconds,
     locale,
     elementLabelEnabled,
+    selectionCaptionStyle,
     allElementsOutlineEnabled,
     allElementsFillEnabled,
   };
@@ -639,12 +645,14 @@ ext.storage.onChanged.addListener((changes, area) => {
   const secondsChange = changes.notificationSeconds;
   const localeChange = changes.locale;
   const elementLabelChange = changes.elementLabelEnabled;
+  const selectionCaptionChange = changes.selectionCaptionStyle;
   const outlineChange = changes.allElementsOutlineEnabled;
   const fillChange = changes.allElementsFillEnabled;
   if (
     !secondsChange &&
     !localeChange &&
     !elementLabelChange &&
+    !selectionCaptionChange &&
     !outlineChange &&
     !fillChange
   ) {

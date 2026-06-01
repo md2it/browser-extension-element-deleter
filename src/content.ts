@@ -13,6 +13,7 @@ import {
   getAllElementsFillEnabled,
   getAllElementsOutlineEnabled,
   getElementLabelEnabled,
+  getSelectionCaptionStyle,
 } from "./storage";
 import {
   resolveUndoEntryParent,
@@ -240,6 +241,7 @@ function attachMessageHandler(state: ContentState): void {
         state.ui.setNotificationSeconds(message.notificationSeconds);
         state.ui.setLocale(message.locale);
         state.ui.setElementLabelEnabled(message.elementLabelEnabled);
+        state.ui.setSelectionCaptionStyle(message.selectionCaptionStyle);
       }
       return;
     }
@@ -290,23 +292,29 @@ async function syncAllElementsPageStylesFromStorage(
   applyAllElementsPageStyles({ outline, fill });
 }
 
-async function syncElementLabelFromStorage(state: ContentState): Promise<void> {
+async function syncSelectionCaptionFromStorage(state: ContentState): Promise<void> {
   if (!state.ui) return;
-  state.ui.setElementLabelEnabled(await getElementLabelEnabled());
+  const [elementLabelEnabled, selectionCaptionStyle] = await Promise.all([
+    getElementLabelEnabled(),
+    getSelectionCaptionStyle(),
+  ]);
+  state.ui.setElementLabelEnabled(elementLabelEnabled);
+  state.ui.setSelectionCaptionStyle(selectionCaptionStyle);
 }
 
 ext.storage.onChanged.addListener((changes, area) => {
   if (area !== "local") return;
   const outlineOrFillChanged =
     changes.allElementsOutlineEnabled || changes.allElementsFillEnabled;
-  const elementLabelChanged = changes.elementLabelEnabled;
-  if (!outlineOrFillChanged && !elementLabelChanged) {
+  const selectionCaptionChanged =
+    changes.elementLabelEnabled || changes.selectionCaptionStyle;
+  if (!outlineOrFillChanged && !selectionCaptionChanged) {
     return;
   }
   if (outlineOrFillChanged) {
     void syncAllElementsPageStylesFromStorage(state);
   }
-  if (elementLabelChanged) {
-    void syncElementLabelFromStorage(state);
+  if (selectionCaptionChanged) {
+    void syncSelectionCaptionFromStorage(state);
   }
 });

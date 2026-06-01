@@ -97,6 +97,12 @@ export async function setElementLabelEnabled(value: boolean): Promise<void> {
   await ext.storage.local.set({ [ELEMENT_LABEL_ENABLED_KEY]: value });
 }
 
+export {
+  getSelectionCaptionStyle,
+  setSelectionCaptionStyle,
+  type SelectionCaptionStyle,
+} from "./settings/selection-caption-style";
+
 export async function getAllElementsOutlineEnabled(): Promise<boolean> {
   const data = await ext.storage.local.get(ALL_ELEMENTS_OUTLINE_ENABLED_KEY);
   return data[ALL_ELEMENTS_OUTLINE_ENABLED_KEY] === true;

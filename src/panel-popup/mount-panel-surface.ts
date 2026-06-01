@@ -7,9 +7,11 @@ import {
   getEscHotkeyEnabled,
   getLocale,
   getNotificationSeconds,
+  getSelectionCaptionStyle,
   getStartHotkeyEnabled,
   getUndoHotkeyEnabled,
 } from "../storage";
+import type { SelectionCaptionStyle } from "../settings/selection-caption-style";
 import { ToastSystem } from "../toast";
 import { PANEL_POPUP_HOST_ATTR, PANEL_POPUP_ROOT_ID, type PanelPopupTab } from "./constants";
 import { PanelWindowSystem } from "./window";
@@ -30,6 +32,7 @@ export async function mountPanelSurface(
   let escHotkeyEnabled = true;
   let undoHotkeyEnabled = true;
   let elementLabelEnabled = false;
+  let selectionCaptionStyle: SelectionCaptionStyle = "click-to-delete";
   let allElementsOutlineEnabled = false;
   let allElementsFillEnabled = false;
 
@@ -48,6 +51,7 @@ export async function mountPanelSurface(
     escHotkeyEnabled,
     undoHotkeyEnabled,
     elementLabelEnabled,
+    selectionCaptionStyle,
     allElementsOutlineEnabled,
     allElementsFillEnabled,
   ] = await Promise.all([
@@ -57,6 +61,7 @@ export async function mountPanelSurface(
     getEscHotkeyEnabled(),
     getUndoHotkeyEnabled(),
     getElementLabelEnabled(),
+    getSelectionCaptionStyle(),
     getAllElementsOutlineEnabled(),
     getAllElementsFillEnabled(),
   ]);
@@ -99,6 +104,10 @@ export async function mountPanelSurface(
     getElementLabelEnabled: () => elementLabelEnabled,
     setElementLabelEnabled: (enabled) => {
       elementLabelEnabled = enabled;
+    },
+    getSelectionCaptionStyle: () => selectionCaptionStyle,
+    setSelectionCaptionStyle: (style) => {
+      selectionCaptionStyle = style;
     },
     getAllElementsOutlineEnabled: () => allElementsOutlineEnabled,
     setAllElementsOutlineEnabled: (enabled) => {

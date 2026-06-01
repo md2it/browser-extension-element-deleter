@@ -46,6 +46,12 @@ export type Strings = {
   undoHotkeyToggleLabel: string;
   allElementsOutlineToggleLabel: string;
   allElementsFillToggleLabel: string;
+  selectionCaptionStyleLabel: string;
+  selectionCaptionNone: string;
+  selectionCaptionClickToDelete: string;
+  selectionCaptionTagIdClass: string;
+  selectionCaptionSelector: string;
+  selectionCaptionFullXPath: string;
   toastDeleted: string;
   toastRestored: string;
   btnRestore: string;

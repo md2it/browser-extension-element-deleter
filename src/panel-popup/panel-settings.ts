@@ -20,12 +20,17 @@ import {
   getUndoHotkeyLabel,
 } from "../hotkeys";
 import {
+  SELECTION_CAPTION_STYLES,
+  type SelectionCaptionStyle,
+} from "../settings/selection-caption-style";
+import {
   setAllElementsFillEnabled,
   setAllElementsOutlineEnabled,
   setElementLabelEnabled,
   setEscHotkeyEnabled,
   setLocale,
   setNotificationSeconds,
+  setSelectionCaptionStyle,
   setStartHotkeyEnabled,
   setUndoHotkeyEnabled,
 } from "../storage";
@@ -43,6 +48,8 @@ export type PanelSettingsHost = {
   setUndoHotkeyEnabled: (enabled: boolean) => void;
   getElementLabelEnabled: () => boolean;
   setElementLabelEnabled: (enabled: boolean) => void;
+  getSelectionCaptionStyle: () => SelectionCaptionStyle;
+  setSelectionCaptionStyle: (style: SelectionCaptionStyle) => void;
   getAllElementsOutlineEnabled: () => boolean;
   setAllElementsOutlineEnabled: (enabled: boolean) => void;
   getAllElementsFillEnabled: () => boolean;
@@ -51,6 +58,72 @@ export type PanelSettingsHost = {
 };
 
 const ELEMENT_LABEL_TOGGLE_ARIA = "tag#id / tag.class";
+const SELECTION_CAPTION_SELECT_ID = "dd-selection-caption-style";
+
+function selectionCaptionOptionLabel(
+  style: SelectionCaptionStyle,
+  strings: Strings,
+): string {
+  switch (style) {
+    case "none":
+      return strings.selectionCaptionNone;
+    case "click-to-delete":
+      return strings.selectionCaptionClickToDelete;
+    case "tag-id-class":
+      return strings.selectionCaptionTagIdClass;
+    case "selector":
+      return strings.selectionCaptionSelector;
+    case "full-xpath":
+      return strings.selectionCaptionFullXPath;
+  }
+}
+
+function createSelectionCaptionStyleRow(
+  host: PanelSettingsHost,
+  strings: Strings,
+): HTMLElement {
+  const row = document.createElement("div");
+  row.className = "dd-caption-style-row";
+
+  const label = document.createElement("label");
+  label.className = "dd-caption-style-label";
+  label.htmlFor = SELECTION_CAPTION_SELECT_ID;
+  label.textContent = strings.selectionCaptionStyleLabel;
+
+  const select = document.createElement("select");
+  select.id = SELECTION_CAPTION_SELECT_ID;
+  select.className = "dd-caption-style-select";
+
+  for (const style of SELECTION_CAPTION_STYLES) {
+    const option = document.createElement("option");
+    option.value = style;
+    option.textContent = selectionCaptionOptionLabel(style, strings);
+    option.selected = style === host.getSelectionCaptionStyle();
+    select.append(option);
+  }
+
+  select.addEventListener("change", () => {
+    const next = select.value as SelectionCaptionStyle;
+    host.setSelectionCaptionStyle(next);
+    void setSelectionCaptionStyle(next);
+  });
+
+  row.append(label, select);
+  return row;
+}
+
+function syncSelectionCaptionStyleRow(panel: HTMLElement, strings: Strings): void {
+  const label = panel.querySelector<HTMLElement>(".dd-caption-style-label");
+  if (label) label.textContent = strings.selectionCaptionStyleLabel;
+  const select = panel.querySelector<HTMLSelectElement>(`#${SELECTION_CAPTION_SELECT_ID}`);
+  if (!select) return;
+  for (const option of Array.from(select.options)) {
+    option.textContent = selectionCaptionOptionLabel(
+      option.value as SelectionCaptionStyle,
+      strings,
+    );
+  }
+}
 
 function createPageDivider(): HTMLDivElement {
   const divider = document.createElement("div");
@@ -211,6 +284,7 @@ function syncSettingsPanelCopy(host: PanelSettingsHost, panel: HTMLElement): voi
       "aria-label",
       `${copy.notificationPeriodPrefix}${copy.notificationPeriodSuffix}`.trim(),
     );
+  syncSelectionCaptionStyleRow(panel, copy);
   const toggles = panel.querySelectorAll<HTMLElement>(
     ".dd-toggle-row:not(.dd-toggle-row--notification)",
   );
@@ -457,9 +531,13 @@ export function populateSettingsPanel(
   row.append(toMin, dec, valueWrap, inc, toMax);
 
   notificationRow.append(row, tooltip);
+
+  const captionStyleRow = createSelectionCaptionStyleRow(host, copy);
+
   settingsMount.append(
     langField,
     notificationRow,
+    captionStyleRow,
     startHotkeyRow,
     escHotkeyRow,
     undoHotkeyRow,
