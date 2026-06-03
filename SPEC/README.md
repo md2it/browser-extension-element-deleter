@@ -32,6 +32,6 @@
 
 - [lib/SPEC](../../lib/SPEC) — общие дефолтные требования для всех расширений
 - [lib/BUILD.md](../../lib/BUILD.md) — сборка и упаковка
-- [lib/scripts](../../lib/scripts) — скрипты сборки (pack-extension и др.)
+- [lib/scripts](../../lib/scripts) — общие скрипты, включая `minify-and-zip.zsh`
 - [lib/our](../../lib/our) — переиспользуемые модули
 - [lib/vendor/icons](../../lib/vendor/icons) и [lib/our/icons](../../lib/our/icons) — общие SVG-иконки
