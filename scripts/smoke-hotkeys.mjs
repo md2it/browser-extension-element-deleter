@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { runSmokeHotkeysCore } from "../../lib/scripts/smoke-hotkeys-core.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const extensionRoot = join(root, "extension");
 
 runSmokeHotkeysCore();
 
@@ -73,7 +74,7 @@ assert.match(commandsSrc, /activate-deactivate/);
 assert.match(commandsSrc, /_execute_action/);
 assert.doesNotMatch(commandsSrc, /undo-delete/);
 
-const manifestSrc = readFileSync(join(root, "manifest.json"), "utf8");
+const manifestSrc = readFileSync(join(extensionRoot, "manifest.json"), "utf8");
 assert.match(manifestSrc, /"_execute_action"/);
 assert.match(manifestSrc, /"activate-deactivate"/);
 assert.match(manifestSrc, /__MSG_commandToggleDelete__/);

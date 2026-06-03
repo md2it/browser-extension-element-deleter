@@ -265,7 +265,7 @@ async function injectContent(tabId: number, frameId?: number): Promise<boolean> 
         : { tabId, allFrames: true };
     await ext.scripting.executeScript({
       target,
-      files: ["content.js"],
+      files: ["app/content.js"],
     });
     return true;
   } catch (err) {

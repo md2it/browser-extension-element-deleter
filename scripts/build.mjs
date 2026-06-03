@@ -1,5 +1,5 @@
 import { createRequire } from "node:module";
-import { readFileSync } from "node:fs";
+import { cpSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,9 +10,11 @@ const esbuild = require(
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const libSrc = join(root, "../lib/src");
+const extensionDir = join(root, "extension");
+const appDir = join(extensionDir, "app");
 const watch = process.argv.includes("--watch");
 
-const stylesDir = join(root, "styles");
+const stylesDir = join(root, "src/styles");
 const panelHeaderCss = readFileSync(join(stylesDir, "panel-header.css"), "utf8");
 const panelFooterCss = readFileSync(join(stylesDir, "panel-footer.css"), "utf8");
 const panelCss = readFileSync(join(stylesDir, "panel-popup.css"), "utf8");
@@ -42,6 +44,13 @@ const common = {
   },
 };
 
+rmSync(appDir, { recursive: true, force: true });
+mkdirSync(appDir, { recursive: true });
+cpSync(
+  join(libSrc, "page-operability/blocked-notice-page.js"),
+  join(appDir, "blocked-notice.js"),
+);
+
 const ctx = await esbuild.context({
   ...common,
   entryPoints: {
@@ -49,7 +58,7 @@ const ctx = await esbuild.context({
     content: join(root, "src/content.ts"),
     welcome: join(root, "src/welcome/welcome.ts"),
   },
-  outdir: root,
+  outdir: appDir,
 });
 
 if (watch) {

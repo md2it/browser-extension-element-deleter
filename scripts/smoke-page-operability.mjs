@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { runSmokePageOperabilityCore } from "../../lib/scripts/smoke-page-operability-core.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const extensionRoot = join(root, "extension");
 const libOperability = join(root, "../lib/src/page-operability");
 
 runSmokePageOperabilityCore();
@@ -40,12 +41,12 @@ assert.match(bgSrc, /from "\.\/page-operability"/);
 assert.doesNotMatch(bgSrc, /function canOperateOnTab/);
 assert.doesNotMatch(bgSrc, /function showRestrictedNotice/);
 
-const noticeHtml = readFileSync(join(root, "blocked-notice.html"), "utf8");
-assert.match(noticeHtml, /blocked-notice\.js/);
+const noticeHtml = readFileSync(join(extensionRoot, "blocked-notice.html"), "utf8");
+assert.match(noticeHtml, /app\/blocked-notice\.js/);
 assert.match(noticeHtml, /id="msg"/);
 assert.match(noticeHtml, /data-notice-session-key="restrictedNotice"/);
 
-const noticeJs = readFileSync(join(root, "blocked-notice.js"), "utf8");
+const noticeJs = readFileSync(join(extensionRoot, "app/blocked-notice.js"), "utf8");
 assert.match(noticeJs, /noticeSessionKey/);
 assert.match(noticeJs, /restrictedNotice/);
 assert.match(noticeJs, /BLOCKED_NOTICE_DISMISSED/);
