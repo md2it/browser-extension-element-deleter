@@ -4,7 +4,6 @@ var iconState = createExtensionIconState({
   paths: TOOLBAR_ICON_PATHS,
   syncedTabIdsStorageKey: ICON_SYNCED_TAB_IDS_KEY,
   logLabel: ICON_STATE_LOG_LABEL,
-  getImageSets: getToolbarIconSets,
 });
 var {
   bootstrapToolbarIcons,

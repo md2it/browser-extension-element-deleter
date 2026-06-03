@@ -61,6 +61,10 @@
 ### 1.1.1
 - Updated notifications
 
+### 1.1.2
+- Refactoring
+- Upd icon to better quality
+
 ---
 
 ## NOT RELEASED LIST
