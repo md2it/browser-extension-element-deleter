@@ -314,7 +314,10 @@
   var LINKEDIN = brandIcon(linkedin_default);
 
   // ../lib/icons/md2it.svg
-  var md2it_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946.295 947.014" width="24" height="24" fill="#000000">\n  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.294998 230.507V461.014H57.295H114.295L114.321 317.264L114.347 173.514L119.729 182.014C131.242 200.194 138.673 212.076 147.245 226.014C152.15 233.989 159.72 246.139 164.067 253.014C168.414 259.889 177.529 274.514 184.323 285.514C197.987 307.639 211.847 329.833 216.794 337.514C218.566 340.264 223.961 348.814 228.784 356.514C241.803 377.3 252.729 393.981 253.295 393.936C253.57 393.914 256.783 389.31 260.436 383.705C264.088 378.1 274.925 361.589 284.519 347.014C294.112 332.439 306.24 313.989 311.47 306.014C316.7 298.039 328.999 279.364 338.8 264.514C348.602 249.664 364.02 226.264 373.064 212.514C382.107 198.764 391.371 184.711 393.651 181.285L397.795 175.056L398.048 318.035L398.302 461.014H455.298H512.295V230.514V0.0139999H443.011H373.726L371.839 3.264C370.8 5.052 365.368 13.939 359.766 23.014C348.231 41.703 333.55 65.582 322.265 84.014C307.818 107.609 298.029 123.527 291.826 133.514C277.383 156.769 269.295 170.081 269.295 170.6C269.295 170.904 268.002 173.035 266.422 175.334C264.842 177.633 261.224 183.452 258.383 188.264C255.542 193.077 252.898 197.008 252.506 197C252.115 196.992 250.503 194.629 248.925 191.75C245.975 186.369 222.868 148.272 218.758 142.014C217.494 140.089 209.141 126.589 200.195 112.014C166.909 57.782 163.441 52.143 153.136 35.514C147.343 26.164 140.152 14.464 137.158 9.514L131.713 0.514L66.004 0.257L0.294998 0V230.507ZM540.295 230.566V461.117L643.545 460.759C743.253 460.413 747.246 460.328 759.951 458.267C786.579 453.949 808.086 447.481 828.992 437.506C870.648 417.63 901.83 386.413 922.717 343.678C933.069 322.495 939.448 300.945 943.929 272.014C946.675 254.283 946.442 212.457 943.49 193.259C940.647 174.774 938.091 163.449 933.656 149.681C915.674 93.867 880.193 51.134 831.073 26.127C809.507 15.147 790.444 8.876 765.795 4.652C739.813 0.2 734.575 0.0139999 635.189 0.0139999H540.295V230.566ZM739.295 115.392C773.348 120.821 799.25 138.981 813.666 167.534C821.407 182.866 826.068 203.012 826.965 225.014C828.571 264.421 818.637 296.12 797.875 317.843C783.839 332.529 767.977 341.016 744.795 346.244C736.861 348.033 731.265 348.329 697.545 348.742L659.295 349.211V231.779C659.295 167.192 659.632 114.008 660.045 113.593C661.417 112.213 728.97 113.747 739.295 115.392ZM162.295 479.597C123.366 484.23 94.04 494.332 66.795 512.496C52.467 522.048 42.425 531.456 32.459 544.664C14.097 568.999 2.966 601.142 0.685997 636.416L0 647.014H57.602H115.204L115.848 643.264C119.075 624.476 127.082 609.374 139.033 599.535C151.737 589.075 168.073 583.811 187.87 583.798C205.641 583.786 220.085 588.054 232.359 596.946C241.176 603.332 248.391 615.313 250.446 626.979C253.356 643.5 244.67 663.689 228.705 677.514C225.529 680.264 210.3 692.06 194.863 703.727C179.425 715.394 164.095 727.003 160.795 729.525C157.495 732.046 143.041 742.976 128.676 753.812C99.224 776.028 70.868 797.623 45.795 816.933C36.445 824.134 22.399 834.861 14.581 840.77L0.365997 851.514L0.330997 899.264L0.294998 947.014H186.295H372.295V895.019V843.024L278.045 842.769L183.795 842.514L192.295 836.212C196.97 832.746 208.22 824.451 217.295 817.779C226.37 811.106 239.645 801.31 246.795 796.009C253.945 790.709 262.27 784.647 265.295 782.539C271.406 778.282 293.855 761.209 307.165 750.698C317.777 742.317 334.967 725.563 341.175 717.55C356.435 697.853 365.255 678.635 369.948 654.861C372.035 644.285 372.321 615.682 370.446 605.014C367.07 585.803 363.897 575.411 356.997 560.97C346.286 538.552 331.67 522.278 309.037 507.569C286.568 492.967 257.662 483.528 223.295 479.571C206.92 477.685 178.255 477.698 162.295 479.597ZM398.295 717.014V947.014H455.295H512.295V717.014V487.014H455.295H398.295V717.014ZM540.295 543.514V600.014H612.295H684.295V773.514V947.014H745.795H807.295V773.514V600.014H876.795H946.295V543.514V487.014H743.295H540.295V543.514Z"/>\n</svg>\n';
+  var md2it_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946.295 947.014" width="24" height="24" fill="#000000">\n  <path d="M0.294998 230.507V461.014H57.295" />\n</svg>\n';
+
+  // ../lib/icons/extension-logos/element-deleter/icon.svg
+  var icon_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="trash-2.svg">\n  <rect width="24" height="24" fill="#012292"/>\n  <g transform="translate(0 0)" color="#ffffff" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n<path d="M10 11v6" />\n  <path d="M14 11v6" />\n  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />\n  <path d="M3 6h18" />\n  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />\n  </g>\n</svg>\n';
 
   // src/icons.ts
   function stripComment2(svg) {
@@ -332,14 +335,31 @@
   var CHEVRON_RIGHT = lucideUiIcon2(chevron_right_default);
   var CHEVRONS_LEFT = lucideUiIcon2(chevrons_left_default);
   var CHEVRONS_RIGHT = lucideUiIcon2(chevrons_right_default);
-  var INACTIVE_BG = "#012292";
+  var INACTIVE_BG = "#f00";
   var ACTIVE_BG = INACTIVE_BG;
   var TOOLBAR_VIEWBOX = 24;
   var TOOLBAR_RADIUS_RATIO = 0.18;
   var TOOLBAR_PAD_RATIO = 0.1;
+  var elementDeleterLogoInner = stripFullBackgroundRect(
+    innerSvgMarkup(stripComment2(icon_default))
+  );
   function innerSvgMarkup(svg) {
     const match = svg.match(/<svg[\s\S]*?>([\s\S]*)<\/svg>/i);
     return match ? match[1].trim() : svg;
+  }
+  function stripFullBackgroundRect(inner) {
+    const match = inner.match(/^\s*(<rect\b[^>]*\/?>)/i);
+    if (!match) return inner;
+    const tag = match[1];
+    const x = Number(svgAttr(tag, "x") ?? 0);
+    const y = Number(svgAttr(tag, "y") ?? 0);
+    const w = Number(svgAttr(tag, "width"));
+    const h = Number(svgAttr(tag, "height"));
+    const fill = svgAttr(tag, "fill");
+    if (x === 0 && y === 0 && w === 24 && h === 24 && fill && !/^none$/i.test(fill)) {
+      return inner.slice(match[0].length).trimStart();
+    }
+    return inner;
   }
   function svgAttr(tag, name) {
     const m = tag.match(new RegExp(`${name}="([^"]*)"`));
@@ -374,8 +394,15 @@
       ctx.stroke();
     }
     for (const m of inner.matchAll(/<path\b[^>]*\/?>/g)) {
-      const d = svgAttr(m[0], "d");
-      if (d) ctx.stroke(new Path2D(d));
+      const tag = m[0];
+      const d = svgAttr(tag, "d");
+      if (!d) continue;
+      const path = new Path2D(d);
+      const fill = svgAttr(tag, "fill");
+      const stroke = svgAttr(tag, "stroke");
+      if (fill && !/^none$/i.test(fill) && !/^url\(/i.test(fill)) ctx.fill(path);
+      if (stroke && !/^none$/i.test(stroke) && !/^url\(/i.test(stroke)) ctx.stroke(path);
+      if (!fill && !stroke) ctx.stroke(path);
     }
   }
   var trash2Inner = innerSvgMarkup(stripComment2(trash_2_default));
@@ -401,7 +428,7 @@
     ctx.save();
     ctx.translate(pad, pad);
     ctx.scale(scale, scale);
-    drawInnerSvg(ctx, trash2Inner);
+    drawInnerSvg(ctx, elementDeleterLogoInner);
     ctx.restore();
     return ctx.getImageData(0, 0, size, size);
   }
@@ -423,7 +450,7 @@
     const r = TOOLBAR_VIEWBOX * TOOLBAR_RADIUS_RATIO;
     const pad = TOOLBAR_VIEWBOX * TOOLBAR_PAD_RATIO;
     const scale = (TOOLBAR_VIEWBOX - pad * 2) / TOOLBAR_VIEWBOX;
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${TOOLBAR_VIEWBOX} ${TOOLBAR_VIEWBOX}" aria-hidden="true"><rect width="${TOOLBAR_VIEWBOX}" height="${TOOLBAR_VIEWBOX}" rx="${r}" fill="${bg}"/><g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(${pad} ${pad}) scale(${scale})">${trash2Inner}</g></svg>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${TOOLBAR_VIEWBOX} ${TOOLBAR_VIEWBOX}" aria-hidden="true"><rect width="${TOOLBAR_VIEWBOX}" height="${TOOLBAR_VIEWBOX}" rx="${r}" fill="${bg}"/><g fill="#ffffff" transform="translate(${pad} ${pad}) scale(${scale})">${elementDeleterLogoInner}</g></svg>`;
   }
 
   // ../lib/our/extension-icon-state/tab-active-state.ts
