@@ -1,11 +1,11 @@
-import chevronLeftSvg from "../../lib/icons/lucide/chevron-left.svg";
-import chevronRightSvg from "../../lib/icons/lucide/chevron-right.svg";
-import chevronsLeftSvg from "../../lib/icons/lucide/chevrons-left.svg";
-import chevronsRightSvg from "../../lib/icons/lucide/chevrons-right.svg";
-import circlePowerSvg from "../../lib/icons/lucide/circle-power.svg";
-import shieldCheckSvg from "../../lib/icons/lucide/shield-check.svg";
-import trash2Svg from "../../lib/icons/lucide/trash-2.svg";
-import undo2Svg from "../../lib/icons/lucide/undo-2.svg";
+import chevronLeftSvg from "../../lib/vendor/icons/lucide/chevron-left.svg";
+import chevronRightSvg from "../../lib/vendor/icons/lucide/chevron-right.svg";
+import chevronsLeftSvg from "../../lib/vendor/icons/lucide/chevrons-left.svg";
+import chevronsRightSvg from "../../lib/vendor/icons/lucide/chevrons-right.svg";
+import circlePowerSvg from "../../lib/vendor/icons/lucide/circle-power.svg";
+import shieldCheckSvg from "../../lib/vendor/icons/lucide/shield-check.svg";
+import trash2Svg from "../../lib/vendor/icons/lucide/trash-2.svg";
+import undo2Svg from "../../lib/vendor/icons/lucide/undo-2.svg";
 
 import {
   ARROW_UP,
@@ -19,7 +19,7 @@ import {
   PUZZLE,
   ROTATE_CW,
   SETTINGS,
-} from "../../lib/src/icons";
+} from "../../lib/our/icons";
 
 export {
   ARROW_UP,

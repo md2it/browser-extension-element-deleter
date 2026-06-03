@@ -2,7 +2,7 @@ import {
   openPanelInActionPopup as openLibPanelInActionPopup,
   panelPagePath,
   type PanelPageOpenTarget,
-} from "../../../lib/src/panel-popup";
+} from "../../../lib/our/panel-popup";
 import { openPanelInTab } from "../panel-tab";
 import { PANEL_PAGE_CONFIG, type PanelPopupTab } from "./constants";
 

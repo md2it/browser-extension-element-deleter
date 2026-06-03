@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 import type { SelectionCaptionStyle } from "./settings/selection-caption-style";
-import type { PrefixHintContentToBg } from "../../lib/src/hotkeys/prefix-hint-messages";
+import type { PrefixHintContentToBg } from "../../lib/our/hotkeys/prefix-hint-messages";
 
 export type BgToContent =
   | { type: "SET_ACTIVE"; active: boolean }

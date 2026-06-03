@@ -9,7 +9,7 @@ const esbuild = require(
 );
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const libSrc = join(root, "../lib/src");
+const libSrc = join(root, "../lib/our");
 const extensionDir = join(root, "extension");
 const appDir = join(extensionDir, "app");
 const watch = process.argv.includes("--watch");

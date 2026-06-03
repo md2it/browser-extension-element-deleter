@@ -1,7 +1,7 @@
 export {
   HighlightSystem,
   type ElementHighlightHost as HighlightHost,
-} from "../../lib/src/highlight";
+} from "../../lib/our/highlight";
 export {
   ensurePageHighlightStyles,
   HIGHLIGHT_UI,

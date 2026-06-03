@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-  // ../lib/src/all-elements-fill/css.ts
+  // ../lib/our/all-elements-fill/css.ts
   var ALL_ELEMENTS_FILL_CSS = `* { background-color: hsl(150 50% 50% / 0.18) !important; color: #012292 !important; }
 *:has(> *) { background-color: hsl(150 50% 50% / 0.18) !important; background-clip: padding-box !important; }
 * * { background-color: hsl(175 58.33% 50% / 0.18) !important; }
@@ -29,7 +29,7 @@
     return ALL_ELEMENTS_FILL_CSS;
   }
 
-  // ../lib/src/all-elements-style-inject.ts
+  // ../lib/our/all-elements-style-inject.ts
   function setAllElementsStyleAtEnd(styleId, css) {
     const existing = document.getElementById(styleId);
     if (existing instanceof HTMLStyleElement) {
@@ -46,7 +46,7 @@
     document.getElementById(styleId)?.remove();
   }
 
-  // ../lib/src/all-elements-fill/lifecycle.ts
+  // ../lib/our/all-elements-fill/lifecycle.ts
   function enableAllElementsFill(config) {
     setAllElementsStyleAtEnd(config.styleId, buildAllElementsFillCss(config));
   }
@@ -54,7 +54,7 @@
     removeAllElementsStyle(styleId);
   }
 
-  // ../lib/src/all-elements-outline/css.ts
+  // ../lib/our/all-elements-outline/css.ts
   var DEFAULT_WIDTH_PX = 1;
   var DEFAULT_OFFSET_PX = -1;
   function assertRgba(value, label) {
@@ -79,7 +79,7 @@
 `.trim();
   }
 
-  // ../lib/src/all-elements-outline/lifecycle.ts
+  // ../lib/our/all-elements-outline/lifecycle.ts
   function enableAllElementsOutline(config) {
     setAllElementsStyleAtEnd(
       config.styleId,
@@ -116,18 +116,18 @@
     }
   }
 
-  // ../lib/src/api.ts
+  // ../lib/our/api.ts
   var ext = typeof browser !== "undefined" ? browser : chrome;
 
   // src/hotkeys/commands.ts
   var PREFIX_ACTION_KEY = "D";
 
-  // ../lib/src/hotkeys/prefix-hint-messages.ts
+  // ../lib/our/hotkeys/prefix-hint-messages.ts
   var PREFIX_HINT_SHOW = "PREFIX_HINT_SHOW";
   var PREFIX_HINT_HIDE = "PREFIX_HINT_HIDE";
   var PREFIX_HINT_BLOCKED = "PREFIX_HINT_BLOCKED";
 
-  // ../lib/src/hotkeys/prefix-hint-content.ts
+  // ../lib/our/hotkeys/prefix-hint-content.ts
   function createContentPrefixHintSink() {
     return {
       show(letter) {
@@ -141,12 +141,12 @@
     };
   }
 
-  // ../lib/src/hotkeys/platform.ts
+  // ../lib/our/hotkeys/platform.ts
   function isMacPlatform() {
     return /Mac|iPhone|iPad|iPod/.test(navigator.userAgent) || navigator.platform.toUpperCase().includes("MAC");
   }
 
-  // ../lib/src/hotkeys/keys.ts
+  // ../lib/our/hotkeys/keys.ts
   var ESCAPE_KEY_LABEL = "Esc";
   var PREFIX_ACTION_TIMEOUT_MS = 3e3;
   var PREFIX_DOUBLE_ACTION_WINDOW_MS = 400;
@@ -204,7 +204,7 @@
     return !!target.closest('[contenteditable=""], [contenteditable="true"]');
   }
 
-  // ../lib/src/hotkeys/prefix-mode.ts
+  // ../lib/our/hotkeys/prefix-mode.ts
   function createPrefixModeController(options) {
     let armed = false;
     let timeoutId;
@@ -342,7 +342,7 @@
     };
   }
 
-  // ../lib/src/hotkeys/registry.ts
+  // ../lib/our/hotkeys/registry.ts
   function handlerPropertyKey(namespace, slot) {
     return `__${namespace}HotkeyHandler_${slot}`;
   }
@@ -365,7 +365,7 @@
     win[key] = void 0;
   }
 
-  // ../lib/src/hotkeys/prefix-content.ts
+  // ../lib/our/hotkeys/prefix-content.ts
   function registerPrefixStartHotkey(options) {
     if (typeof window === "undefined" || window.top !== window) return void 0;
     const controller = createPrefixModeController({
@@ -396,7 +396,7 @@
     return controller;
   }
 
-  // ../lib/src/page-operability/probe.ts
+  // ../lib/our/page-operability/probe.ts
   function probeDocumentOperability() {
     try {
       const root = document.documentElement ?? document.body;
@@ -412,7 +412,7 @@
     }
   }
 
-  // ../lib/src/hotkeys/prefix-operability.ts
+  // ../lib/our/hotkeys/prefix-operability.ts
   async function queryPrefixHintCanShowInContent() {
     return probeDocumentOperability();
   }
@@ -421,7 +421,7 @@
     });
   }
 
-  // ../lib/src/hotkeys/suppress.ts
+  // ../lib/our/hotkeys/suppress.ts
   var DEFAULT_TOGGLE_COMMAND_SUPPRESS_MS = 300;
   function shouldSuppressContentToggleAfterToggleCommand(lastAt, now, windowMs = DEFAULT_TOGGLE_COMMAND_SUPPRESS_MS) {
     return lastAt > 0 && now - lastAt < windowMs;
@@ -445,7 +445,7 @@
     };
   }
 
-  // ../lib/src/hotkeys/settings.ts
+  // ../lib/our/hotkeys/settings.ts
   function readBooleanSetting(data, key) {
     const raw = data[key];
     return raw !== false;
@@ -582,7 +582,7 @@
     }
   }
 
-  // ../lib/src/i18n/locale-code.ts
+  // ../lib/our/i18n/locale-code.ts
   var CHINESE_UI_LOCALE = "zh_CN";
   var TRADITIONAL_CHINESE_RE = /^zh-(tw|hk|mo|hant)(-|$)|^zh-hant(-|$)/;
   function mapChineseUiLocale(tag) {
@@ -599,7 +599,7 @@
     return locale.replace(/_/g, "-");
   }
 
-  // ../lib/src/i18n/detect.ts
+  // ../lib/our/i18n/detect.ts
   function getAcceptLanguageTags() {
     return new Promise((resolve) => {
       const getAccept = ext.i18n?.getAcceptLanguages;
@@ -667,7 +667,7 @@
     return detectLocale(mapLanguageTag, "en");
   }
 
-  // ../lib/src/i18n/rtl.ts
+  // ../lib/our/i18n/rtl.ts
   var RTL_LOCALES = /* @__PURE__ */ new Set(["ar"]);
   function isRtlLocale(locale) {
     return RTL_LOCALES.has(locale);
@@ -1391,7 +1391,7 @@
     }
   };
 
-  // ../lib/src/element-under-cursor.ts
+  // ../lib/our/element-under-cursor.ts
   var MIN_IFRAME_PICK_PX = 4;
   function isPointInElement(el, x, y) {
     const rect = el.getBoundingClientRect();
@@ -1461,7 +1461,7 @@
     return null;
   }
 
-  // ../lib/src/copy/selector.ts
+  // ../lib/our/copy/selector.ts
   var STABLE_ATTRS = [
     "data-testid",
     "data-test",
@@ -1553,7 +1553,7 @@
     return parts.join(" > ");
   }
 
-  // ../lib/src/copy/xpath.ts
+  // ../lib/our/copy/xpath.ts
   function xpathSegment(element) {
     const tag = element.tagName.toLowerCase();
     const parent = element.parentElement;
@@ -1630,7 +1630,7 @@
     }
   }
 
-  // ../lib/src/highlight/classes.ts
+  // ../lib/our/highlight/classes.ts
   function createHighlightUiClasses(prefix) {
     return {
       highlightTarget: `${prefix}-highlight`,
@@ -1640,7 +1640,7 @@
     };
   }
 
-  // ../lib/src/highlight/page-styles.ts
+  // ../lib/our/highlight/page-styles.ts
   function buildGenericHighlightPageCss(classes) {
     return `
 .${classes.highlightTarget} {
@@ -1667,7 +1667,7 @@ iframe.${classes.highlightFill} {
     document.getElementById(styleId)?.remove();
   }
 
-  // ../lib/src/highlight/visual.ts
+  // ../lib/our/highlight/visual.ts
   var HIGHLIGHT_FRAME_INSET = 2;
   var ElementHighlightVisual = class {
     constructor(host, pageStyles) {
@@ -1883,7 +1883,7 @@ iframe.${classes.highlightFill} {
     }
   };
 
-  // ../lib/src/highlight/selector.ts
+  // ../lib/our/highlight/selector.ts
   var HighlightSystem = class {
     highlighted = null;
     visual;
@@ -2022,88 +2022,88 @@ ins.adsbygoogle.dd-highlight,
     pageCss: HIGHLIGHT_PAGE_CSS
   };
 
-  // ../lib/icons/lucide/chevron-left.svg
+  // ../lib/vendor/icons/lucide/chevron-left.svg
   var chevron_left_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m15 18-6-6 6-6" />\n</svg>\n';
 
-  // ../lib/icons/lucide/chevron-right.svg
+  // ../lib/vendor/icons/lucide/chevron-right.svg
   var chevron_right_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m9 18 6-6-6-6" />\n</svg>\n';
 
-  // ../lib/icons/lucide/chevrons-left.svg
+  // ../lib/vendor/icons/lucide/chevrons-left.svg
   var chevrons_left_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m11 17-5-5 5-5" />\n  <path d="m18 17-5-5 5-5" />\n</svg>\n';
 
-  // ../lib/icons/lucide/chevrons-right.svg
+  // ../lib/vendor/icons/lucide/chevrons-right.svg
   var chevrons_right_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m6 17 5-5-5-5" />\n  <path d="m13 17 5-5-5-5" />\n</svg>\n';
 
-  // ../lib/icons/lucide/circle-power.svg
+  // ../lib/vendor/icons/lucide/circle-power.svg
   var circle_power_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <circle cx="12" cy="12" r="10" />\n  <path d="M12 7v4" />\n  <path d="M7.998 9.003a5 5 0 1 0 8-.005" />\n</svg>\n';
 
-  // ../lib/icons/lucide/shield-check.svg
+  // ../lib/vendor/icons/lucide/shield-check.svg
   var shield_check_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />\n  <path d="m9 12 2 2 4-4" />\n</svg>\n';
 
-  // ../lib/icons/lucide/trash-2.svg
+  // ../lib/vendor/icons/lucide/trash-2.svg
   var trash_2_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M10 11v6" />\n  <path d="M14 11v6" />\n  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />\n  <path d="M3 6h18" />\n  <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />\n</svg>\n';
 
-  // ../lib/icons/lucide/undo-2.svg
+  // ../lib/vendor/icons/lucide/undo-2.svg
   var undo_2_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M9 14 4 9l5-5" />\n  <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />\n</svg>\n';
 
-  // ../lib/icons/lucide/arrow-up.svg
-  var arrow_up_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m5 12 7-7 7 7" />\n  <path d="M12 19V5" />\n</svg>\n';
-
-  // ../lib/icons/lucide/copy.svg
-  var copy_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />\n  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />\n</svg>\n';
-
-  // ../lib/icons/lucide/external-link.svg
-  var external_link_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link-icon lucide-external-link">\n  <path d="M15 3h6v6" />\n  <path d="M10 14 21 3" />\n  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />\n</svg>\n';
-
-  // ../lib/icons/lucide/file-down.svg
-  var file_down_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />\n  <path d="M14 2v4a2 2 0 0 0 2 2h4" />\n  <path d="M12 18v-6" />\n  <path d="m9 15 3 3 3-3" />\n</svg>\n';
-
-  // ../lib/icons/lucide/files.svg
-  var files_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15 2h-4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />\n  <path d="M16.706 2.706A2.4 2.4 0 0 0 15 2v5a1 1 0 0 0 1 1h5a2.4 2.4 0 0 0-.706-1.706z" />\n  <path d="M5 7a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 1.732-1" />\n</svg>\n';
-
-  // ../lib/icons/lucide/image-down.svg
-  var image_down_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21" />\n  <path d="m14 19 3 3v-5.5" />\n  <path d="m17 22 3-3" />\n  <circle cx="9" cy="9" r="2" />\n</svg>\n';
-
-  // ../lib/icons/lucide/images.svg
-  var images_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M18 22H4a2 2 0 0 1-2-2V6" />\n  <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />\n  <circle cx="12" cy="8" r="2" />\n  <rect width="16" height="16" x="6" y="2" rx="2" />\n</svg>\n';
-
-  // ../lib/icons/lucide/heart.svg
-  var heart_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />\n</svg>\n';
-
-  // ../lib/icons/lucide/history.svg
-  var history_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />\n  <path d="M3 3v5h5" />\n  <path d="M12 7v5l4 2" />\n</svg>\n';
-
-  // ../lib/icons/lucide/cog.svg
-  var cog_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M11 10.27 7 3.34" />\n  <path d="m11 13.73-4 6.93" />\n  <path d="M12 22v-2" />\n  <path d="M12 2v2" />\n  <path d="M14 12h8" />\n  <path d="m17 20.66-1-1.73" />\n  <path d="m17 3.34-1 1.73" />\n  <path d="M2 12h2" />\n  <path d="m20.66 17-1.73-1" />\n  <path d="m20.66 7-1.73 1" />\n  <path d="m3.34 17 1.73-1" />\n  <path d="m3.34 7 1.73 1" />\n  <circle cx="12" cy="12" r="2" />\n  <circle cx="12" cy="12" r="8" />\n</svg>\n';
-
-  // ../lib/icons/lucide/info.svg
-  var info_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <circle cx="12" cy="12" r="10" />\n  <path d="M12 16v-4" />\n  <path d="M12 8h.01" />\n</svg>\n';
-
-  // ../lib/icons/lucide/keyboard.svg
-  var keyboard_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M10 8h.01" />\n  <path d="M12 12h.01" />\n  <path d="M14 8h.01" />\n  <path d="M16 12h.01" />\n  <path d="M18 8h.01" />\n  <path d="M6 8h.01" />\n  <path d="M7 16h10" />\n  <path d="M8 12h.01" />\n  <rect width="20" height="16" x="2" y="4" rx="2" />\n</svg>\n';
-
-  // ../lib/icons/lucide/pin.svg
-  var pin_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M12 17v5" />\n  <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" />\n</svg>\n';
-
-  // ../lib/icons/lucide/play.svg
-  var play_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>';
-
-  // ../lib/icons/lucide/puzzle.svg
-  var puzzle_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />\n</svg>\n';
-
-  // ../lib/icons/lucide/rotate-cw.svg
-  var rotate_cw_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />\n  <path d="M21 3v5h-5" />\n</svg>\n';
-
-  // ../lib/icons/lucide/settings.svg
-  var settings_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />\n  <circle cx="12" cy="12" r="3" />\n</svg>\n';
-
-  // ../lib/icons/brands/linkedin.svg
-  var linkedin_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">\n  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>\n</svg>\n';
-
-  // ../lib/icons/brands/md2it.svg
+  // ../lib/our/icons/md2it.svg
   var md2it_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946.295 947.014" width="24" height="24" fill="#000000">\n  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.294998 230.507V461.014H57.295H114.295L114.321 317.264L114.347 173.514L119.729 182.014C131.242 200.194 138.673 212.076 147.245 226.014C152.15 233.989 159.72 246.139 164.067 253.014C168.414 259.889 177.529 274.514 184.323 285.514C197.987 307.639 211.847 329.833 216.794 337.514C218.566 340.264 223.961 348.814 228.784 356.514C241.803 377.3 252.729 393.981 253.295 393.936C253.57 393.914 256.783 389.31 260.436 383.705C264.088 378.1 274.925 361.589 284.519 347.014C294.112 332.439 306.24 313.989 311.47 306.014C316.7 298.039 328.999 279.364 338.8 264.514C348.602 249.664 364.02 226.264 373.064 212.514C382.107 198.764 391.371 184.711 393.651 181.285L397.795 175.056L398.048 318.035L398.302 461.014H455.298H512.295V230.514V0.0139999H443.011H373.726L371.839 3.264C370.8 5.052 365.368 13.939 359.766 23.014C348.231 41.703 333.55 65.582 322.265 84.014C307.818 107.609 298.029 123.527 291.826 133.514C277.383 156.769 269.295 170.081 269.295 170.6C269.295 170.904 268.002 173.035 266.422 175.334C264.842 177.633 261.224 183.452 258.383 188.264C255.542 193.077 252.898 197.008 252.506 197C252.115 196.992 250.503 194.629 248.925 191.75C245.975 186.369 222.868 148.272 218.758 142.014C217.494 140.089 209.141 126.589 200.195 112.014C166.909 57.782 163.441 52.143 153.136 35.514C147.343 26.164 140.152 14.464 137.158 9.514L131.713 0.514L66.004 0.257L0.294998 0V230.507ZM540.295 230.566V461.117L643.545 460.759C743.253 460.413 747.246 460.328 759.951 458.267C786.579 453.949 808.086 447.481 828.992 437.506C870.648 417.63 901.83 386.413 922.717 343.678C933.069 322.495 939.448 300.945 943.929 272.014C946.675 254.283 946.442 212.457 943.49 193.259C940.647 174.774 938.091 163.449 933.656 149.681C915.674 93.867 880.193 51.134 831.073 26.127C809.507 15.147 790.444 8.876 765.795 4.652C739.813 0.2 734.575 0.0139999 635.189 0.0139999H540.295V230.566ZM739.295 115.392C773.348 120.821 799.25 138.981 813.666 167.534C821.407 182.866 826.068 203.012 826.965 225.014C828.571 264.421 818.637 296.12 797.875 317.843C783.839 332.529 767.977 341.016 744.795 346.244C736.861 348.033 731.265 348.329 697.545 348.742L659.295 349.211V231.779C659.295 167.192 659.632 114.008 660.045 113.593C661.417 112.213 728.97 113.747 739.295 115.392ZM162.295 479.597C123.366 484.23 94.04 494.332 66.795 512.496C52.467 522.048 42.425 531.456 32.459 544.664C14.097 568.999 2.966 601.142 0.685997 636.416L0 647.014H57.602H115.204L115.848 643.264C119.075 624.476 127.082 609.374 139.033 599.535C151.737 589.075 168.073 583.811 187.87 583.798C205.641 583.786 220.085 588.054 232.359 596.946C241.176 603.332 248.391 615.313 250.446 626.979C253.356 643.5 244.67 663.689 228.705 677.514C225.529 680.264 210.3 692.06 194.863 703.727C179.425 715.394 164.095 727.003 160.795 729.525C157.495 732.046 143.041 742.976 128.676 753.812C99.224 776.028 70.868 797.623 45.795 816.933C36.445 824.134 22.399 834.861 14.581 840.77L0.365997 851.514L0.330997 899.264L0.294998 947.014H186.295H372.295V895.019V843.024L278.045 842.769L183.795 842.514L192.295 836.212C196.97 832.746 208.22 824.451 217.295 817.779C226.37 811.106 239.645 801.31 246.795 796.009C253.945 790.709 262.27 784.647 265.295 782.539C271.406 778.282 293.855 761.209 307.165 750.698C317.777 742.317 334.967 725.563 341.175 717.55C356.435 697.853 365.255 678.635 369.948 654.861C372.035 644.285 372.321 615.682 370.446 605.014C367.07 585.803 363.897 575.411 356.997 560.97C346.286 538.552 331.67 522.278 309.037 507.569C286.568 492.967 257.662 483.528 223.295 479.571C206.92 477.685 178.255 477.698 162.295 479.597ZM398.295 717.014V947.014H455.295H512.295V717.014V487.014H455.295H398.295V717.014ZM540.295 543.514V600.014H612.295H684.295V773.514V947.014H745.795H807.295V773.514V600.014H876.795H946.295V543.514V487.014H743.295H540.295V543.514Z"/>\n</svg>\n';
 
-  // ../lib/src/icons.ts
+  // ../lib/vendor/icons/lucide/arrow-up.svg
+  var arrow_up_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="m5 12 7-7 7 7" />\n  <path d="M12 19V5" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/copy.svg
+  var copy_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />\n  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/external-link.svg
+  var external_link_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link-icon lucide-external-link">\n  <path d="M15 3h6v6" />\n  <path d="M10 14 21 3" />\n  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/file-down.svg
+  var file_down_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />\n  <path d="M14 2v4a2 2 0 0 0 2 2h4" />\n  <path d="M12 18v-6" />\n  <path d="m9 15 3 3 3-3" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/files.svg
+  var files_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15 2h-4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />\n  <path d="M16.706 2.706A2.4 2.4 0 0 0 15 2v5a1 1 0 0 0 1 1h5a2.4 2.4 0 0 0-.706-1.706z" />\n  <path d="M5 7a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 1.732-1" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/image-down.svg
+  var image_down_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21" />\n  <path d="m14 19 3 3v-5.5" />\n  <path d="m17 22 3-3" />\n  <circle cx="9" cy="9" r="2" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/images.svg
+  var images_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M18 22H4a2 2 0 0 1-2-2V6" />\n  <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />\n  <circle cx="12" cy="8" r="2" />\n  <rect width="16" height="16" x="6" y="2" rx="2" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/heart.svg
+  var heart_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/history.svg
+  var history_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />\n  <path d="M3 3v5h5" />\n  <path d="M12 7v5l4 2" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/cog.svg
+  var cog_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M11 10.27 7 3.34" />\n  <path d="m11 13.73-4 6.93" />\n  <path d="M12 22v-2" />\n  <path d="M12 2v2" />\n  <path d="M14 12h8" />\n  <path d="m17 20.66-1-1.73" />\n  <path d="m17 3.34-1 1.73" />\n  <path d="M2 12h2" />\n  <path d="m20.66 17-1.73-1" />\n  <path d="m20.66 7-1.73 1" />\n  <path d="m3.34 17 1.73-1" />\n  <path d="m3.34 7 1.73 1" />\n  <circle cx="12" cy="12" r="2" />\n  <circle cx="12" cy="12" r="8" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/info.svg
+  var info_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <circle cx="12" cy="12" r="10" />\n  <path d="M12 16v-4" />\n  <path d="M12 8h.01" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/keyboard.svg
+  var keyboard_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M10 8h.01" />\n  <path d="M12 12h.01" />\n  <path d="M14 8h.01" />\n  <path d="M16 12h.01" />\n  <path d="M18 8h.01" />\n  <path d="M6 8h.01" />\n  <path d="M7 16h10" />\n  <path d="M8 12h.01" />\n  <rect width="20" height="16" x="2" y="4" rx="2" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/pin.svg
+  var pin_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M12 17v5" />\n  <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/play.svg
+  var play_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>';
+
+  // ../lib/vendor/icons/lucide/puzzle.svg
+  var puzzle_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/rotate-cw.svg
+  var rotate_cw_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />\n  <path d="M21 3v5h-5" />\n</svg>\n';
+
+  // ../lib/vendor/icons/lucide/settings.svg
+  var settings_default = '<svg\n  xmlns="http://www.w3.org/2000/svg"\n  width="24"\n  height="24"\n  viewBox="0 0 24 24"\n  fill="none"\n  stroke="currentColor"\n  stroke-width="2"\n  stroke-linecap="round"\n  stroke-linejoin="round"\n>\n  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />\n  <circle cx="12" cy="12" r="3" />\n</svg>\n';
+
+  // ../lib/vendor/icons/brand/linkedin.svg
+  var linkedin_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#000000">\n  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>\n</svg>\n';
+
+  // ../lib/our/icons.ts
   function stripComment(svg) {
     return svg.replace(/<!--[\s\S]*?-->\s*/g, "").trim();
   }
@@ -2182,7 +2182,7 @@ ins.adsbygoogle.dd-highlight,
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${TOOLBAR_VIEWBOX} ${TOOLBAR_VIEWBOX}" aria-hidden="true"><rect width="${TOOLBAR_VIEWBOX}" height="${TOOLBAR_VIEWBOX}" rx="${r}" fill="${bg}"/><g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(${pad} ${pad}) scale(${scale})">${trash2Inner}</g></svg>`;
   }
 
-  // ../lib/src/toast/stack.ts
+  // ../lib/our/toast/stack.ts
   var ToastStack = class {
     constructor(host, config) {
       this.host = host;
@@ -2265,7 +2265,7 @@ ins.adsbygoogle.dd-highlight,
     }
   };
 
-  // ../lib/src/toast/index.ts
+  // ../lib/our/toast/index.ts
   function createToastUiClasses(prefix) {
     return {
       toast: `${prefix}-toast`,
@@ -3836,7 +3836,7 @@ input:focus-visible {
     }
   };
 
-  // ../lib/src/page-operability/content-probe.ts
+  // ../lib/our/page-operability/content-probe.ts
   var PROBE_DOCUMENT_OPERABILITY = "PROBE_DOCUMENT_OPERABILITY";
   function isProbeDocumentOperabilityMessage(message) {
     if (typeof message !== "object" || message === null) return false;
@@ -3869,7 +3869,7 @@ input:focus-visible {
     logLabel: "Element Deleter"
   };
 
-  // ../lib/src/panel-header/header.ts
+  // ../lib/our/panel-header/header.ts
   function createPanelDivider() {
     const divider = document.createElement("div");
     divider.className = "dd-panel-divider";
@@ -3901,7 +3901,7 @@ input:focus-visible {
     return header;
   }
 
-  // ../lib/src/panel-shell/shadow-host.ts
+  // ../lib/our/panel-shell/shadow-host.ts
   function mountPanelShadowHost(options) {
     const host = document.createElement("div");
     host.id = options.rootId;
@@ -3927,11 +3927,11 @@ input:focus-visible {
   // src/brand.ts
   var PANEL_TITLE = "ELEMENT DELETER";
 
-  // ../lib/src/panel-footer/constants.ts
+  // ../lib/our/panel-footer/constants.ts
   var PANEL_FOOTER_LINKEDIN_URL = "https://www.linkedin.com/in/alex-terekhov/";
   var PANEL_FOOTER_MD2IT_URL = "https://md2it.com";
 
-  // ../lib/src/panel-footer/footer.ts
+  // ../lib/our/panel-footer/footer.ts
   var PANEL_FOOTER_LINKS = [
     { href: PANEL_FOOTER_LINKEDIN_URL, title: "LinkedIn", iconHtml: LINKEDIN },
     { href: PANEL_FOOTER_MD2IT_URL, title: "MD2IT", iconHtml: MD2IT }
@@ -6056,7 +6056,7 @@ input:focus-visible {
     });
   }
 
-  // ../lib/src/panel-popup/page-path.ts
+  // ../lib/our/panel-popup/page-path.ts
   function getPanelPageUrl(pageHtml) {
     return ext.runtime.getURL(pageHtml);
   }
@@ -6064,7 +6064,7 @@ input:focus-visible {
     return href.startsWith(getPanelPageUrl(pageHtml));
   }
 
-  // ../lib/src/panel-popup/resolve-tab.ts
+  // ../lib/our/panel-popup/resolve-tab.ts
   function resolveInitialPanelTab(sessionTab, queryTab, defaultTab, validTabs) {
     if (typeof sessionTab === "string" && validTabs.includes(sessionTab)) {
       return sessionTab;
@@ -6085,7 +6085,7 @@ input:focus-visible {
     return resolveInitialPanelTab(sessionTab, tabParam, config.defaultTab, config.validTabs);
   }
 
-  // ../lib/src/panel-tab/index.ts
+  // ../lib/our/panel-tab/index.ts
   var PANEL_TAB_MODE_PARAM = "mode";
   var PANEL_TAB_MODE_VALUE = "tab";
   function isPanelTabMode(modeParam = PANEL_TAB_MODE_PARAM, modeValue = PANEL_TAB_MODE_VALUE, search = location.search) {

@@ -1,7 +1,7 @@
 import { extensionMarkSvg, COG, INFO, UNDO_2 } from "../icons";
 import { type Strings } from "../i18n";
 import { TOAST_STACK_CONFIG, TOAST_UI } from "../ui-config";
-import { ToastStack, type ToastStackHost } from "../../../lib/src/toast";
+import { ToastStack, type ToastStackHost } from "../../../lib/our/toast";
 
 export type ToastHost = ToastStackHost & {
   getStrings: () => Strings;

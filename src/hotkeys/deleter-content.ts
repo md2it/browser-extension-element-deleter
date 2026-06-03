@@ -2,7 +2,7 @@ import {
   notifyPrefixHintBlockedOnBackground,
   queryPrefixHintCanShowInContent,
   registerPrefixStartHotkey,
-} from "../../../lib/src/hotkeys";
+} from "../../../lib/our/hotkeys";
 import {
   isEditableKeyboardTarget,
   isEscHotkeyEvent,

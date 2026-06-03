@@ -1,4 +1,4 @@
-import { applyPanelTabPageLayout as applyLibPanelTabPageLayout } from "../../../lib/src/panel-tab";
+import { applyPanelTabPageLayout as applyLibPanelTabPageLayout } from "../../../lib/our/panel-tab";
 import { PANEL_TAB_PAGE_CLASS } from "./constants";
 
 /** Document-level tab layout (centered card on gray page). */

@@ -1,7 +1,7 @@
 import {
   createToggleCommandSuppressTracker,
   registerPrefixBackgroundHotkeys,
-} from "../../../lib/src/hotkeys";
+} from "../../../lib/our/hotkeys";
 import { DELETER_ACTIVE_COLOR } from "./commands";
 import { getStartHotkeyEnabled } from "./settings";
 

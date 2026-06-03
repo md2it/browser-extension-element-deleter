@@ -10,7 +10,7 @@ import { runSmokePageOperabilityCore } from "../../lib/scripts/smoke-page-operab
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const extensionRoot = join(root, "extension");
-const libOperability = join(root, "../lib/src/page-operability");
+const libOperability = join(root, "../lib/our/page-operability");
 
 runSmokePageOperabilityCore();
 

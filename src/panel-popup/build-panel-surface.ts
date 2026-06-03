@@ -1,4 +1,4 @@
-import { localeToHtmlLang } from "../../../lib/src/i18n/locale-code";
+import { localeToHtmlLang } from "../../../lib/our/i18n/locale-code";
 import { isRtlLocale, t, type Locale } from "../i18n";
 import { PANEL_POPUP_HOST_ATTR } from "./constants";
 import { createPanelMenu, type PanelMenuHandle } from "./panel-menu";

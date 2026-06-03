@@ -25,7 +25,7 @@ assert.match(deleterRegistrySrc, /unregisterLibContentHotkey/);
 assert.match(deleterRegistrySrc, /elementDeleter/);
 
 const libRegistrySrc = readFileSync(
-  join(root, "../lib/src/hotkeys/registry.ts"),
+  join(root, "../lib/our/hotkeys/registry.ts"),
   "utf8",
 );
 assert.match(libRegistrySrc, /unregisterContentHotkey/);
@@ -47,7 +47,7 @@ assert.match(deleterBgSrc, /canShowPrefixBadgeOnTab/);
 assert.doesNotMatch(deleterBgSrc, /registerBackgroundHotkeys\([\s\S]*canShowPrefixHintOnTab/);
 
 const prefixBackgroundSrc = readFileSync(
-  join(root, "../lib/src/hotkeys/prefix-background.ts"),
+  join(root, "../lib/our/hotkeys/prefix-background.ts"),
   "utf8",
 );
 assert.match(prefixBackgroundSrc, /registerPrefixBackgroundHotkeys/);

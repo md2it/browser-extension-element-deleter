@@ -3,7 +3,7 @@ import {
   createHighlightUiClasses,
   ensurePageHighlightStyles as ensureLibPageHighlightStyles,
   removePageHighlightStyles as removeLibPageHighlightStyles,
-} from "../../../lib/src/highlight";
+} from "../../../lib/our/highlight";
 import { DELETER_HIGHLIGHT_PAGE_CSS } from "./deleter-page-styles";
 
 export const HIGHLIGHT_STYLE_ID = "element-deleter-highlight-style";

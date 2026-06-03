@@ -2,7 +2,7 @@ import { ext } from "./api";
 import {
   registerPrefixHintBadgeListeners,
   registerPrefixHintOperabilityListeners,
-} from "../../lib/src/hotkeys";
+} from "../../lib/our/hotkeys";
 import {
   bootstrapToolbarIcons,
   forEachActiveTabId,
@@ -19,7 +19,7 @@ import {
   shouldSuppressToolbarClickAfterHotkeyCommand,
 } from "./hotkeys/background";
 import { DELETER_ACTIVE_COLOR } from "./hotkeys/commands";
-import { createBadgeTextColorAnimation } from "../../lib/src/badge/text-color-animation";
+import { createBadgeTextColorAnimation } from "../../lib/our/badge/text-color-animation";
 import {
   ensureLocaleInStorage,
   getAllElementsFillEnabled,

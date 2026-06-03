@@ -1,12 +1,12 @@
 export {
   clearMessageCache,
   getMessage,
-} from "../../../lib/src/i18n/get-message";
+} from "../../../lib/our/i18n/get-message";
 export {
   detectLocale,
   getAcceptLanguageTags,
 } from "./detect";
-export { isRtlLocale } from "../../../lib/src/i18n/rtl";
+export { isRtlLocale } from "../../../lib/our/i18n/rtl";
 export { t } from "./strings";
 export {
   isLocale,

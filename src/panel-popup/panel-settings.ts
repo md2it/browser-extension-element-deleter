@@ -1,4 +1,4 @@
-import { localeToHtmlLang } from "../../../lib/src/i18n/locale-code";
+import { localeToHtmlLang } from "../../../lib/our/i18n/locale-code";
 import {
   CHEVRON_LEFT,
   CHEVRON_RIGHT,

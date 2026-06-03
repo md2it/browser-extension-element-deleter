@@ -1,7 +1,7 @@
 import {
   findIframeAtPoint,
   isPointInElement,
-} from "../../lib/src/element-under-cursor";
+} from "../../lib/our/element-under-cursor";
 import {
   formatToastDescriptor,
   resolveElementDescriptor,

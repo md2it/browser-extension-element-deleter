@@ -2,7 +2,7 @@ import {
   getPanelPageUrl,
   isPanelPage,
   resolvePanelPageInitialTab as resolveLibPanelPageInitialTab,
-} from "../../../lib/src/panel-popup";
+} from "../../../lib/our/panel-popup";
 import { isPanelTabMode } from "../panel-tab";
 import {
   PANEL_PAGE_CONFIG,
