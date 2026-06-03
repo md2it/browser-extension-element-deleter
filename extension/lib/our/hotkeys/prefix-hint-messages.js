@@ -1,0 +1,12 @@
+"use strict";
+// ../lib/our/hotkeys/prefix-hint-messages.ts
+var PREFIX_HINT_SHOW = "PREFIX_HINT_SHOW";
+var PREFIX_HINT_HIDE = "PREFIX_HINT_HIDE";
+var PREFIX_HINT_BLOCKED = "PREFIX_HINT_BLOCKED";
+var PREFIX_HINT_CAN_SHOW = "PREFIX_HINT_CAN_SHOW";
+function isPrefixHintShowMessage(msg) {
+  return msg.type === PREFIX_HINT_SHOW;
+}
+function isPrefixHintHideMessage(msg) {
+  return msg.type === PREFIX_HINT_HIDE;
+}

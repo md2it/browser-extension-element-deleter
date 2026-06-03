@@ -1,0 +1,55 @@
+"use strict";
+// src/hotkeys/deleter-content.ts
+var HOTKEY_NAMESPACE2 = "elementDeleter";
+var contentHotkeysMounted = false;
+function registerDeleterStartHotkey(requestToggle2) {
+  registerPrefixStartHotkey({
+    namespace: HOTKEY_NAMESPACE2,
+    hintLetter: PREFIX_ACTION_KEY,
+    isEnabled: getStartHotkeyEnabled,
+    canShowPrefixHint: queryPrefixHintCanShowInContent,
+    onPrefixHintBlocked: notifyPrefixHintBlockedOnBackground,
+    onAction: requestToggle2,
+  });
+}
+function mountDeleterContentHotkeys(host, slots = ["esc", "undo"]) {
+  if (typeof window !== "undefined" && window.top !== window) return;
+  if (contentHotkeysMounted) return;
+  contentHotkeysMounted = true;
+  if (slots.includes("undo")) {
+    registerContentHotkey2("undo", (e) => {
+      if (!isUndoHotkeyEvent(e)) return;
+      if (isEditableKeyboardTarget(e.target)) return;
+      if (!host.isActive()) return;
+      if (host.hasRestorableUndo()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      void (async () => {
+        if (!(await getUndoHotkeyEnabled())) return;
+        const ui = await host.ensureUi();
+        if (!ui.canUndo()) return;
+        await ui.undoLast();
+      })();
+    });
+  }
+  if (slots.includes("esc")) {
+    registerContentHotkey2("esc", (e) => {
+      if (!isEscHotkeyEvent(e)) return;
+      if (!host.isActive()) return;
+      void (async () => {
+        if (!(await getEscHotkeyEnabled())) return;
+        e.preventDefault();
+        e.stopPropagation();
+        host.deactivate();
+      })();
+    });
+  }
+}
+function unmountDeleterContentHotkeys(slots = ["esc", "undo"]) {
+  if (!contentHotkeysMounted) return;
+  contentHotkeysMounted = false;
+  for (const slot of slots) {
+    unregisterContentHotkey2(slot);
+  }
+}

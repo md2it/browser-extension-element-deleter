@@ -1,0 +1,14 @@
+"use strict";
+// src/messages.ts
+var STORAGE_KEY = "notificationSeconds";
+var LOCALE_STORAGE_KEY = "locale";
+var LOCALE_USER_SELECTED_KEY = "localeUserSelected";
+var START_HOTKEY_ENABLED_KEY = "startHotkeyEnabled";
+var ESC_HOTKEY_ENABLED_KEY = "escHotkeyEnabled";
+var UNDO_HOTKEY_ENABLED_KEY = "undoHotkeyEnabled";
+var SELECTION_CAPTION_STYLE_KEY = "selectionCaptionStyle";
+var ALL_ELEMENTS_OUTLINE_ENABLED_KEY = "allElementsOutlineEnabled";
+var ALL_ELEMENTS_FILL_ENABLED_KEY = "allElementsFillEnabled";
+var DEFAULT_NOTIFICATION_SECONDS = 4;
+var LOCALE_DETECT_VERSION_KEY = "localeDetectVersion";
+var LOCALE_DETECT_VERSION = 5;

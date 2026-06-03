@@ -3,7 +3,9 @@ const ext = typeof browser !== "undefined" ? browser : chrome;
 const BLOCKED_NOTICE_DISMISSED = "BLOCKED_NOTICE_DISMISSED";
 
 function noticeSessionKey() {
-  return document.documentElement.dataset.noticeSessionKey || "restrictedNotice";
+  return (
+    document.documentElement.dataset.noticeSessionKey || "restrictedNotice"
+  );
 }
 
 function noticeMinDismissMs() {
