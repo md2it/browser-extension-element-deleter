@@ -156,9 +156,16 @@ function buildAboutPanelBody(body, strings) {
   for (const item of buildAboutListItems(strings)) {
     const li = document.createElement("li");
     li.className = "dd-about-item";
-    const label = document.createElement("span");
+    const label = document.createElement(item.href ? "a" : "span");
     label.className = "dd-about-text";
     label.textContent = item.text;
+    if (item.href) {
+      label.href = item.href;
+      label.target = "_blank";
+      label.rel = "noopener noreferrer";
+      label.style.color = "inherit";
+      label.addEventListener("click", (e) => e.stopPropagation());
+    }
     li.append(createAboutIcon(item.iconHtml), label);
     list.appendChild(li);
   }

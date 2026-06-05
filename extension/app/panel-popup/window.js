@@ -213,20 +213,27 @@ var PanelWindowSystem = class {
     list.className = "dd-about-list";
     list.setAttribute("aria-label", copy.tabAbout);
     for (const item of items) {
-      list.appendChild(this.createOverlayAboutItem(item.iconHtml, item.text));
+      list.appendChild(this.createOverlayAboutItem(item.iconHtml, item.text, item.href));
     }
     panel.append(list);
   }
-  createOverlayAboutItem(iconHtml, text) {
+  createOverlayAboutItem(iconHtml, text, href) {
     const li = document.createElement("li");
     li.className = "dd-about-item dd-about-item--bool";
     const mark = document.createElement("span");
     mark.className = "dd-about-bool";
     mark.setAttribute("aria-hidden", "true");
     mark.innerHTML = iconHtml;
-    const label = document.createElement("span");
+    const label = document.createElement(href ? "a" : "span");
     label.className = "dd-about-text";
     label.textContent = text;
+    if (href) {
+      label.href = href;
+      label.target = "_blank";
+      label.rel = "noopener noreferrer";
+      label.style.color = "inherit";
+      label.addEventListener("click", (e) => e.stopPropagation());
+    }
     li.append(mark, label);
     return li;
   }

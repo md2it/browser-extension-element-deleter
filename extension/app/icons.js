@@ -70,6 +70,7 @@ var ABOUT_BULLET_ICONS = [
   ROTATE_CW,
   lucideUiIcon2(shield_check_default),
   lucideUiIcon2(shield_check_default),
+  lucideUiIcon2(git_fork_default),
 ];
 function toolbarWelcomeIconSvg(bg = INACTIVE_BG, size = 16) {
   const r = TOOLBAR_VIEWBOX * TOOLBAR_RADIUS_RATIO;

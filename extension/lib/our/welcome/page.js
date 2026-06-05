@@ -61,9 +61,15 @@ function createAboutItem(item) {
       : "about-icon";
   mark.setAttribute("aria-hidden", "true");
   mark.innerHTML = item.iconHtml;
-  const label = document.createElement("span");
+  const label = document.createElement(item.href ? "a" : "span");
   label.className = "about-text";
   label.textContent = item.text;
+  if (item.href) {
+    label.href = item.href;
+    label.target = "_blank";
+    label.rel = "noopener noreferrer";
+    label.style.color = "inherit";
+  }
   li.append(mark, label);
   return li;
 }

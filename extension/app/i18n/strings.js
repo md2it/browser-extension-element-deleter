@@ -18,7 +18,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "But it is safer and avoids conflicts with other apps.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "Notifications ",
     notificationPeriodSuffix: " sec.",
     notificationPeriodHint: "Set 0 to turn off notifications",
@@ -55,6 +55,7 @@ var MESSAGES = {
       "Reloading the page restores everything,",
       "Doesn't use the network,",
       "Doesn't collect data.",
+      "Code on GitHub",
     ],
   },
   es: {
@@ -74,7 +75,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "Pero es más seguro y evita conflictos con otras apps.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "Avisos ",
     notificationPeriodSuffix: " seg.",
     notificationPeriodHint: "Ponga 0 para desactivar las notificaciones",
@@ -111,6 +112,7 @@ var MESSAGES = {
       "Al recargar la página se restaura todo,",
       "No usa la red,",
       "No recopila datos.",
+      "Código en GitHub",
     ],
   },
   fr: {
@@ -130,7 +132,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "Mais il est plus sûr et évite les conflits avec d'autres apps.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "Notifications ",
     notificationPeriodSuffix: " s",
     notificationPeriodHint: "Mettez 0 pour désactiver les notifications",
@@ -167,6 +169,7 @@ var MESSAGES = {
       "Le rechargement de la page restaure tout,",
       "N'utilise pas le réseau,",
       "Ne collecte pas de données.",
+      "Code sur GitHub",
     ],
   },
   de: {
@@ -186,7 +189,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "Es ist aber sicherer und vermeidet Konflikte mit anderen Apps.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "Hinweise ",
     notificationPeriodSuffix: " Sek.",
     notificationPeriodHint: "0 setzen, um Benachrichtigungen auszuschalten",
@@ -223,6 +226,7 @@ var MESSAGES = {
       "Beim Neuladen der Seite wird alles wiederhergestellt,",
       "Nutzt kein Netzwerk,",
       "Sammelt keine Daten.",
+      "Code auf GitHub",
     ],
   },
   ru: {
@@ -242,7 +246,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "Но оно безопаснее и реже конфликтует с другими приложениями.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "Уведомления ",
     notificationPeriodSuffix: " сек",
     notificationPeriodHint: "Установите 0 для выключения уведомлений",
@@ -279,6 +283,7 @@ var MESSAGES = {
       "Перезагрузка страницы восстановит всё,",
       "Не использует сеть,",
       "Не собирает данные.",
+      "Код на GitHub",
     ],
   },
   zh_CN: {
@@ -297,7 +302,7 @@ var MESSAGES = {
     shortcutsSafetyLine1: "三步快捷键并不直观。",
     shortcutsSafetyLine2: "但它更安全，且较少与其他应用冲突。",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "通知 ",
     notificationPeriodSuffix: " 秒",
     notificationPeriodHint: "设为 0 可关闭通知",
@@ -334,6 +339,7 @@ var MESSAGES = {
       "重新加载页面可恢复一切，",
       "不使用网络，",
       "不收集数据。",
+      "GitHub 上的代码",
     ],
   },
   ar: {
@@ -353,7 +359,7 @@ var MESSAGES = {
     shortcutsSafetyLine2:
       "لكنه أكثر أمانًا ويتجنب التعارض مع التطبيقات الأخرى.",
     aboutProductName: "Element-Deleter",
-    aboutCreditAuthor: "Alex T",
+    aboutCreditAuthor: "md2it",
     notificationPeriodPrefix: "إشعار ",
     notificationPeriodSuffix: " ث",
     notificationPeriodHint: "اضبط على 0 لإيقاف الإشعارات",
@@ -390,6 +396,7 @@ var MESSAGES = {
       "إعادة تحميل الصفحة تستعيد كل شيء،",
       "لا تستخدم الشبكة،",
       "لا تجمع البيانات.",
+      "الكود على GitHub",
     ],
   },
 };
