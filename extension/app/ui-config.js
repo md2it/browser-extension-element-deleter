@@ -15,6 +15,3 @@ var TOAST_STACK_CONFIG = {
   hostAttr: UI_HOST_ATTR,
   classes: toastStructureClasses,
 };
-var PANEL_FOOTER_CONFIG = {
-  footerClassName: "dd-panel-footer",
-};

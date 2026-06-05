@@ -68,7 +68,6 @@ var PanelWindowSystem = class {
     const infoPanel = document.createElement("div");
     infoPanel.className = "dd-tab-panel is-about";
     body.append(settingsPanel, infoPanel);
-    const footer = createPanelFooter(PANEL_FOOTER_CONFIG);
     const setActiveTab = (active) => {
       if (active === "shortcuts") return;
       this.activeTab = active;
@@ -112,8 +111,6 @@ var PanelWindowSystem = class {
       tabsBar,
       createPanelDivider(),
       body,
-      createPanelDivider(),
-      footer,
     );
     panelRoot.setAttribute(PANEL_POPUP_HOST_ATTR, "true");
     this.panelRoot = panelRoot;

@@ -6,9 +6,6 @@ function stripComment(svg) {
 function lucideUiIcon(raw) {
   return stripComment(raw);
 }
-function brandIcon(raw) {
-  return stripComment(raw).replace(/fill="#000000"/g, 'fill="currentColor"');
-}
 var ARROW_UP = lucideUiIcon(arrow_up_default);
 var CIRCLE_POWER = lucideUiIcon(circle_power_default);
 var COG = lucideUiIcon(cog_default);
@@ -28,4 +25,3 @@ var PIN = lucideUiIcon(pin_default);
 var PLAY = lucideUiIcon(play_default);
 var PUZZLE = lucideUiIcon(puzzle_default);
 var ROTATE_CW = lucideUiIcon(rotate_cw_default);
-var LINKEDIN = brandIcon(linkedin_default);

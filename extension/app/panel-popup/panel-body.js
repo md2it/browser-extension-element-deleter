@@ -99,7 +99,7 @@ function createAboutCredit(strings) {
   const copyrightLine = document.createElement("p");
   copyrightLine.className = "dd-about-credit-line";
   const link = document.createElement("a");
-  link.href = PANEL_FOOTER_LINKEDIN_URL;
+  link.href = ABOUT_AUTHOR_URL;
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   link.textContent = strings.aboutCreditAuthor;
