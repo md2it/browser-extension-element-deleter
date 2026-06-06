@@ -1,59 +1,71 @@
-# ПОЛЬЗОВАТЕЛЬСКИЙ ПУТЬ
+# USER PATHS
 
 U = User
 E = Extension
 
-## Основной сценарий
-1. U выполнил одно из:
-   - ИЛИ нажал на иконку расширения левой кнопкой мыши
-   - ИЛИ нажал хоткей `Ctrl+Shift+X`→`D` (для Mac `Cmd+Shift+X`→`D`)
-2. E запустилось
-3. U навёл на элемент страницы
-4. E подсветило соответствующий DOM элемент
-5. U нажал на элемент
-6. E выполнило все пункты:
-   - удалило элемент со всеми дочерними
-   - появилось уведомление об удалении
-   - сменило подсветку на другой элемент, если таковой есть под курсором
-7. U выполнил одно из:
-   - ИЛИ повторно нажал на иконку расширения левой кнопкой мыши
-   - ИЛИ нажал хоткей `Ctrl+Shift+X`→`D` (для Mac `Cmd+Shift+X`→`D`)
-   - ИЛИ нажал хоткей `Esc`
-8. E завершило работу
+### Main flow
 
-## Многократное удаление
-- Шаги 3-6 могут повторяться неограниченное число раз до выключения расширения
+1. U performs one of the following:
+   - Clicks the extension icon with the left mouse button
+   - Presses `Ctrl+Shift+X`→`D` (on Mac, `Cmd+Shift+X`→`D`)
+2. E starts
+3. U hovers over a page element
+4. E highlights the corresponding DOM element
+5. U clicks the element
+6. E performs all of the following:
+   - Removes the element and all its children
+   - Shows a deletion notification
+   - Highlights another element, if one exists under the cursor
+7. U performs one of the following:
+   - Clicks the extension icon again with the left mouse button
+   - Presses `Ctrl+Shift+X`→`D` (on Mac, `Cmd+Shift+X`→`D`)
+   - Presses `Esc`
+8. E stops
 
-## Восстановление
-7a. U нажал кнопку восстановления в уведомлении
-8a. E восстановило связанный элемент
+### Multiple deletions
 
-## Альтернативное восстановление
-7b. U нажал хоткей `Cmd+Z` / `Ctrl+Z` (в зависимости от ОС)
-8b. E восстановило связанный элемент
+- Steps 3-6 can be repeated any number of times before the extension is stopped
 
-## Многократное восстановление
-- Шаги 7b-8b могут повторяться неограниченное число раз до выключения расширения
+### Restore
 
-## Удаление элемента правой кнопкой мыши
-> [!NOTE] Нумерация не связана со сценариями выше
-0. E не запущено
-1. U нажал правой клавишей мыши на элемент
-2. U выбрал расширение из контекстного меню
-3. E удалило элемент
+7a. U clicks the restore button in the notification
+8a. E restores the related element
 
-## Приветственное окно
-> [!NOTE] Нумерация не связана со сценариями выше
-1. U установил расширение
-2. E предугадало язык пользователя
-3. E открыло приветственное окно с:
-   - Возможностью сменить язык
-   - Рекомендацией и пояснением как закрепить расширение
-   - Информацией о возможностях
-4. Пользователь закрепил расширение в панели браузера
+### Alternative restore
 
-## Иные возможности
-- Открытие настроек и раздела "о расширении"
-   - По кнопке в уведомлении
-   - Из контекстного меню расширения
-- В случае попытки использовать расширение на страницах, где это недоступно, расширение не работает, а пользователь явно уведомляется
+7b. U presses `Cmd+Z` / `Ctrl+Z` (depending on the operating system)
+8b. E restores the related element
+
+### Multiple restores
+
+- Steps 7b-8b can be repeated any number of times before the extension is stopped
+
+### Delete an element with the right mouse button
+
+> [!NOTE]
+> Numbering is not related to the flows above.
+
+0. E is not running
+1. U right-clicks an element
+2. U selects the extension from the context menu
+3. E removes the element
+
+### Welcome window
+
+> [!NOTE]
+> Numbering is not related to the flows above.
+
+1. U installs the extension
+2. E detects the user's language
+3. E opens a welcome window with:
+   - An option to change the language
+   - A recommendation and instructions for pinning the extension
+   - Information about its capabilities
+4. U pins the extension to the browser toolbar
+
+### Other capabilities
+
+- Open settings and the "About" section:
+   - From a button in the notification
+   - From the extension context menu
+- If U attempts to use the extension on a page where it is unavailable, E does not operate and clearly notifies U
