@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-popup/open-action-popup.ts
 function openPanelInActionPopup(
   config,
   panelTab,

@@ -1,5 +1,4 @@
 "use strict";
-// src/welcome/page.ts
 void bootstrapWelcomePage({
   sessionDataKey: WELCOME_SESSION_DATA_KEY,
   localeStorageKey: "locale",

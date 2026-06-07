@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-shell/shadow-host.ts
 function mountPanelShadowHost(options) {
   const host = document.createElement("div");
   host.id = options.rootId;

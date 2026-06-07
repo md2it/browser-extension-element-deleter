@@ -1,5 +1,4 @@
 "use strict";
-// src/icon-paths.ts
 var INACTIVE = {
   16: "icons/icon-16.png",
   32: "icons/icon-32.png",

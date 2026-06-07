@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/extension-icon-state/listeners.ts
 function registerExtensionIconStateListeners(sync) {
   ext.tabs.onRemoved.addListener((tabId) => {
     deleteTabActiveState(tabId);

@@ -1,5 +1,4 @@
 "use strict";
-// src/hotkeys/deleter-content.ts
 var HOTKEY_NAMESPACE2 = "elementDeleter";
 var contentHotkeysMounted = false;
 function registerDeleterStartHotkey(requestToggle2) {

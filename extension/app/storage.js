@@ -1,5 +1,4 @@
 "use strict";
-// src/storage.ts
 async function getNotificationSeconds() {
   const data = await ext.storage.local.get(STORAGE_KEY);
   const raw = data[STORAGE_KEY];

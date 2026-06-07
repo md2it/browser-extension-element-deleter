@@ -1,5 +1,4 @@
 "use strict";
-// src/hotkeys/background.ts
 var toggleCommandSuppress = createToggleCommandSuppressTracker();
 function shouldSuppressToolbarClickAfterHotkeyCommand(now = Date.now()) {
   return toggleCommandSuppress.shouldSuppressToolbarClick(now);

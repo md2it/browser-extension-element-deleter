@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/window.ts
 var PANEL_BODY_MIN_VAR = "--dd-panel-body-min";
 var panelBodyMinPx = null;
 var PanelWindowSystem = class {

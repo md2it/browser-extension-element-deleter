@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/all-elements-outline/css.ts
 var DEFAULT_WIDTH_PX = 1;
 var DEFAULT_OFFSET_PX = -1;
 function assertRgba(value, label) {

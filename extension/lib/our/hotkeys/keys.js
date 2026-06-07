@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/keys.ts
 var ESCAPE_KEY_LABEL = "Esc";
 var PREFIX_ACTION_TIMEOUT_MS = 3e3;
 var PREFIX_DOUBLE_ACTION_WINDOW_MS = 400;

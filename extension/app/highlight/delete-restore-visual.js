@@ -1,5 +1,4 @@
 "use strict";
-// src/highlight/delete-restore-visual.ts
 var DELETE_RESTORE_STYLE_ID = "element-deleter-delete-restore-style";
 var DELETE_RESTORE_PAGE_CSS = `
 .dd-delete-anim,

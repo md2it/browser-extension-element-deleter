@@ -1,5 +1,4 @@
 "use strict";
-// src/i18n/strings.ts
 var MESSAGES = {
   en: {
     tabSettings: "SETTINGS",

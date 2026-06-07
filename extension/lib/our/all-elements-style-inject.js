@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/all-elements-style-inject.ts
 function setAllElementsStyleAtEnd(styleId, css) {
   const existing = document.getElementById(styleId);
   if (existing instanceof HTMLStyleElement) {

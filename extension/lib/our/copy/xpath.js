@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/copy/xpath.ts
 function xpathSegment(element) {
   const tag = element.tagName.toLowerCase();
   const parent = element.parentElement;

@@ -1,5 +1,4 @@
 "use strict";
-// src/ui.ts
 var ROOT_ID = "element-deleter-root";
 var HOST_ATTR = "data-element-deleter-ui";
 var DeleterUI = class {

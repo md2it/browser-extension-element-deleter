@@ -1,5 +1,4 @@
 "use strict";
-// src/welcome/constants.ts
 var WELCOME_PAGE = "welcome.html";
 var WELCOME_SESSION_DATA_KEY = "welcomeData";
 var WELCOME_TAB_CONFIG = {

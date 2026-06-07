@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/constants.ts
 var PANEL_POPUP_PAGE = "panel-popup-page.html";
 var PANEL_POPUP_ROOT_ID = "element-deleter-root";
 var PANEL_POPUP_HOST_ATTR = "data-element-deleter-ui";

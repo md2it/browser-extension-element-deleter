@@ -1,5 +1,4 @@
 "use strict";
-// src/messages.ts
 var STORAGE_KEY = "notificationSeconds";
 var LOCALE_STORAGE_KEY = "locale";
 var LOCALE_USER_SELECTED_KEY = "localeUserSelected";

@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-hint-content.ts
 function createContentPrefixHintSink() {
   return {
     show(letter) {

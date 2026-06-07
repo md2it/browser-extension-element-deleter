@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/registry.ts
 function handlerPropertyKey(namespace, slot) {
   return `__${namespace}HotkeyHandler_${slot}`;
 }

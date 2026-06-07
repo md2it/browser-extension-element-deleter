@@ -1,5 +1,4 @@
 "use strict";
-// src/i18n/types.ts
 var LOCALES = ["en", "es", "fr", "de", "ru", "zh_CN", "ar"];
 var LOCALE_BUTTON_LABELS = {
   en: "EN",

@@ -1,5 +1,4 @@
 "use strict";
-// src/welcome/data.ts
 function buildWelcomeLocalePayload(locale, extensionName) {
   const strings = t(locale);
   return {

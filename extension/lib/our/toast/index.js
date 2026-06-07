@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/toast/index.ts
 function createToastUiClasses(prefix) {
   return {
     toast: `${prefix}-toast`,

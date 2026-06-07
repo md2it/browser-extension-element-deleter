@@ -1,5 +1,4 @@
 "use strict";
-// src/hotkeys/keys.ts
 var ESC_HOTKEY_LABEL = ESCAPE_KEY_LABEL;
 var SHORTCUTS_PREFIX_CHORD_WIN_DISPLAY = "Ctrl+Shift+X";
 var SHORTCUTS_PREFIX_CHORD_MAC_DISPLAY = "Cmd+Shift+X";

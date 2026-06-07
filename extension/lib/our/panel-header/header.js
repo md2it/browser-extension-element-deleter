@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-header/header.ts
 function createPanelDivider() {
   const divider = document.createElement("div");
   divider.className = "dd-panel-divider";

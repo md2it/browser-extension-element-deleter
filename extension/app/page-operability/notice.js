@@ -1,5 +1,4 @@
 "use strict";
-// src/page-operability/notice.ts
 var restrictedNoticeCache = null;
 async function restrictedNoticeDismissMs() {
   const seconds = await getNotificationSeconds();

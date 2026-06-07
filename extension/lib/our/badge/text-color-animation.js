@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/badge/text-color-animation.ts
 function toHex(value) {
   return value.toString(16).padStart(2, "0");
 }

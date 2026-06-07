@@ -1,5 +1,4 @@
 "use strict";
-// src/about.ts
 var ABOUT_AUTHOR_URL = "https://www.md2it.com/";
 function buildAboutListItems(copy) {
   return copy.aboutBullets.map((text, index) => ({

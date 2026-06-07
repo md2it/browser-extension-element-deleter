@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-background.ts
 var EXECUTE_ACTION_COMMAND = "_execute_action";
 function registerPrefixBackgroundHotkeys(config) {
   registerPrefixHintBadgeListeners({

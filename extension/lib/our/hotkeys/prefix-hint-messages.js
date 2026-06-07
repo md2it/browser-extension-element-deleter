@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-hint-messages.ts
 var PREFIX_HINT_SHOW = "PREFIX_HINT_SHOW";
 var PREFIX_HINT_HIDE = "PREFIX_HINT_HIDE";
 var PREFIX_HINT_BLOCKED = "PREFIX_HINT_BLOCKED";

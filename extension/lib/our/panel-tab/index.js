@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-tab/index.ts
 var PANEL_TAB_MODE_PARAM = "mode";
 var PANEL_TAB_MODE_VALUE = "tab";
 function isPanelTabMode(

@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/highlight/selector.ts
 var HighlightSystem = class {
   highlighted = null;
   visual;

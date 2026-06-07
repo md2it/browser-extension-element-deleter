@@ -1,5 +1,4 @@
 "use strict";
-// src/background.ts
 var TOGGLE_DEBOUNCE_MS = 80;
 var lastToggleTabId;
 var lastToggleAt = 0;

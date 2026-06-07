@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/welcome/page.ts
 var WELCOME_BODY_MIN_VAR = "--welcome-body-min";
 var WELCOME_PROBE_WIDTH = "360px";
 var PANEL_HEADER_STYLE_ID = "dd-panel-header-styles";

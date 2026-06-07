@@ -1,5 +1,4 @@
 "use strict";
-// src/toast/deleter.ts
 var ToastSystem = class {
   constructor(host) {
     this.host = host;

@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/page-operability/show-notice.ts
 async function showBlockedNotice(tabId, config, payload, windowId) {
   const { popupHtml, sessionKey, logLabel } = config;
   void ext.storage.session.set({

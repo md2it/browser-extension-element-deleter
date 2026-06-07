@@ -1,5 +1,4 @@
 "use strict";
-// src/ui-config.ts
 var UI_HOST_ATTR = "data-element-deleter-ui";
 var UI_CLASS_PREFIX = "dd";
 var TOAST_STACK_ID = "dd-toast-stack";

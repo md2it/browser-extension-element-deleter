@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/welcome/background.ts
 var welcomePinWatchers = /* @__PURE__ */ new Map();
 function stopWelcomePinWatcher(tabId) {
   welcomePinWatchers.get(tabId)?.();

@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/mount-panel-surface.ts
 async function mountPanelSurface(initialTab, { hostStyle, surface }) {
   let locale = "en";
   let notificationSeconds = 4;

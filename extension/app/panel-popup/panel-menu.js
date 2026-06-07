@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/panel-menu.ts
 var MENU_ITEMS = [
   { tab: "settings", iconSvg: SETTINGS, label: (s) => s.tabSettings },
   { tab: "shortcuts", iconSvg: KEYBOARD, label: (s) => s.tabShortcuts },

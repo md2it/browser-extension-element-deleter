@@ -1,5 +1,4 @@
 "use strict";
-// src/i18n/detect.ts
 function mapLanguageTag(tag) {
   const chinese = mapChineseUiLocale(tag);
   if (chinese) return chinese;

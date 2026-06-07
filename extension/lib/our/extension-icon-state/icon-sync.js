@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/extension-icon-state/icon-sync.ts
 function createIconSync(config) {
   const { paths, syncedTabIdsStorageKey, logLabel, getImageSets } = config;
   let imageSetsFailed = false;

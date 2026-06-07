@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-content.ts
 function registerPrefixStartHotkey(options) {
   if (typeof window === "undefined" || window.top !== window) return void 0;
   const controller = createPrefixModeController({

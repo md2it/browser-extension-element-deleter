@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/extension-icon-state/tab-active-state.ts
 var tabActive = /* @__PURE__ */ new Map();
 function getTabActiveState(tabId) {
   return tabActive.get(tabId) ?? false;

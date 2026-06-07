@@ -1,5 +1,4 @@
 "use strict";
-// src/icons.ts
 function stripComment2(svg) {
   return svg.replace(/<!--[\s\S]*?-->\s*/g, "").trim();
 }

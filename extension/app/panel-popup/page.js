@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/page.ts
 function isPanelPopupPage(href) {
   return isPanelPage(href, PANEL_POPUP_PAGE);
 }

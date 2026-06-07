@@ -1,5 +1,4 @@
 "use strict";
-// src/content.ts
 function getState() {
   if (!window.__elementDeleterState) {
     window.__elementDeleterState = {

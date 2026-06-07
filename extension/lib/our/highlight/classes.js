@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/highlight/classes.ts
 function createHighlightUiClasses(prefix) {
   return {
     highlightTarget: `${prefix}-highlight`,

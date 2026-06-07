@@ -1,5 +1,4 @@
 "use strict";
-// src/selection-caption.ts
 function formatTagIdClassCaption(el) {
   const tag = el.tagName.toLowerCase();
   const id = el.id.trim();

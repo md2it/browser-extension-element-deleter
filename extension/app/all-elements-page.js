@@ -1,5 +1,4 @@
 "use strict";
-// src/all-elements-page.ts
 var ALL_ELEMENTS_OUTLINE_STYLE_ID = "element-deleter-all-elements-outline";
 var ALL_ELEMENTS_FILL_STYLE_ID = "element-deleter-all-elements-fill";
 var OUTLINE_RGBA = "rgba(185, 28, 28, 0.48)";

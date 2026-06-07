@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-popup/resolve-tab.ts
 function resolveInitialPanelTab(sessionTab, queryTab, defaultTab, validTabs) {
   if (typeof sessionTab === "string" && validTabs.includes(sessionTab)) {
     return sessionTab;

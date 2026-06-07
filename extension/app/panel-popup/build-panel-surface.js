@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/build-panel-surface.ts
 function createPanelSurface(locale, surface) {
   const panelRoot = document.createElement("div");
   panelRoot.className = "dd-panel";

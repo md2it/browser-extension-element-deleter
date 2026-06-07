@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-mode.ts
 function createPrefixModeController(options) {
   let armed = false;
   let timeoutId;

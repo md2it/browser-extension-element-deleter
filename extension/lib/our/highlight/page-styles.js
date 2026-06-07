@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/highlight/page-styles.ts
 function buildGenericHighlightPageCss(classes) {
   return `
 .${classes.highlightTarget} {

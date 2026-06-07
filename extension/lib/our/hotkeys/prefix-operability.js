@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-operability.ts
 async function queryPrefixHintCanShowInContent() {
   return probeDocumentOperability();
 }

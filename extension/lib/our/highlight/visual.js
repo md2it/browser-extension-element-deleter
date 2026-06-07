@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/highlight/visual.ts
 var HIGHLIGHT_FRAME_INSET = 2;
 var ElementHighlightVisual = class {
   constructor(host, pageStyles) {

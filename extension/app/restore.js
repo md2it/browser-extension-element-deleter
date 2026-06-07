@@ -1,5 +1,4 @@
 "use strict";
-// src/restore.ts
 function buildDocumentChildPath(element) {
   const path = [];
   let node = element;

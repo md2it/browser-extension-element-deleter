@@ -1,5 +1,4 @@
 "use strict";
-// src/settings/selection-caption-style.ts
 var DEFAULT_SELECTION_CAPTION_STYLE = "click-to-delete";
 var SELECTION_CAPTION_STYLES = [
   "none",

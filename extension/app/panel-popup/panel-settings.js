@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/panel-settings.ts
 var SELECTION_CAPTION_SELECT_ID = "dd-selection-caption-style";
 function selectionCaptionOptionLabel(style, strings) {
   switch (style) {

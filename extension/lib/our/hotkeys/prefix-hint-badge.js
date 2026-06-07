@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/prefix-hint-badge.ts
 var PREFIX_BADGE_BACKGROUND_COLOR = "#012292";
 var PREFIX_BADGE_TEXT_COLOR = "#ffffff";
 async function showPrefixBadge(

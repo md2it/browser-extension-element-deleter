@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/i18n/detect.ts
 function getAcceptLanguageTags() {
   return new Promise((resolve) => {
     const getAccept = ext.i18n?.getAcceptLanguages;

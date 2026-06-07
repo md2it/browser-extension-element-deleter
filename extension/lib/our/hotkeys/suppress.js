@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/hotkeys/suppress.ts
 var DEFAULT_TOGGLE_COMMAND_SUPPRESS_MS = 300;
 function shouldSuppressContentToggleAfterToggleCommand(
   lastAt,

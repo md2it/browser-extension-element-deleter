@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/element-under-cursor.ts
 var MIN_IFRAME_PICK_PX = 4;
 function isPointInElement(el, x, y) {
   const rect = el.getBoundingClientRect();

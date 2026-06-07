@@ -1,5 +1,4 @@
 "use strict";
-// src/welcome/background.ts
 function stopWelcomePinWatcher2(tabId) {
   stopWelcomePinWatcher(tabId);
 }

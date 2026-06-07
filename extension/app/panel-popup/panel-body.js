@@ -1,5 +1,4 @@
 "use strict";
-// src/panel-popup/panel-body.ts
 function createPageDivider() {
   const divider = document.createElement("div");
   divider.className = "dd-panel-divider dd-panel-page-divider";

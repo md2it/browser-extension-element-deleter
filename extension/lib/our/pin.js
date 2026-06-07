@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/pin.ts
 async function isActionOnToolbar(action) {
   if (typeof action.getUserSettings !== "function") return null;
   try {

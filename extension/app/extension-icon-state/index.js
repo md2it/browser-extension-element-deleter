@@ -1,5 +1,4 @@
 "use strict";
-// src/extension-icon-state/index.ts
 var iconState = createExtensionIconState({
   paths: TOOLBAR_ICON_PATHS,
   syncedTabIdsStorageKey: ICON_SYNCED_TAB_IDS_KEY,

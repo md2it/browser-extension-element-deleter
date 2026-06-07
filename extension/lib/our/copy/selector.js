@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/copy/selector.ts
 var STABLE_ATTRS = [
   "data-testid",
   "data-test",

@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/i18n/locale-code.ts
 var CHINESE_UI_LOCALE = "zh_CN";
 var TRADITIONAL_CHINESE_RE = /^zh-(tw|hk|mo|hant)(-|$)|^zh-hant(-|$)/;
 function mapChineseUiLocale(tag) {

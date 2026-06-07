@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/extension-icon-state/create.ts
 function createExtensionIconState(config) {
   const sync = createIconSync(config);
   return {

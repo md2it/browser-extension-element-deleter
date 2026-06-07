@@ -1,5 +1,4 @@
 "use strict";
-// src/highlight/page-styles.ts
 var HIGHLIGHT_STYLE_ID = "element-deleter-highlight-style";
 var HIGHLIGHT_UI = createHighlightUiClasses("dd");
 var HIGHLIGHT_PAGE_CSS =

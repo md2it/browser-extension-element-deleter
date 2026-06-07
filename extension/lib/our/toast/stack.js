@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/toast/stack.ts
 var ToastStack = class {
   constructor(host, config) {
     this.host = host;

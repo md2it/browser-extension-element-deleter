@@ -1,5 +1,4 @@
 "use strict";
-// src/hotkeys/settings.ts
 async function getStartHotkeyEnabled() {
   const data = await ext.storage.local.get(START_HOTKEY_ENABLED_KEY);
   return readBooleanSetting(data, START_HOTKEY_ENABLED_KEY);

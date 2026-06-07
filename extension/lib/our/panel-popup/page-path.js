@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/panel-popup/page-path.ts
 function getPanelPageUrl(pageHtml) {
   return ext.runtime.getURL(pageHtml);
 }

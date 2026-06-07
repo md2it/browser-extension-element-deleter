@@ -1,5 +1,4 @@
 "use strict";
-// ../lib/our/page-operability/can-operate.ts
 function scriptingTarget(tabId, frameId) {
   return frameId !== void 0 && frameId !== 0
     ? { tabId, frameIds: [frameId] }
